@@ -150,6 +150,7 @@ public class UserService {
     }
 
 }
+
 ```
 
 过程：
@@ -248,6 +249,7 @@ Spring 框架无法解决
         private A a;
 
     }
+
 ```
 
     上述代码运行，不会报错。这说明Bean A,Bean 都被成功注入。Spring 框架解决了这种循环依赖的问题。具体怎么解决的呢？

@@ -28,6 +28,7 @@ public class User {
     // getters and setters
 
 }
+
 ```
 
 映射文件（XML）：
@@ -72,6 +73,7 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
     <insert id="insertBatch">
 
         INSERT INTO your_table (column1, column2, ...)
+
 ```
 
     VALUES
@@ -98,7 +100,8 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
   INSERT INTO users (username, email) VALUES (\#{username}, \#{email})
 
 </insert>
-```
+
+```bash
 
 ## 7.Mybatis中在mapper接口方法中如何传递多个参数，需要用到什么注解?
 
@@ -140,7 +143,8 @@ MyBatis的XML映射文件中，不同的映射文件可以有相同的id值，�
   </select>
 
 </mapper>
-```
+
+```bash
 
 ## 10.说说Mybatis的大概执行流程？
 

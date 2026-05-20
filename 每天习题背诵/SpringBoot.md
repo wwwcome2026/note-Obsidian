@@ -21,7 +21,8 @@ Springboot 工程 pom -----<parent> spring-boot-starter-parent ---→父工程�
 @Component
 @Configuration
 @Controller
-```
+
+```java
 
 @service
 
