@@ -2,5 +2,6 @@
   "theme": "system",
   "cssTheme": "Minimal",
   "baseFontSizeAction": true,
-  "accentColor": ""
+  "accentColor": "",
+  "baseFontSize": 15
 }
