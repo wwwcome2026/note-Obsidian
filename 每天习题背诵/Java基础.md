@@ -2,11 +2,11 @@
 
 ## 1.String 是不是基本数据类型？请说出String 的几个方法？
 
-答：不是，String 是 final 修饰 不能被继承和重写。
+答：不是，String 是 final 修饰。 不能被继承和重写。
 
 Indexof(c) ---c 的 索引位置
 
-符CharAt(5) --- 查找的索引对应的字
+CharAt(5) --- 查找的索引对应的字
 
 Substring(0,5)—截取字符串
 
@@ -14,7 +14,7 @@ Substring(0,5)—截取字符串
 
 答：StringBuilder 线程不安全，但效率高
 
-  StringBuffer  线程安全，但效率慢
+  StringBuffer  线程安全，但效率低
 
 ## 3.请说出java 的集合分类？
 
