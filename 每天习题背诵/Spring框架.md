@@ -303,7 +303,8 @@ Bean 的创建和管理：BeanFactory 负责创建、配置和管理 Bean 实�
 
 延迟初始化：FactoryBean 可以控制 Bean 的初始化时机，例如在第一次请求时才创建 Bean 实例。
 
-![](每天习题背诵_assets/image_17.png)s
+![](每天习题背诵_assets/image_17.png)
+
 
 ## 21.说说spring和springboot的关系？
 
