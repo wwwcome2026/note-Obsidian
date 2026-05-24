@@ -68,13 +68,12 @@ Hash 冲突 时会放入链表中，链表的长度是 8.  Jdk 1.8 之前是链�
 
 优先从子类去找父类，父类没有再找子类（从下往上，再从上往下）
 
-## 13.jdk 8 有哪些新特性？
+## 13.JDK 8 有哪些新特性？
 
 答：
-
 lambda 表达式----（a,b）->{} 或User::getName
 
-  stream流     ----foreach  map
+stream流     ----foreach  map
 
 新的日期API -------timeZone 包含时区
 
