@@ -1,7 +1,10 @@
 {
-  "theme": "system",
-  "cssTheme": "AnuPpuccin",
+  "theme": "moonstone",
+  "cssTheme": "Zen",
   "baseFontSizeAction": true,
   "accentColor": "",
-  "baseFontSize": 15
+  "baseFontSize": 15,
+  "enabledCssSnippets": [
+    "class"
+  ]
 }
