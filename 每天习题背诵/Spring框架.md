@@ -16,7 +16,11 @@
 
 cglib 动态代理：针对接口的实现类的代理
 
-   底层主要是通过Proxy.newProxyInstance(ClassLoader loader, class<?> interfaces,new InvocationHandler) 这个方法实现。
+   底层主要是通过
+   ```java
+Proxy.newProxyInstance(ClassLoader loader, class<?> interfaces,new InvocationHandler) 
+   ```
+   这个方法实现。
 
 这三个参数分别是：指定当前目标对象的类加载器
 
