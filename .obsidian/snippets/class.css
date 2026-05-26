@@ -1,6 +1,16 @@
-/* 让侧边栏和设置面板拥有毛玻璃效果 */
-.mod-left-split, .mod-right-split, .modal {
-  background-color: rgba(30, 30, 30, 0.6); /* 半透明背景，可根据主题调整颜色 */
-  backdrop-filter: blur(10px); /* 核心：背景模糊 */
-  -webkit-backdrop-filter: blur(10px); /* 兼容性写法 */
+body {
+  /* 将主背景和侧边栏背景都设为完全透明 */
+  --background-primary: transparent !important;
+  --background-secondary: transparent !important;
+}
+
+.workspace {
+  /* 为工作区添加半透明磨砂效果，rgba最后一个值0.85是不透明度，数值越小越透 */
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(10px); /* 10px是背景模糊的强度，可以按喜好调整 */
+}
+
+/* 可选：让笔记编辑区更透明一些 */
+.workspace-leaf-content {
+  background-color: rgba(0, 0, 0, 0.6) !important;
 }
