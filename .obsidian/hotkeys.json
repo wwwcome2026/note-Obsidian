@@ -1,3 +1,11 @@
 {
-  "markdown:toggle-preview": []
+  "markdown:toggle-preview": [],
+  "editor:toggle-source": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "`"
+    }
+  ]
 }
