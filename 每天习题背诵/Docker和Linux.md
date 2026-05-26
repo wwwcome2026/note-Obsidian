@@ -24,7 +24,7 @@ Docker exec -it 容器名 bash
 
 ## 3.Linux 相关指令操作？
 
-Ps -ef | grep tomcat  ---查看进程
+Ps -ef | grep 进程名  ---查看进程
 
 Kill -9  ----杀进程
 
