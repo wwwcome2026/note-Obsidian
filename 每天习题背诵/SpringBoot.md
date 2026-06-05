@@ -17,13 +17,9 @@ Springboot 工程 pom -----<parent> spring-boot-starter-parent ---→父工程�
 @SpringBootApplication
 @EnableAutoConfiguration
 @Import
-```java
 @Component
 @Configuration
 @Controller
-
-```java
-
 @service
 
 ## 3.SpringBoot读取配置文件的方式有哪些？

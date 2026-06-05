@@ -6,9 +6,11 @@ Docker pull 镜像名
 
 Docker images 查看镜像
 
-Docker save -o 压缩包.tar 镜像名:tag
+Docker save -o 压缩包.tar 镜像名:tag    //导出镜像
 
-Docker load -I 压缩包.tar
+Docker load -I 压缩包.tar     //导入镜像
+
+Docker rmi 镜像名
 
 ## 2.Docker 容器相关操作？
 
@@ -20,11 +22,11 @@ Docker ps -a 查看所有
 
 Docker logs -f 查看日志
 
-Docker exec -it 容器名 bash
+Docker exec -it 容器名 bash  //进入一个正在运行的 Docker 容器，并启动一个交互式的 Bash 终端
 
 ## 3.Linux 相关指令操作？
 
-Ps -ef | grep 进程名  ---查看进程
+Ps -ef | grep 进程名  ---强制查看所有并过滤进程
 
 Kill -9  ----杀进程
 

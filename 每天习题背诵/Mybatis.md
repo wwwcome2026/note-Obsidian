@@ -93,6 +93,7 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
 ## 6.Mybatis中如何获取Mysql自动增长的主键值【主键返回/生成】?
 
 在MyBatis中，要获取MySQL数据库自增主键值，可以使用useGeneratedKeys属性和keyProperty属性。在<insert>标签中设置这两个属性，useGeneratedKeys设置为true表明要获取数据库自动生成的键，keyProperty设置为Java对象中对应主键属性的名
+
 ```xml
 
 <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
@@ -101,7 +102,7 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
 
 </insert>
 
-```bash
+```
 
 ## 7.Mybatis中在mapper接口方法中如何传递多个参数，需要用到什么注解?
 
@@ -144,7 +145,7 @@ MyBatis的XML映射文件中，不同的映射文件可以有相同的id值，�
 
 </mapper>
 
-```bash
+```
 
 ## 10.说说Mybatis的大概执行流程？
 

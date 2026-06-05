@@ -81,7 +81,8 @@ stream流     ----foreach  map
 
 ## 14.创建线程的几种方式？
 
-答：继承 Thread
+答：
+继承 Thread
 
 实现 runnable 接口 ----无返回值
 
@@ -90,7 +91,10 @@ stream流     ----foreach  map
 ## 15.实现线程池有几种方式？使用最多哪种？哪七个参数？
 
 答：
-Executors.newFixedThreadPool：创建一个固定大小的线程池Executors.newCachedThreadPool：创建一个可缓存的线程池，Executors.newSingleThreadExecutor：创建单个线程数的线程池Executors.newScheduledThreadPool：创建一个可以执行延迟任务的线程池；
+Executors.newFixedThreadPool：创建一个固定大小的线程池
+Executors.newCachedThreadPool：创建一个可缓存的线程池，
+Executors.newSingleThreadExecutor：创建单个线程数的线程池
+Executors.newScheduledThreadPool：创建一个可以执行延迟任务的线程池；
 
 Executors.newSingleThreadScheduledExecutor：创建一个单线程的可以执行延迟任务的线程池；
 
@@ -98,7 +102,7 @@ Executors.newWorkStealingPool：创建一个工作窃取线程池
 
 ThreadPoolExecutor：最原始也最推荐的创建线程池的方式，它包含了 7 个参数可供设置
 
-（1：核心线程数 2: 最大线程数 3: 最大线程数可以存活的时间 4: 时间单位 5: 阻塞队列 6: 线程工厂 7: 拒绝策略)
+（1：核心线程数 2: 最大线程数 3: 线程存活时间 4: 时间单位 5: 阻塞队列 6: 线程工厂 7: 拒绝策略)
 
 拒绝策略 :
 
@@ -120,7 +124,8 @@ ThreadPoolExecutor：最原始也最推荐的创建线程池的方式，它包�
 
 ## 17.线程状态Sleep 和 wait 有什么区别？
 
-答：Sleep 是Thead 类 ，必须传参指定延迟时间，延迟期间不释放锁。
+答：
+Sleep 是Thead 类 ，必须传参指定延迟时间，延迟期间不释放锁。
 
 Wait 是 Object 类 （由锁对象调用，锁对象被synchronized 同步锁定），调用就立即释放锁。指定时间自动唤醒，不传参，需使用notify唤醒。
 
