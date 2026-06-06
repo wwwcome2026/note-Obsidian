@@ -1,0 +1,9 @@
+{
+	"id": "pathlinker",
+	"name": "External File Linker",
+	"version": "1.4.3",
+	"minAppVersion": "1.1.0",
+	"description": "Embed external files into your notes.",
+	"author": "Kay606",
+	"isDesktopOnly": false
+}

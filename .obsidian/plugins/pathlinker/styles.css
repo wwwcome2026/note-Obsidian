@@ -1,0 +1,10 @@
+/* Placeholder to allow release */
+
+.hiddenDevice {
+    display: none;
+}
+
+.nonembed {
+    text-decoration: underline !important;
+    cursor: pointer;
+}
