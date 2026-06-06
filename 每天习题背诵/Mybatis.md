@@ -53,7 +53,7 @@ public class User {
 </select>
 ```
 
-在上面的resultMap中，property属性指的是实体类中的属性名，column属性指的是数据库表中的字段名。在<select>查询中，通过resultMap属性引用这个resultMap，MyBatis会自动处理映射。
+在上面的resultMap中，property属性指的是实体类中的属性名，column属性指的是数据库表中的字段名。在 < select > 查询中，通过resultMap属性引用这个resultMap，MyBatis会自动处理映射。
 
 第二种方式：可以 使用select user_name as name 这种别名的方式
 
@@ -74,14 +74,11 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
 
         INSERT INTO your_table (column1, column2, ...)
 
-```
-
     VALUES
 
     <foreach collection="list" item="item" index="index" separator=",">
 
     (\#{item.field1}, \#{item.field2}, ...)
-```xml
 
         </foreach>
 
