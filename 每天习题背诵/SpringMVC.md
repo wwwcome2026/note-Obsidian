@@ -17,7 +17,6 @@ Spring MVC 是 Spring Framework 提供的一个基于 Java 的实现 MVC（Model
 2.5调用视图解析器（ViewResolver）封装数据返回
 
 ## 3.说说你们项目中springmvc异常是如何处理的？
-
 -
 	1. 定义异常的类型（业务异常，系统异常，其它异常）
 	2. 创建一个异常类使用@RestControllerAdvice注解
