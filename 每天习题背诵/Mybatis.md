@@ -222,7 +222,7 @@ MyBatis 一级缓存失效的场景：
 
 同一个SqlSession两次查询期间手动清空了缓存
 
-二级缓存原理：SqlsessionFactory
+### 二级缓存原理：SqlsessionFactory
 
  MyBatis的二级缓存相对于一级缓存来说，实现了SqlSession之间缓存数据的共享，同时粒度更加的细，能够到namespace级别，通过Cache接口实现类不同的组合，对Cache的可控性也更强。MyBatis在多表查询时，极大可能会出现脏数据，有设计上的缺陷，安全使用二级缓存的条件比较苛刻
 
