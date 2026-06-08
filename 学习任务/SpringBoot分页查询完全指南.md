@@ -525,7 +525,7 @@ flowchart LR
 </dependency>
 ```
 
-### 5.3 配置分页插件（必须！）
+### 5.3  配置类-配置分页插件（必须！）
 
 ```java
 @Configuration
