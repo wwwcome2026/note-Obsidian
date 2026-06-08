@@ -166,7 +166,7 @@ MyBatis 的执行流程大致可以分为以下几个步骤：
 
 使用原始limit (pageNum-1)*pageSize , pageSize
 
-## 13.Mybatis的一级、二级缓存有了解吗，具体说说？
+## 12.Mybatis的一级、二级缓存有了解吗，具体说说？
 
 答：
 
