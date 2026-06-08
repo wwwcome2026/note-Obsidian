@@ -245,10 +245,6 @@ public class PageResult<T> {
 
 ## 四、方案一：PageHelper（MyBatis 生态）
 
-<iframe src="//player.bilibili.com/player.html?bvid=BV19V411B7en&page=1" width="100%" height="500" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-
-> [!info] 视频教程：Spring Boot 整合 PageHelper 实现分页
-
 ### 4.1 原理
 
 PageHelper 是一个 **MyBatis 拦截器插件**，它的工作流程：
