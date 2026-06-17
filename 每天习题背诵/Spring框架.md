@@ -35,7 +35,7 @@ ClassLoader loader, class<?> interfaces,new InvocationHandler)
 
 @Aspect、@Pointcut
 
-@Before、@After、@AfterReturning、@AfterThrowing和@Around
+@Before、@After、@Around、@AfterReturning和@AfterThrowing
 
 ## 说说AOP一般能用来干什么？在你的项目中有用到吗，如何使用的？
 
