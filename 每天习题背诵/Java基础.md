@@ -28,11 +28,10 @@ LinkedList  是增删快，查询慢
 
 ## 5.HashMap, HashSet 和 HashTable 的区别？
 
-HashMap 是key-value 结构 ，key-value 是可以为null  , 添加put()
+HashMap与HashTable都是key-value 结构 ，put()添加
+HashMap 可以为null  ,HashTable 不能为 null， 
 
-HashSet  是 不能 有重复元素,添加add()
-
-HashTable 是key-value 是不能为 null
+HashSet  是 不能 有重复元素,add()添加
 
 ## 6.HashMap, ConcurrentHashMap 和HashTable 的区别？（线程安全性考虑）
 
