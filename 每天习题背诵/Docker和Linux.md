@@ -22,7 +22,7 @@ Docker ps -a 查看所有容器
 
 Docker logs -f 查看日志
 
-Docker exec -it 容器名 bash  //进入一个正在运行的 Docker 容器，并启动一个交互式的 Bash 终端
+Docker exec -it 容器名 bash    //进入一个正在运行的 Docker 容器，并启动一个交互式的 Bash 终端
 
 ## 3.Linux 相关指令操作？
 
