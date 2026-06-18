@@ -6,11 +6,11 @@ Docker pull 镜像名
 
 Docker images 查看镜像
 
-Docker save -o 压缩包.tar 镜像名:tag    //导出镜像
+Docker save -o 压缩包.tar 镜像名:tag     //导出镜像
 
-Docker load -I 压缩包.tar     //导入镜像
+Docker load -I 压缩包.tar      //导入镜像
 
-Docker rmi 镜像名
+Docker rmi   镜像名       //移除镜像
 
 ## 2.Docker 容器相关操作？
 
@@ -18,7 +18,7 @@ Docker run –name 容器名 -v 数据卷目录：/容器目录 -p 宿主机端�
 
 Docker ps  查看正在运行的容器
 
-Docker ps -a 查看所有
+Docker ps -a 查看所有容器
 
 Docker logs -f 查看日志
 
