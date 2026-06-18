@@ -6,7 +6,7 @@ Docker pull 镜像名
 
 Docker images 查看镜像
 
-Docker save -o 压缩包.tar 镜像名:tag     //导出镜像
+Docker save  -o  压缩包.tar  镜像名:tag     //导出镜像
 
 Docker load -I 压缩包.tar      //导入镜像
 
