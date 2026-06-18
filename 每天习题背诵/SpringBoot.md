@@ -10,7 +10,7 @@ Springboot 工程 pom -----<parent> spring-boot-starter-parent ---→父工程�
 
 2. 自动配置
 
-启动类@SpringBootApplication--→ @EnableAutoConfiguration--→ @Import--→bean对象选择器---→ META-INF/spring/*.import结尾文件(定义了大量的配置类，配置类包含所有的bean对象)
+启动类@SpringBootApplication--→ @EnableAutoConfiguration--→ @Import--→bean对象选择器---→ META-INF/spring/*.imports结尾文件(定义了大量的配置类，配置类包含所有的bean对象)
 
 ## 2.SpringBoot的常用注解有哪些？
 
