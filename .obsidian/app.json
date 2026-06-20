@@ -3,5 +3,6 @@
   "newLinkFormat": "relative",
   "promptDelete": false,
   "showLineNumber": true,
-  "defaultViewMode": "source"
+  "defaultViewMode": "source",
+  "useTab": false
 }
