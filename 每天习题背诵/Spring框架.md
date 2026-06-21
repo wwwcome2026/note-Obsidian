@@ -94,15 +94,15 @@ Aop 用来在不改变原代码的基础上对代码功能进行增强。我项�
 
 2. 在同一个类中，如果一个方法调用了另一个带有事务注解的方法，事务将不会生效。这是因为Spring的事务管理是通过代理模式实现的，内部方法调用不会经过代理对象
 
-![](每天习题背诵_assets/image_09.png)
+![393](每天习题背诵_assets/image_09.png)
 
-Spring事务默认情况下只会回滚RuntimeException和Error，如果抛出的是受检异常（Checked Exception），事务不会回滚。可以通过@Transactional的rollbackFor属性指定需要回滚的异常类型。
+3. Spring事务默认情况下只会回滚RuntimeException和Error，如果抛出的是受检异常（Checked Exception），事务不会回滚。可以通过@Transactional的rollbackFor属性指定需要回滚的异常类型。
 
-![](每天习题背诵_assets/image_10.png)
+![401](每天习题背诵_assets/image_10.png)
 
-Spring事务的传播行为（Propagation Behavior）决定了事务在不同方法调用之间如何传播。如果传播行为设置不当，可能会导致事务失效
+4. Spring事务的传播行为（Propagation Behavior）决定了事务在不同方法调用之间如何传播。如果传播行为设置不当，可能会导致事务失效
 
-![](每天习题背诵_assets/image_11.png)s
+![410](每天习题背诵_assets/image_11.png)s
 
 ## Spring事务的隔离级别有哪些？
 
