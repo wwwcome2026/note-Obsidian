@@ -89,7 +89,7 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
 
 ## 6.Mybatis中如何获取Mysql自动增长的主键值【主键返回/生成】?
 
-==设置useGeneratedKeys属性为true，指定keyProperty属性为java对象中对应的主键属性名==
+    设置useGeneratedKeys属性为true，指定keyProperty属性为java对象中对应的主键属性名
 在MyBatis中，要获取MySQL数据库自增主键值，可以使用useGeneratedKeys属性和keyProperty属性。在<insert>标签中设置这两个属性，useGeneratedKeys设置为true表明要获取数据库自动生成的键，keyProperty设置为Java对象中对应主键属性的名
 
 ```xml
@@ -172,7 +172,7 @@ MyBatis 的执行流程大致可以分为以下几个步骤：
 答：
 
 一级缓存原理：Sqlsession
-==在一次Sqlsession中，执行多次条件完全相同的查询，且中间没有增删改操作时，第二次及以后的查询可以直接从缓存中读取数据，无需走数据库。==
+    在一次Sqlsession中，执行多次条件完全相同的查询，且中间没有增删改操作时，第二次及以后的查询可以直接从缓存中读取数据，无需走数据库。
 
 在一次 SqlSession 中（数据库会话），程序执行多次查询，且查询条件完全相同，多次查询之间程序没有其他增删改操作，则第二次及后面的查询可以从缓存中获取数据，避免走数据库。
 
