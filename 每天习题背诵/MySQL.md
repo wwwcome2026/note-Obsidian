@@ -22,7 +22,6 @@ B+Tree：在b-tree 的基础上改进，数据放在叶子节点。中间只加�
 
 CREATE INDEX idx_iotId_functionId_time ON device_data (iot_id,function_id,alarm_time)---创建索引
 
-DROP INDEX idx_iotId_functionId_time ON device_data ---删除索引
 
 MySQL索引不是越多越好。索引可以提高查询性能，但它们也会占用更多的存储空间，并且在插入、删除和更新数据时会增加额外的开销，因为索引也需要被更新。过多的索引可能导致性能问题，因为数据库需要更多的时间来维护这些索引
 
@@ -44,9 +43,9 @@ like 通配符% 错误使用---左模糊会失效
 
 数据库事务的特性通常被称为[ACID特性](https://www.baidu.com/s?wd=ACID%E7%89%B9%E6%80%A7&rsv_idx=2&tn=baiduhome_pg&usm=2&ie=utf-8&rsv_pq=b21cccad0397ab2f&oq=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E7%89%A9%E7%89%B9%E6%80%A7&rsv_t=77b68deXsOSiNB7s5RhgzumlFmM0wVqY%2BHeQP%2FNbzPASzcu%2BJHW6grUj%2FCRtKGjQDSVS&sa=re_dqa_zy&icon=1" \t "_self)，这四个特性分别是：
 
-1. 原子性（Atomicity）：事务是一个不可分割的工作单位，事务中的所有操作要么全部执行，要么全部不执行。这意味着事务的操作序列要么完全应用到数据库，要么完全不影响数据库。12
+1. 原子性（Atomicity）：事务是一个不可分割的工作单位，事务中的所有操作要么全部执行，要么全部不执行。这意味着事务的操作序列要么完全应用到数据库，要么完全不影响数据库。
 2. 一致性（Consistency）：事务的执行必须使数据库从一个一致性状态变换到另一个一致性状态。这意味着事务的执行必须满足所有数据的完整性约束条件，例如，在转账的例子中，无论转账如何进行，参与转账的账户总金额应保持不变。
-3. [隔离性](https://www.baidu.com/s?wd=%E9%9A%94%E7%A6%BB%E6%80%A7&rsv_idx=2&tn=baiduhome_pg&usm=2&ie=utf-8&rsv_pq=b21cccad0397ab2f&oq=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E7%89%A9%E7%89%B9%E6%80%A7&rsv_t=461eAfFuxWL4zwc2bs0eoghF0VqCNMO4oHX0a6HNuTO64DHYN4sjwoRiwLVG1yEmHQKg&sa=re_dqa_zy&icon=1" \t "_self)（Isolation）：在并发环境中，多个事务的执行应相互隔离。这意味着一个事务的内部操作及其使用的数据对其他并发事务是隔离的，并发执行的事务之间不能互相干扰。数据库系统提供了多种隔离级别来确保事务的隔离性。23
+3. [隔离性](https://www.baidu.com/s?wd=%E9%9A%94%E7%A6%BB%E6%80%A7&rsv_idx=2&tn=baiduhome_pg&usm=2&ie=utf-8&rsv_pq=b21cccad0397ab2f&oq=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E7%89%A9%E7%89%B9%E6%80%A7&rsv_t=461eAfFuxWL4zwc2bs0eoghF0VqCNMO4oHX0a6HNuTO64DHYN4sjwoRiwLVG1yEmHQKg&sa=re_dqa_zy&icon=1" \t "_self)（Isolation）：在并发环境中，多个事务的执行应相互隔离。这意味着一个事务的内部操作及其使用的数据对其他并发事务是隔离的，并发执行的事务之间不能互相干扰。数据库系统提供了多种隔离级别来确保事务的隔离性。
 4. [持久性](https://www.baidu.com/s?wd=%E6%8C%81%E4%B9%85%E6%80%A7&rsv_idx=2&tn=baiduhome_pg&usm=2&ie=utf-8&rsv_pq=b21cccad0397ab2f&oq=%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E7%89%A9%E7%89%B9%E6%80%A7&rsv_t=f89e8WEEVnSAjtDGgipq%2BY6p0GcliZJTDLjMWGKrw6S69upgi5TcTpFX2%2FTN6CMZeV6K&sa=re_dqa_zy&icon=1" \t "_self)（Durability）：一旦事务被提交，它对数据库中数据的改变就是永久性的，即使系统或介质发生故障，已提交事务的更新不会被丢失。这意味着事务日志等机制被用来确保即使在故障发生后，已提交事务的更改仍然可以被恢复
 
 ## 6.SQL语句如何调优? 100%
@@ -125,7 +124,7 @@ Memory
 
 Merge
 
-## 10.mysql的快照读和当前度？
+## 10.mysql的快照读和当前读？
 
 MySQL中的快照读和当前读是事务隔离级别的概念，不是指具体的代码实现或功能。
 
@@ -135,7 +134,7 @@ MySQL中的快照读和当前读是事务隔离级别的概念，不是指具体
 
 在实际操作中，快照读通常是隐式的，而当前读则可以通过显式锁定语句来实现，如SELECT ... FOR UPDATE或者SELECT ... LOCK IN SHARE MODE
 
-## 11.mysql的MVCC？
+## 11.mysql的MVC？
 
 自己去看
 

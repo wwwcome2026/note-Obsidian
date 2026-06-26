@@ -69,21 +69,13 @@ MyBatis可以通过<foreach>标签来实现批量插入数据
 ```xml
 
 <mapper namespace="your.package.YourMapper">
-
     <insert id="insertBatch">
-
         INSERT INTO your_table (column1, column2, ...)
-
     VALUES
-
     <foreach collection="list" item="item" index="index" separator=",">
-
     (\#{item.field1}, \#{item.field2}, ...)
-
         </foreach>
-
     </insert>
-
 </mapper>
 ```
 
