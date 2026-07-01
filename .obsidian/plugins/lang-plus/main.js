@@ -29,14 +29,153 @@ __export(main_exports, {
 module.exports = __toCommonJS(main_exports);
 var import_obsidian9 = require("obsidian");
 
+// src/framework/locales.ts
+var OBSIDIAN_LOCALES = [
+  { code: "en", name: "English", nativeName: "English" },
+  { code: "af", name: "Afrikaans", nativeName: "Afrikaans" },
+  { code: "am", name: "Amharic", nativeName: "\u12A0\u121B\u122D\u129B" },
+  { code: "ar", name: "Arabic", nativeName: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629" },
+  { code: "az", name: "Azerbaijani", nativeName: "Az\u0259rbaycan" },
+  { code: "be", name: "Belarusian", nativeName: "\u0411\u0435\u043B\u0430\u0440\u0443\u0441\u043A\u0430\u044F \u043C\u043E\u0432\u0430" },
+  { code: "bg", name: "Bulgarian", nativeName: "\u0431\u044A\u043B\u0433\u0430\u0440\u0441\u043A\u0438 \u0435\u0437\u0438\u043A" },
+  { code: "bn", name: "Bengali", nativeName: "\u09AC\u09BE\u0982\u09B2\u09BE" },
+  { code: "ca", name: "Catalan", nativeName: "catal\xE0" },
+  { code: "cs", name: "Czech", nativeName: "\u010De\u0161tina" },
+  { code: "da", name: "Danish", nativeName: "Dansk" },
+  { code: "de", name: "German", nativeName: "Deutsch" },
+  { code: "dv", name: "Dhivehi", nativeName: "\u078B\u07A8\u0788\u07AC\u0780\u07A8" },
+  { code: "el", name: "Greek", nativeName: "\u0395\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AC" },
+  { code: "en-gb", name: "English (GB)", nativeName: "English (GB)" },
+  { code: "eo", name: "Esperanto", nativeName: "Esperanto" },
+  { code: "es", name: "Spanish", nativeName: "Espa\xF1ol" },
+  { code: "eu", name: "Basque", nativeName: "Euskara" },
+  { code: "fa", name: "Persian", nativeName: "\u0641\u0627\u0631\u0633\u06CC" },
+  { code: "fi", name: "Finnish", nativeName: "suomi" },
+  { code: "fr", name: "French", nativeName: "fran\xE7ais" },
+  { code: "ga", name: "Irish", nativeName: "Gaeilge" },
+  { code: "gl", name: "Galician", nativeName: "Galego" },
+  { code: "he", name: "Hebrew", nativeName: "\u05E2\u05D1\u05E8\u05D9\u05EA" },
+  { code: "hi", name: "Hindi", nativeName: "\u0939\u093F\u0928\u094D\u0926\u0940" },
+  { code: "hr", name: "Croatian", nativeName: "Hrvatski" },
+  { code: "hu", name: "Hungarian", nativeName: "Magyar" },
+  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia" },
+  { code: "it", name: "Italian", nativeName: "Italiano" },
+  { code: "ja", name: "Japanese", nativeName: "\u65E5\u672C\u8A9E" },
+  { code: "ka", name: "Georgian", nativeName: "\u10E5\u10D0\u10E0\u10D7\u10E3\u10DA\u10D8" },
+  { code: "kh", name: "Khmer", nativeName: "\u1781\u17C1\u1798\u179A\u1797\u17B6\u179F\u17B6" },
+  { code: "kn", name: "Kannada", nativeName: "\u0C95\u0CA8\u0CCD\u0CA8\u0CA1" },
+  { code: "ko", name: "Korean", nativeName: "\uD55C\uAD6D\uC5B4" },
+  { code: "ky", name: "Kyrgyz", nativeName: "\u041A\u044B\u0440\u0433\u044B\u0437\u0447\u0430" },
+  { code: "la", name: "Latin", nativeName: "Latina" },
+  { code: "lt", name: "Lithuanian", nativeName: "Lietuvi\u0173" },
+  { code: "lv", name: "Latvian", nativeName: "Latvie\u0161u" },
+  { code: "ml", name: "Malayalam", nativeName: "\u0D2E\u0D32\u0D2F\u0D3E\u0D33\u0D02" },
+  { code: "ms", name: "Malay", nativeName: "Bahasa Melayu" },
+  { code: "nan-tw", name: "Taiwanese (Min Nan)", nativeName: "\u95A9\u5357\u8A9E" },
+  { code: "ne", name: "Nepali", nativeName: "\u0928\u0947\u092A\u093E\u0932\u0940" },
+  { code: "nl", name: "Dutch", nativeName: "Nederlands" },
+  { code: "nn", name: "Norwegian Nynorsk", nativeName: "Nynorsk" },
+  { code: "no", name: "Norwegian", nativeName: "Norsk" },
+  { code: "oc", name: "Occitan", nativeName: "Occitan" },
+  { code: "or", name: "Odia", nativeName: "\u0B13\u0B21\u0B3C\u0B3F\u0B06" },
+  { code: "pl", name: "Polish", nativeName: "j\u0119zyk polski" },
+  { code: "pt", name: "Portuguese", nativeName: "Portugu\xEAs" },
+  { code: "pt-br", name: "Brazilian Portuguese", nativeName: "Portugu\xEAs do Brasil" },
+  { code: "ro", name: "Romanian", nativeName: "Rom\xE2n\u0103" },
+  { code: "ru", name: "Russian", nativeName: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439" },
+  { code: "sa", name: "Sanskrit", nativeName: "\u0938\u0902\u0938\u094D\u0915\u0943\u0924\u092E\u094D" },
+  { code: "si", name: "Sinhalese", nativeName: "\u0DC3\u0DD2\u0D82\u0DC4\u0DBD" },
+  { code: "sk", name: "Slovak", nativeName: "Sloven\u010Dina" },
+  { code: "sl", name: "Slovenian", nativeName: "Sloven\u0161\u010Dina" },
+  { code: "sq", name: "Albanian", nativeName: "Shqip" },
+  { code: "sr", name: "Serbian", nativeName: "\u0441\u0440\u043F\u0441\u043A\u0438 \u0458\u0435\u0437\u0438\u043A" },
+  { code: "sv", name: "Swedish", nativeName: "Svenska" },
+  { code: "sw", name: "Swahili", nativeName: "Kiswahili" },
+  { code: "ta", name: "Tamil", nativeName: "\u0BA4\u0BAE\u0BBF\u0BB4\u0BCD" },
+  { code: "te", name: "Telugu", nativeName: "\u0C24\u0C46\u0C32\u0C41\u0C17\u0C41" },
+  { code: "th", name: "Thai", nativeName: "\u0E44\u0E17\u0E22" },
+  { code: "tl", name: "Filipino (Tagalog)", nativeName: "Tagalog" },
+  { code: "tr", name: "Turkish", nativeName: "T\xFCrk\xE7e" },
+  { code: "tt", name: "Tatar", nativeName: "\u0422\u0430\u0442\u0430\u0440\u0447\u0430" },
+  { code: "uk", name: "Ukrainian", nativeName: "\u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430" },
+  { code: "ur", name: "Urdu", nativeName: "\u0627\u0631\u062F\u0648" },
+  { code: "uz", name: "Uzbek", nativeName: "o\u02BBzbekcha" },
+  { code: "vi", name: "Vietnamese", nativeName: "Ti\u1EBFng Vi\u1EC7t" },
+  { code: "zh", name: "Chinese (Simplified)", nativeName: "\u7B80\u4F53\u4E2D\u6587" },
+  { code: "zh-tw", name: "Chinese (Traditional)", nativeName: "\u7E41\u9AD4\u4E2D\u6587" }
+];
+var LOCALE_MAP = new Map(
+  OBSIDIAN_LOCALES.map((locale) => [locale.code, locale])
+);
+var VALID_LOCALE_CODES = new Set(
+  OBSIDIAN_LOCALES.map((locale) => locale.code)
+);
+function normalizeLocaleCode(code) {
+  let result = code.toLowerCase();
+  result = result.replace(/_/g, "-");
+  result = result.replace(/\..*$/, "");
+  return result;
+}
+var LOCALE_ALIASES = /* @__PURE__ */ new Map([
+  // --- Chinese ---
+  ["zh-cn", "zh"],
+  ["zh-sg", "zh"],
+  ["zh-hans", "zh"],
+  ["zh-hk", "zh-tw"],
+  ["zh-mo", "zh-tw"],
+  ["zh-tw", "zh-tw"],
+  // identity — keeps zh-tw canonical
+  ["zh-hant", "zh-tw"],
+  // --- Portuguese ---
+  ["pt-pt", "pt"],
+  ["pt-br", "pt-br"],
+  // identity — Obsidian treats as separate
+  // --- English ---
+  ["en-us", "en"],
+  ["en-gb", "en-gb"],
+  // identity
+  ["en-au", "en-gb"],
+  ["en-ca", "en-gb"],
+  // --- Norwegian ---
+  ["nb", "no"],
+  ["nn", "no"],
+  // --- Malay ---
+  ["ms-my", "ms"],
+  ["ms-sg", "ms"],
+  // --- Spanish variants → es ---
+  ["es-es", "es"],
+  ["es-mx", "es"],
+  ["es-ar", "es"],
+  // --- French variants → fr ---
+  ["fr-fr", "fr"],
+  ["fr-ca", "fr"],
+  ["fr-be", "fr"],
+  ["fr-ch", "fr"],
+  // --- German variants → de ---
+  ["de-de", "de"],
+  ["de-at", "de"],
+  ["de-ch", "de"],
+  // --- Common legacy codes ---
+  ["in", "id"],
+  // Indonesian (old ISO code)
+  ["iw", "he"],
+  // Hebrew (old ISO code)
+  ["ji", "yi"]
+  // Yiddish (old ISO code)
+]);
+function resolveLocale(code) {
+  const normalized = normalizeLocaleCode(code);
+  return LOCALE_ALIASES.get(normalized) || normalized;
+}
+
 // src/framework/translator.ts
 var I18nTranslator = class {
   constructor(options) {
     this.dictionaries = /* @__PURE__ */ new Map();
     this.builtinLocales = /* @__PURE__ */ new Set();
     this.pluginId = options.pluginId;
-    this.baseLocale = options.baseLocale;
-    this._currentLocale = options.currentLocale || options.baseLocale;
+    this.baseLocale = resolveLocale(options.baseLocale);
+    this._currentLocale = resolveLocale(options.currentLocale || this.baseLocale);
     this.baseDictionary = options.baseDictionary;
     this.onValidationError = options.onValidationError;
     this.dictionaries.set(this.baseLocale, this.baseDictionary);
@@ -107,26 +246,31 @@ var I18nTranslator = class {
    */
   loadDictionary(locale, dict) {
     var _a;
+    const resolved = resolveLocale(locale);
     const result = this.validateDictionary(dict);
     if (!result.valid) {
       (_a = this.onValidationError) == null ? void 0 : _a.call(this, result);
-      console.error(`[i18n-plus] Dictionary validation failed for ${this.pluginId}/${locale}:`, result.errors);
+      console.error(`[i18n-plus] Dictionary validation failed for ${this.pluginId}/${resolved}:`, result.errors);
       return result;
     }
     if (result.warnings && result.warnings.length > 0) {
-      console.warn(`[i18n-plus] Dictionary loaded with warnings for ${this.pluginId}/${locale}:`, result.warnings);
+      console.warn(`[i18n-plus] Dictionary loaded with warnings for ${this.pluginId}/${resolved}:`, result.warnings);
     }
-    this.dictionaries.set(locale, dict);
-    console.debug(`[i18n-plus] Loaded dictionary: ${this.pluginId}/${locale}`);
+    if (resolved !== locale) {
+      console.debug(`[i18n-plus] Resolved locale alias: ${locale} \u2192 ${resolved}`);
+    }
+    this.dictionaries.set(resolved, dict);
+    console.debug(`[i18n-plus] Loaded dictionary: ${this.pluginId}/${resolved}`);
     return result;
   }
   /**
    * Load dictionary as builtin
    */
   loadBuiltinDictionary(locale, dict) {
+    const resolved = resolveLocale(locale);
     const result = this.loadDictionary(locale, dict);
     if (result.valid) {
-      this.builtinLocales.add(locale);
+      this.builtinLocales.add(resolved);
     }
     return result;
   }
@@ -134,14 +278,15 @@ var I18nTranslator = class {
    * Unload dictionary
    */
   unloadDictionary(locale) {
-    if (locale === this.baseLocale) {
-      console.warn(`[i18n-plus] Cannot unload base dictionary: ${locale}`);
+    const resolved = resolveLocale(locale);
+    if (resolved === this.baseLocale) {
+      console.warn(`[i18n-plus] Cannot unload base dictionary: ${resolved}`);
       return;
     }
-    if (this.dictionaries.has(locale)) {
-      this.dictionaries.delete(locale);
-      console.debug(`[i18n-plus] Unloaded dictionary: ${this.pluginId}/${locale}`);
-      if (this._currentLocale === locale) {
+    if (this.dictionaries.has(resolved)) {
+      this.dictionaries.delete(resolved);
+      console.debug(`[i18n-plus] Unloaded dictionary: ${this.pluginId}/${resolved}`);
+      if (this._currentLocale === resolved) {
         this._currentLocale = this.baseLocale;
         console.debug(`[i18n-plus] Locale reset to base: ${this.baseLocale}`);
       }
@@ -151,7 +296,7 @@ var I18nTranslator = class {
    * Set current locale
    */
   setLocale(locale) {
-    this._currentLocale = locale;
+    this._currentLocale = resolveLocale(locale);
   }
   /**
    * Get current locale
@@ -178,17 +323,19 @@ var I18nTranslator = class {
     return Array.from(this.dictionaries.keys()).filter((l) => !this.builtinLocales.has(l));
   }
   getDictionary(locale) {
-    if (locale === this.baseLocale) {
+    const resolved = resolveLocale(locale);
+    if (resolved === this.baseLocale) {
       return this.baseDictionary;
     }
-    return this.dictionaries.get(locale);
+    return this.dictionaries.get(resolved);
   }
   /**
    * Get builtin dictionary
    */
   getBuiltinDictionary(locale) {
-    if (this.builtinLocales.has(locale)) {
-      return this.dictionaries.get(locale);
+    const resolved = resolveLocale(locale);
+    if (this.builtinLocales.has(resolved)) {
+      return this.dictionaries.get(resolved);
     }
     return void 0;
   }
@@ -328,11 +475,22 @@ var I18nPlusManager = class {
    * Set locale for all registered plugins
    */
   setGlobalLocale(locale) {
-    this.currentLocale = locale;
+    this.currentLocale = resolveLocale(locale);
     for (const translator2 of this.translators.values()) {
-      translator2.setLocale(locale);
+      translator2.setLocale(this.currentLocale);
     }
-    this.emit("locale-changed", locale);
+    this.emit("locale-changed", this.currentLocale);
+  }
+  /**
+   * Set locale for a specific plugin and emit a per-plugin event.
+   * This allows the plugin (or its host) to react to the change.
+   */
+  setPluginLocale(pluginId, locale) {
+    const translator2 = this.translators.get(pluginId);
+    if (translator2) {
+      translator2.setLocale(locale);
+      this.emit("plugin-locale-changed", pluginId, locale);
+    }
   }
   /**
    * Listen to events
@@ -426,9 +584,9 @@ var I18nPlusManager = class {
       const value = dict[key];
       if (typeof value === "string") return value;
     }
-    const baseLang = (_a = this.currentLocale.split("-")[0]) != null ? _a : this.currentLocale;
-    if (baseLang !== this.currentLocale) {
-      const baseDict = themeLocales.get(baseLang);
+    const baseLanguage = this.currentLocale === "en" ? void 0 : resolveLocale((_a = this.currentLocale.split("-")[0]) != null ? _a : this.currentLocale);
+    if (baseLanguage && baseLanguage !== this.currentLocale) {
+      const baseDict = themeLocales.get(baseLanguage);
       if (baseDict && key in baseDict) {
         const value = baseDict[key];
         if (typeof value === "string") return value;
@@ -469,88 +627,6 @@ function destroyGlobalAPI() {
   instance = null;
 }
 
-// src/framework/locales.ts
-var OBSIDIAN_LOCALES = [
-  { code: "en", name: "English", nativeName: "English" },
-  { code: "af", name: "Afrikaans", nativeName: "Afrikaans" },
-  { code: "am", name: "Amharic", nativeName: "\u12A0\u121B\u122D\u129B" },
-  { code: "ar", name: "Arabic", nativeName: "\u0627\u0644\u0639\u0631\u0628\u064A\u0629" },
-  { code: "az", name: "Azerbaijani", nativeName: "Az\u0259rbaycan" },
-  { code: "be", name: "Belarusian", nativeName: "\u0411\u0435\u043B\u0430\u0440\u0443\u0441\u043A\u0430\u044F \u043C\u043E\u0432\u0430" },
-  { code: "bg", name: "Bulgarian", nativeName: "\u0431\u044A\u043B\u0433\u0430\u0440\u0441\u043A\u0438 \u0435\u0437\u0438\u043A" },
-  { code: "bn", name: "Bengali", nativeName: "\u09AC\u09BE\u0982\u09B2\u09BE" },
-  { code: "ca", name: "Catalan", nativeName: "catal\xE0" },
-  { code: "cs", name: "Czech", nativeName: "\u010De\u0161tina" },
-  { code: "da", name: "Danish", nativeName: "Dansk" },
-  { code: "de", name: "German", nativeName: "Deutsch" },
-  { code: "dv", name: "Dhivehi", nativeName: "\u078B\u07A8\u0788\u07AC\u0780\u07A8" },
-  { code: "el", name: "Greek", nativeName: "\u0395\u03BB\u03BB\u03B7\u03BD\u03B9\u03BA\u03AC" },
-  { code: "en-gb", name: "English (GB)", nativeName: "English (GB)" },
-  { code: "eo", name: "Esperanto", nativeName: "Esperanto" },
-  { code: "es", name: "Spanish", nativeName: "Espa\xF1ol" },
-  { code: "eu", name: "Basque", nativeName: "Euskara" },
-  { code: "fa", name: "Persian", nativeName: "\u0641\u0627\u0631\u0633\u06CC" },
-  { code: "fi", name: "Finnish", nativeName: "suomi" },
-  { code: "fr", name: "French", nativeName: "fran\xE7ais" },
-  { code: "ga", name: "Irish", nativeName: "Gaeilge" },
-  { code: "gl", name: "Galician", nativeName: "Galego" },
-  { code: "he", name: "Hebrew", nativeName: "\u05E2\u05D1\u05E8\u05D9\u05EA" },
-  { code: "hi", name: "Hindi", nativeName: "\u0939\u093F\u0928\u094D\u0926\u0940" },
-  { code: "hr", name: "Croatian", nativeName: "Hrvatski" },
-  { code: "hu", name: "Hungarian", nativeName: "Magyar" },
-  { code: "id", name: "Indonesian", nativeName: "Bahasa Indonesia" },
-  { code: "it", name: "Italian", nativeName: "Italiano" },
-  { code: "ja", name: "Japanese", nativeName: "\u65E5\u672C\u8A9E" },
-  { code: "ka", name: "Georgian", nativeName: "\u10E5\u10D0\u10E0\u10D7\u10E3\u10DA\u10D8" },
-  { code: "kh", name: "Khmer", nativeName: "\u1781\u17C1\u1798\u179A\u1797\u17B6\u179F\u17B6" },
-  { code: "kn", name: "Kannada", nativeName: "\u0C95\u0CA8\u0CCD\u0CA8\u0CA1" },
-  { code: "ko", name: "Korean", nativeName: "\uD55C\uAD6D\uC5B4" },
-  { code: "ky", name: "Kyrgyz", nativeName: "\u041A\u044B\u0440\u0433\u044B\u0437\u0447\u0430" },
-  { code: "la", name: "Latin", nativeName: "Latina" },
-  { code: "lt", name: "Lithuanian", nativeName: "Lietuvi\u0173" },
-  { code: "lv", name: "Latvian", nativeName: "Latvie\u0161u" },
-  { code: "ml", name: "Malayalam", nativeName: "\u0D2E\u0D32\u0D2F\u0D3E\u0D33\u0D02" },
-  { code: "ms", name: "Malay", nativeName: "Bahasa Melayu" },
-  { code: "nan-tw", name: "Taiwanese (Min Nan)", nativeName: "\u95A9\u5357\u8A9E" },
-  { code: "ne", name: "Nepali", nativeName: "\u0928\u0947\u092A\u093E\u0932\u0940" },
-  { code: "nl", name: "Dutch", nativeName: "Nederlands" },
-  { code: "nn", name: "Norwegian Nynorsk", nativeName: "Nynorsk" },
-  { code: "no", name: "Norwegian", nativeName: "Norsk" },
-  { code: "oc", name: "Occitan", nativeName: "Occitan" },
-  { code: "or", name: "Odia", nativeName: "\u0B13\u0B21\u0B3C\u0B3F\u0B06" },
-  { code: "pl", name: "Polish", nativeName: "j\u0119zyk polski" },
-  { code: "pt", name: "Portuguese", nativeName: "Portugu\xEAs" },
-  { code: "pt-br", name: "Brazilian Portuguese", nativeName: "Portugu\xEAs do Brasil" },
-  { code: "ro", name: "Romanian", nativeName: "Rom\xE2n\u0103" },
-  { code: "ru", name: "Russian", nativeName: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439" },
-  { code: "sa", name: "Sanskrit", nativeName: "\u0938\u0902\u0938\u094D\u0915\u0943\u0924\u092E\u094D" },
-  { code: "si", name: "Sinhalese", nativeName: "\u0DC3\u0DD2\u0D82\u0DC4\u0DBD" },
-  { code: "sk", name: "Slovak", nativeName: "Sloven\u010Dina" },
-  { code: "sl", name: "Slovenian", nativeName: "Sloven\u0161\u010Dina" },
-  { code: "sq", name: "Albanian", nativeName: "Shqip" },
-  { code: "sr", name: "Serbian", nativeName: "\u0441\u0440\u043F\u0441\u043A\u0438 \u0458\u0435\u0437\u0438\u043A" },
-  { code: "sv", name: "Swedish", nativeName: "Svenska" },
-  { code: "sw", name: "Swahili", nativeName: "Kiswahili" },
-  { code: "ta", name: "Tamil", nativeName: "\u0BA4\u0BAE\u0BBF\u0BB4\u0BCD" },
-  { code: "te", name: "Telugu", nativeName: "\u0C24\u0C46\u0C32\u0C41\u0C17\u0C41" },
-  { code: "th", name: "Thai", nativeName: "\u0E44\u0E17\u0E22" },
-  { code: "tl", name: "Filipino (Tagalog)", nativeName: "Tagalog" },
-  { code: "tr", name: "Turkish", nativeName: "T\xFCrk\xE7e" },
-  { code: "tt", name: "Tatar", nativeName: "\u0422\u0430\u0442\u0430\u0440\u0447\u0430" },
-  { code: "uk", name: "Ukrainian", nativeName: "\u0423\u043A\u0440\u0430\u0457\u043D\u0441\u044C\u043A\u0430" },
-  { code: "ur", name: "Urdu", nativeName: "\u0627\u0631\u062F\u0648" },
-  { code: "uz", name: "Uzbek", nativeName: "o\u02BBzbekcha" },
-  { code: "vi", name: "Vietnamese", nativeName: "Ti\u1EBFng Vi\u1EC7t" },
-  { code: "zh", name: "Chinese (Simplified)", nativeName: "\u7B80\u4F53\u4E2D\u6587" },
-  { code: "zh-tw", name: "Chinese (Traditional)", nativeName: "\u7E41\u9AD4\u4E2D\u6587" }
-];
-var LOCALE_MAP = new Map(
-  OBSIDIAN_LOCALES.map((locale) => [locale.code, locale])
-);
-var VALID_LOCALE_CODES = new Set(
-  OBSIDIAN_LOCALES.map((locale) => locale.code)
-);
-
 // src/settings.ts
 var import_obsidian = require("obsidian");
 
@@ -585,6 +661,14 @@ var zh_default = {
   "manager.search_plugins_placeholder": "\u641C\u7D22\u63D2\u4EF6...",
   "manager.search_themes_placeholder": "\u641C\u7D22\u4E3B\u9898...",
   "manager.syncing_cloud": "\u6B63\u5728\u540C\u6B65\u4E91\u7AEF\u6570\u636E...",
+  "manager.no_plugins_found": "\u672A\u627E\u5230\u63D2\u4EF6\u3002",
+  "manager.no_plugins_match": "\u6CA1\u6709\u5339\u914D\u641C\u7D22\u6761\u4EF6\u7684\u63D2\u4EF6\u3002",
+  "manager.no_plugins_registered": "\u6CA1\u6709\u5DF2\u6CE8\u518C\u7684\u63D2\u4EF6\u3002",
+  "manager.no_themes_found": "\u672A\u627E\u5230\u4E3B\u9898\u3002",
+  "manager.no_themes_match": "\u6CA1\u6709\u5339\u914D\u641C\u7D22\u6761\u4EF6\u7684\u4E3B\u9898\u3002",
+  "manager.no_dictionaries": "\u6B64\u63D2\u4EF6\u6CA1\u6709\u53EF\u7528\u8BCD\u5178\u3002",
+  "manager.download_all": "\u4E0B\u8F7D\u5168\u90E8\u7FFB\u8BD1",
+  "manager.download_all_result": "\u5DF2\u4E0B\u8F7D {count}/{total} \u4E2A\u7FFB\u8BD1",
   "action.import_dictionary": "\u5BFC\u5165\u8BCD\u5178",
   "action.add_translation": "\u6DFB\u52A0\u7FFB\u8BD1",
   "action.export_template": "\u5BFC\u51FA\u6A21\u677F",
@@ -641,6 +725,8 @@ var zh_default = {
   "notice.metadata_updated": "\u5143\u6570\u636E\u5DF2\u66F4\u65B0\uFF08\u5F85\u4FDD\u5B58\uFF09",
   "notice.editor_export_success": "\u5DF2\u5BFC\u51FA {locale} \u8BCD\u5178",
   "notice.validation_errors": "\u65E0\u6CD5\u4FDD\u5B58\uFF1A{count} \u4E2A\u6761\u76EE\u5B58\u5728\u9A8C\u8BC1\u9519\u8BEF",
+  "notice.download_failed": "\u4E0B\u8F7D\u5931\u8D25\uFF1A{error}",
+  "notice.export_failed_version": "\u5BFC\u51FA\u5931\u8D25\uFF1A\u672A\u627E\u5230 {pluginId} \u7684\u7248\u672C\u4FE1\u606F",
   "notice.save_success": "\u5DF2\u4FDD\u5B58\u5E76\u5237\u65B0 {locale} \u8BCD\u5178",
   "notice.save_failed": "\u4FDD\u5B58\u8BCD\u5178\u5931\u8D25",
   "notice.no_plugins": "\u6CA1\u6709\u63D2\u4EF6\u6CE8\u518C\u5230 i18n-plus",
@@ -649,7 +735,23 @@ var zh_default = {
   "settings.debug_mode": "\u8C03\u8BD5\u6A21\u5F0F",
   "settings.debug_mode_desc": "\u5728\u63A7\u5236\u53F0\u663E\u793A\u8BE6\u7EC6\u65E5\u5FD7",
   "settings.registered_plugins": "\u5DF2\u6CE8\u518C\u63D2\u4EF6",
-  "settings.loaded_locales": "\u5DF2\u52A0\u8F7D\u8BED\u8A00\uFF1A{locales}"
+  "settings.loaded_locales": "\u5DF2\u52A0\u8F7D\u8BED\u8A00\uFF1A{locales}",
+  "settings.language_section": "\u8BED\u8A00",
+  "settings.preferred_language": "\u9996\u9009\u8BED\u8A00",
+  "settings.preferred_language_desc": "\u7FFB\u8BD1\u7684\u9ED8\u8BA4\u8BED\u8A00\u3002\u4F18\u5148\u4F7F\u7528\u6B64\u8BED\u8A00\u7684\u7FFB\u8BD1\u3002",
+  "settings.language_auto": "\u81EA\u52A8\uFF08\u8DDF\u968F Obsidian \u8BED\u8A00\uFF09",
+  "settings.cloud_section": "\u4E91\u7AEF\u8BCD\u5178",
+  "settings.cdn_url": "CDN \u6E90\u5730\u5740",
+  "settings.cdn_url_desc": "\u4E0B\u8F7D\u8BCD\u5178 manifest \u548C\u7FFB\u8BD1\u6587\u4EF6\u7684\u57FA\u7840 URL\u3002",
+  "settings.cloud_status": "\u4E91\u7AEF\u72B6\u6001",
+  "settings.cloud_loaded": "Manifest \u5DF2\u52A0\u8F7D\uFF0C\u53EF\u4E0B\u8F7D\u8BCD\u5178\u3002",
+  "settings.cloud_not_loaded": "Manifest \u672A\u52A0\u8F7D\u3002\u6253\u5F00\u8BCD\u5178\u7BA1\u7406\u5668\u89E6\u53D1\u540C\u6B65\u3002",
+  "settings.refresh_cloud": "\u5237\u65B0",
+  "settings.debug_section": "\u8C03\u8BD5",
+  "settings.no_plugins_registered": "\u6682\u65E0\u5DF2\u6CE8\u518C\u63D2\u4EF6\u3002\u63D2\u4EF6\u9700\u8981\u96C6\u6210 i18n-plus \u6846\u67B6\u3002",
+  "command.open_manager": "\u6253\u5F00\u8BCD\u5178\u7BA1\u7406\u5668",
+  "command.show_plugins": "\u663E\u793A\u5DF2\u6CE8\u518C\u63D2\u4EF6",
+  "command.reload_dicts": "\u91CD\u65B0\u52A0\u8F7D\u6240\u6709\u8BCD\u5178"
 };
 
 // src/lang/index.ts
@@ -684,6 +786,14 @@ var baseDictionary = {
   "manager.search_plugins_placeholder": "Search plugins...",
   "manager.search_themes_placeholder": "Search themes...",
   "manager.syncing_cloud": "Syncing cloud data...",
+  "manager.no_plugins_found": "No plugins found.",
+  "manager.no_plugins_match": "No plugins matching your search.",
+  "manager.no_plugins_registered": "No plugins registered.",
+  "manager.no_themes_found": "No themes found.",
+  "manager.no_themes_match": "No themes matching your search.",
+  "manager.no_dictionaries": "No dictionaries available for this plugin.",
+  "manager.download_all": "Download all translations",
+  "manager.download_all_result": "Downloaded {count}/{total} translations",
   // === Manager Actions ===
   "action.import_dictionary": "Import dictionary",
   "action.add_translation": "Add translation",
@@ -745,6 +855,8 @@ var baseDictionary = {
   "notice.metadata_updated": "Metadata updated (pending save)",
   "notice.editor_export_success": "Exported {locale} dictionary",
   "notice.validation_errors": "Cannot save: {count} entries have validation errors",
+  "notice.download_failed": "Download failed: {error}",
+  "notice.export_failed_version": "Failed to export: Version not found for {pluginId}",
   "notice.save_success": "Saved and refreshed {locale} dictionary",
   "notice.save_failed": "Failed to save dictionary",
   "notice.no_plugins": "No plugins registered to i18n-plus",
@@ -756,22 +868,47 @@ var baseDictionary = {
   "settings.debug_mode": "Debug mode",
   "settings.debug_mode_desc": "Show detailed logs in the console",
   "settings.registered_plugins": "Registered plugins",
-  "settings.loaded_locales": "Loaded locales: {locales}"
+  "settings.loaded_locales": "Loaded locales: {locales}",
+  "settings.language_section": "Language",
+  "settings.preferred_language": "Preferred language",
+  "settings.preferred_language_desc": "Default language for translations. Plugins with available translations will use this language.",
+  "settings.language_auto": "Auto (follow Obsidian)",
+  "settings.cloud_section": "Cloud Dictionaries",
+  "settings.cdn_source": "CDN source",
+  "settings.cdn_source_desc": "Select a CDN provider for downloading dictionaries. Use 'Custom URL' for self-hosted or alternative CDN endpoints.",
+  "settings.cdn_preset_default": "jsDelivr (@latest)",
+  "settings.cdn_preset_main": "jsDelivr (@main)",
+  "settings.cdn_preset_unpkg": "unpkg",
+  "settings.cdn_preset_custom": "Custom URL...",
+  "settings.cdn_custom_url": "Custom CDN URL",
+  "settings.cdn_custom_url_desc": "Enter your own CDN base URL for dictionary manifests and translation files.",
+  "settings.cloud_status": "Cloud status",
+  "settings.cloud_loaded": "Manifest loaded. Dictionaries available for download.",
+  "settings.cloud_not_loaded": "Manifest not loaded yet. Open the dictionary manager to trigger sync.",
+  "settings.refresh_cloud": "Refresh",
+  "settings.debug_section": "Debug",
+  "settings.no_plugins_registered": "No plugins registered yet. Plugins need to integrate i18n-plus framework.",
+  // === Commands ===
+  "command.open_manager": "Open dictionary manager",
+  "command.show_plugins": "Show registered plugins",
+  "command.reload_dicts": "Reload all dictionaries"
 };
 var translator = null;
 function initSelfI18n(pluginInstance) {
+  var _a;
+  const detectedLocale = (((_a = window.moment) == null ? void 0 : _a.locale()) || "en").split("-")[0];
   translator = new I18nTranslator({
     pluginId: "i18n-plus",
     baseLocale: "en",
     baseDictionary,
-    currentLocale: void 0
-    // Will follow Obsidian's locale
+    currentLocale: detectedLocale
   });
   if (typeof translator.loadBuiltinDictionary === "function") {
     translator.loadBuiltinDictionary("zh", zh_default);
   } else {
     translator.loadDictionary("zh", zh_default);
   }
+  pluginInstance.i18n = translator;
   if (window.i18nPlus) {
     window.i18nPlus.register("i18n-plus", translator);
   }
@@ -792,10 +929,32 @@ function t(key, vars) {
 }
 
 // src/settings.ts
+var CDN_PRESETS = {
+  "default": "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@latest",
+  "jsdelivr-main": "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@main",
+  "unpkg": "https://unpkg.com/@open-obsidian-i18n/dictionaries@latest"
+};
+var CDN_PRESET_OPTIONS = [
+  { value: "default", label: "jsDelivr (@latest)", i18nKey: "settings.cdn_preset_default" },
+  { value: "jsdelivr-main", label: "jsDelivr (@main)", i18nKey: "settings.cdn_preset_main" },
+  { value: "unpkg", label: "unpkg", i18nKey: "settings.cdn_preset_unpkg" },
+  { value: "custom", label: "Custom URL...", i18nKey: "settings.cdn_preset_custom" }
+];
+function resolveCdnUrl(preset, customUrl) {
+  var _a;
+  if (preset === "custom") {
+    return customUrl;
+  }
+  return (_a = CDN_PRESETS[preset]) != null ? _a : "";
+}
 var DEFAULT_SETTINGS = {
   debugMode: false,
-  currentLocale: ""
+  currentLocale: "",
   // Empty means use Obsidian's default language
+  pluginLocales: {},
+  cdnPreset: "default",
+  cdnCustomUrl: "",
+  cdnUrl: CDN_PRESETS["default"]
 };
 var I18nPlusSettingTab = class extends import_obsidian.PluginSettingTab {
   constructor(app, plugin) {
@@ -803,8 +962,84 @@ var I18nPlusSettingTab = class extends import_obsidian.PluginSettingTab {
     this.plugin = plugin;
   }
   display() {
+    var _a, _b, _c;
     const { containerEl } = this;
     containerEl.empty();
+    new import_obsidian.Setting(containerEl).setName(t("settings.language_section") || "Language").setHeading();
+    new import_obsidian.Setting(containerEl).setName(t("settings.preferred_language") || "Preferred language").setDesc(t("settings.preferred_language_desc") || "Default language for translations. Plugins with available translations will use this language.").addDropdown((dropdown) => {
+      dropdown.addOption("", t("settings.language_auto") || "Auto (follow Obsidian)");
+      for (const locale of OBSIDIAN_LOCALES) {
+        dropdown.addOption(locale.code, `${locale.nativeName} (${locale.name})`);
+      }
+      dropdown.setValue(this.plugin.settings.currentLocale);
+      dropdown.onChange(async (val) => {
+        var _a2;
+        const resolved = resolveLocale(val);
+        this.plugin.settings.currentLocale = resolved;
+        await this.plugin.saveSettings();
+        const manager = getI18nPlusManager();
+        if (resolved) {
+          manager.setGlobalLocale(resolved);
+        } else {
+          const detected = resolveLocale(((_a2 = window.moment) == null ? void 0 : _a2.locale()) || "en");
+          manager.setGlobalLocale(detected);
+        }
+      });
+    });
+    new import_obsidian.Setting(containerEl).setName(t("settings.cloud_section") || "Cloud Dictionaries").setHeading();
+    new import_obsidian.Setting(containerEl).setName(t("settings.cdn_source") || "CDN source").setDesc(t("settings.cdn_source_desc") || "Select a CDN provider for downloading dictionaries.").addDropdown((dd) => {
+      for (const opt of CDN_PRESET_OPTIONS) {
+        const label = t(opt.i18nKey) || opt.label;
+        dd.addOption(opt.value, label);
+      }
+      dd.setValue(this.plugin.settings.cdnPreset);
+      dd.onChange(async (val) => {
+        const preset = val;
+        this.plugin.settings.cdnPreset = preset;
+        if (preset === "custom") {
+          if (!this.plugin.settings.cdnCustomUrl) {
+            this.plugin.settings.cdnCustomUrl = this.plugin.settings.cdnUrl;
+          }
+        } else {
+          this.plugin.settings.cdnUrl = resolveCdnUrl(preset, "");
+          this.plugin.settings.cdnCustomUrl = "";
+          if (this.plugin.cloudManager) {
+            this.plugin.cloudManager.setCdnUrl(this.plugin.settings.cdnUrl);
+          }
+        }
+        await this.plugin.saveSettings();
+        this.display();
+      });
+    });
+    if (this.plugin.settings.cdnPreset === "custom") {
+      new import_obsidian.Setting(containerEl).setName(t("settings.cdn_custom_url") || "Custom CDN URL").setDesc(t("settings.cdn_custom_url_desc") || "Enter your own CDN base URL.").addText((text) => text.setPlaceholder("https://cdn.example.com/dictionaries").setValue(this.plugin.settings.cdnCustomUrl || this.plugin.settings.cdnUrl).onChange(async (val) => {
+        this.plugin.settings.cdnCustomUrl = val;
+        this.plugin.settings.cdnUrl = val;
+        await this.plugin.saveSettings();
+        if (this.plugin.cloudManager) {
+          this.plugin.cloudManager.setCdnUrl(val);
+        }
+      }));
+    }
+    if (this.plugin.cloudManager) {
+      const statsContainer = containerEl.createDiv({ cls: "setting-item" });
+      const info = statsContainer.createDiv({ cls: "setting-item-info" });
+      info.createDiv({ cls: "setting-item-name", text: t("settings.cloud_status") || "Cloud status" });
+      const manifestLoaded = this.plugin.cloudManager.hasLoaded;
+      const descText = manifestLoaded ? t("settings.cloud_loaded") || "Manifest loaded. Dictionaries available for download." : t("settings.cloud_not_loaded") || "Manifest not loaded yet. Open the dictionary manager to trigger sync.";
+      info.createDiv({ cls: "setting-item-description", text: descText });
+      const controls = statsContainer.createDiv({ cls: "setting-item-control" });
+      const refreshBtn = controls.createEl("button", { cls: "mod-cta" });
+      refreshBtn.textContent = t("settings.refresh_cloud") || "Refresh";
+      refreshBtn.onclick = () => {
+        refreshBtn.setText("...");
+        void this.plugin.cloudManager.fetchRemoteManifest(true).then(() => {
+          refreshBtn.setText(t("settings.refresh_cloud") || "Refresh");
+          this.display();
+        });
+      };
+    }
+    new import_obsidian.Setting(containerEl).setName(t("settings.debug_section") || "Debug").setHeading();
     new import_obsidian.Setting(containerEl).setName(t("settings.debug_mode")).setDesc(t("settings.debug_mode_desc")).addToggle((toggle) => toggle.setValue(this.plugin.settings.debugMode).onChange(async (value) => {
       this.plugin.settings.debugMode = value;
       await this.plugin.saveSettings();
@@ -815,18 +1050,21 @@ var I18nPlusSettingTab = class extends import_obsidian.PluginSettingTab {
       const plugins = window.i18nPlus.getRegisteredPlugins();
       if (plugins.length === 0) {
         pluginListEl.createEl("p", {
-          text: "No plugins registered yet. Plugins need to integrate i18n-plus framework.",
+          text: t("settings.no_plugins_registered") || "No plugins registered yet. Plugins need to integrate i18n-plus framework.",
           cls: "setting-item-description"
         });
       } else {
         for (const pluginId of plugins) {
+          const pluginRegistry = this.app;
+          const manifest = (_c = (_b = (_a = pluginRegistry.plugins) == null ? void 0 : _a.plugins) == null ? void 0 : _b[pluginId]) == null ? void 0 : _c.manifest;
+          const displayName = (manifest == null ? void 0 : manifest.name) ? `${manifest.name} (${pluginId})` : pluginId;
           const locales = window.i18nPlus.getLoadedLocales(pluginId);
-          new import_obsidian.Setting(pluginListEl).setName(pluginId).setDesc(t("settings.loaded_locales", { locales: locales.join(", ") || "none" }));
+          new import_obsidian.Setting(pluginListEl).setName(displayName).setDesc(t("settings.loaded_locales", { locales: locales.join(", ") || "none" }));
         }
       }
     } else {
       pluginListEl.createEl("p", {
-        text: "I18n plus API not initialized",
+        text: "i18n+ API not initialized",
         cls: "setting-item-description"
       });
     }
@@ -991,13 +1229,13 @@ var DictionaryStore = class {
    * Get plugin dictionary file path
    */
   getDictionaryFilePath(pluginId, locale) {
-    return (0, import_obsidian3.normalizePath)(`${this.pluginsBasePath}/${pluginId}/${locale}.json`);
+    return (0, import_obsidian3.normalizePath)(`${this.pluginsBasePath}/${pluginId}/${resolveLocale(locale)}.json`);
   }
   /**
    * Get theme dictionary file path
    */
   getThemeDictionaryFilePath(themeName, locale) {
-    return (0, import_obsidian3.normalizePath)(`${this.themesBasePath}/${themeName}/${locale}.json`);
+    return (0, import_obsidian3.normalizePath)(`${this.themesBasePath}/${themeName}/${resolveLocale(locale)}.json`);
   }
   /**
    * Save dictionary to local file (supports overwrite)
@@ -1437,16 +1675,23 @@ var CloudManager = class {
     /** 
      * Remote Manifest URL 
      */
-    /** 
-     * Remote Manifest URL 
-     */
     this.manifestUrl = "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@main/manifest.json";
+    this.baseDownloadUrl = "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@main/";
     this.remoteManifest = [];
     this.fetchPromise = null;
     this.hasLoaded = false;
   }
   get isFetching() {
     return this.fetchPromise !== null;
+  }
+  /**
+   * Update the CDN base URL. Clears cache so next fetch uses the new URL.
+   */
+  setCdnUrl(url) {
+    const base = url.replace(/\/+$/, "");
+    this.manifestUrl = `${base}/manifest.json`;
+    this.baseDownloadUrl = `${base}/`;
+    this.remoteManifest = [];
   }
   /**
    * Fetch the remote manifest to see what's available in the cloud
@@ -1473,7 +1718,7 @@ var CloudManager = class {
           if (url && url.startsWith("https://raw.githubusercontent.com/open-obsidian-i18n/dictionaries/main/")) {
             return url.replace(
               "https://raw.githubusercontent.com/open-obsidian-i18n/dictionaries/main/",
-              "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@main/"
+              this.baseDownloadUrl
             );
           }
           return url;
@@ -1549,17 +1794,31 @@ var CloudManager = class {
   }
 };
 
+// src/ui/i18n-editor-view.ts
+var import_obsidian8 = require("obsidian");
+
 // src/ui/dictionary-manager.ts
 var import_obsidian5 = require("obsidian");
 var DictionaryManagerView = class {
   constructor(app, plugin) {
+    /** Optional navigation target for popout window (internal routing). */
+    this.navigationTarget = null;
     this.activeTab = "plugins";
+    this._renderGen = 0;
     this.lastContainer = null;
     this.app = app;
     this.plugin = plugin;
     this.store = new DictionaryStore(app, plugin);
   }
+  /**
+   * Set a navigation target so that "edit" actions navigate within the
+   * same popout window instead of opening a new one.
+   */
+  setNavigationTarget(target) {
+    this.navigationTarget = target;
+  }
   async render(container) {
+    const gen = ++this._renderGen;
     this.containerEl = container;
     container.empty();
     container.addClass("i18n-plus-manager");
@@ -1636,8 +1895,10 @@ var DictionaryManagerView = class {
     const registeredPlugins = manager.getRegisteredPlugins();
     const installedDicts = await this.store.listAllDictionaries();
     const installedThemeDicts = await this.store.listAllThemeDictionaries();
+    if (gen !== this._renderGen) return;
     const installedThemes = await this.store.listInstalledThemes();
     const loadedThemeIds = manager.getLoadedThemes();
+    if (gen !== this._renderGen) return;
     const idToFolderMap = /* @__PURE__ */ new Map();
     for (const dict of installedThemeDicts) {
       if (dict.id && dict.themeName) {
@@ -1664,7 +1925,7 @@ var DictionaryManagerView = class {
         if (filteredPlugins.length > 0 || !query) {
           if (filteredPlugins.length === 0) {
             contentContainer.createEl("div", {
-              text: "No plugins found.",
+              text: t("manager.no_plugins_found"),
               cls: "setting-item-description i18n-plus-list-empty-msg"
             });
           }
@@ -1683,7 +1944,7 @@ var DictionaryManagerView = class {
         }
         if (filteredPlugins.length === 0 && (!orphanDicts.length || orphanDicts.every((d) => !d.pluginId.toLowerCase().includes(lowerQuery)))) {
           contentContainer.createEl("p", {
-            text: query ? "No plugins matching your search." : "No plugins registered.",
+            text: query ? t("manager.no_plugins_match") : t("manager.no_plugins_registered"),
             cls: "setting-item-description"
           });
         }
@@ -1697,7 +1958,7 @@ var DictionaryManagerView = class {
           }
         } else {
           contentContainer.createEl("p", {
-            text: query ? "No themes matching your search." : "No themes found.",
+            text: query ? t("manager.no_themes_match") : t("manager.no_themes_found"),
             cls: "setting-item-description"
           });
         }
@@ -1738,21 +1999,44 @@ var DictionaryManagerView = class {
         void this.render(this.lastContainer);
       }
     } catch (error) {
-      new import_obsidian5.Notice(`Download failed: ${error instanceof Error ? error.message : String(error)}`);
+      new import_obsidian5.Notice(t("notice.download_failed", { error: error instanceof Error ? error.message : String(error) }));
       console.error(error);
     }
+  }
+  /**
+   * Get a friendly display name for a plugin, including its manifest name if available.
+   */
+  getPluginDisplayName(pluginId) {
+    var _a, _b, _c, _d;
+    const appWithPlugins = this.app;
+    const plugins = (_a = appWithPlugins.plugins) == null ? void 0 : _a.plugins;
+    if (!plugins) return pluginId;
+    const directPlugin = plugins[pluginId];
+    if ((_b = directPlugin == null ? void 0 : directPlugin.manifest) == null ? void 0 : _b.name) {
+      return `${directPlugin.manifest.name} (${pluginId})`;
+    }
+    for (const [obsidianId, plugin] of Object.entries(plugins)) {
+      const p = plugin;
+      if (((_c = p.manifest) == null ? void 0 : _c.name) && ((_d = p.i18n) == null ? void 0 : _d.pluginId) === pluginId) {
+        return `${p.manifest.name} (${obsidianId})`;
+      }
+    }
+    return pluginId;
   }
   /**
    * Render single plugin section with collapsible functionality
    */
   renderPluginSection(container, pluginId, installedDicts) {
-    var _a, _b;
+    var _a, _b, _c, _d, _e;
     const manager = getI18nPlusManager();
-    const translator2 = manager.getTranslator(pluginId);
-    if (!translator2) return;
-    const builtinLocales = ((_a = translator2.getBuiltinLocales) == null ? void 0 : _a.call(translator2)) || [];
-    const externalLocales = ((_b = translator2.getExternalLocales) == null ? void 0 : _b.call(translator2)) || [];
-    const currentLocale = translator2.getLocale();
+    const metaTranslator = manager.getTranslator(pluginId);
+    if (!metaTranslator) return;
+    const appWithPlugins2 = this.app;
+    const plugin = (_b = (_a = appWithPlugins2.plugins) == null ? void 0 : _a.plugins) == null ? void 0 : _b[pluginId];
+    const actualAdapter = plugin == null ? void 0 : plugin.i18n;
+    const builtinLocales = ((_c = metaTranslator.getBuiltinLocales) == null ? void 0 : _c.call(metaTranslator)) || [];
+    const externalLocales = ((_d = metaTranslator.getExternalLocales) == null ? void 0 : _d.call(metaTranslator)) || [];
+    const currentLocale = ((_e = actualAdapter == null ? void 0 : actualAdapter.getLocale) == null ? void 0 : _e.call(actualAdapter)) || metaTranslator.getLocale();
     const pluginDicts = installedDicts.filter((d) => d.pluginId === pluginId);
     const section = container.createDiv({ cls: "i18n-plus-plugin-section is-collapsed" });
     const cardHeader = section.createDiv({ cls: "i18n-plus-card-header" });
@@ -1760,7 +2044,7 @@ var DictionaryManagerView = class {
     const iconSpan = titleArea.createSpan({ cls: "i18n-plus-collapse-icon" });
     (0, import_obsidian5.setIcon)(iconSpan, "chevron-down");
     const info = titleArea.createDiv({ cls: "setting-item-info" });
-    info.createDiv({ cls: "setting-item-name", text: pluginId });
+    info.createDiv({ cls: "setting-item-name", text: this.getPluginDisplayName(pluginId) });
     info.createDiv({
       cls: "setting-item-description",
       text: t("manager.builtin_locales", { count: builtinLocales.length, external: pluginDicts.length })
@@ -1771,23 +2055,44 @@ var DictionaryManagerView = class {
     const allLocales = [.../* @__PURE__ */ new Set([...builtinLocales, ...externalLocales])];
     for (const locale of allLocales) {
       const localeInfo = OBSIDIAN_LOCALES.find((l) => l.code === locale);
-      const label = localeInfo ? `${localeInfo.nativeName} (${locale})` : locale;
-      const isExternal = externalLocales.includes(locale) && !builtinLocales.includes(locale);
+      const label = localeInfo ? localeInfo.nativeName : locale;
       const option = dropdown.createEl("option", {
         value: locale,
-        text: (isExternal ? "\u{1F4E5} " : "\u{1F4E6} ") + label
+        text: label
       });
       if (locale === currentLocale) option.selected = true;
     }
     dropdown.onchange = () => {
-      translator2.setLocale(dropdown.value);
-      manager.setGlobalLocale(dropdown.value);
-      new import_obsidian5.Notice(t("notice.switched_locale", { pluginId, locale: dropdown.value }));
-      if (pluginId === "i18n-plus") {
-        window.setTimeout(() => {
-          var _a2;
-          (_a2 = this.plugin.floatingWidget) == null ? void 0 : _a2.refresh();
-        }, 50);
+      var _a2;
+      const target = actualAdapter || metaTranslator;
+      const newLocale = dropdown.value;
+      (_a2 = target.setLocale) == null ? void 0 : _a2.call(target, newLocale);
+      const managerCopy = manager.getTranslator(pluginId);
+      if (managerCopy && managerCopy !== target) {
+        managerCopy.setLocale(newLocale);
+      }
+      manager.setPluginLocale(pluginId, newLocale);
+      if (this.plugin.settings) {
+        this.plugin.settings.pluginLocales = this.plugin.settings.pluginLocales || {};
+        this.plugin.settings.pluginLocales[pluginId] = newLocale;
+        void this.plugin.saveSettings();
+      }
+      new import_obsidian5.Notice(t("notice.switched_locale", { pluginId, locale: newLocale }));
+      if (dropdown) {
+        const newIndex = Array.from(dropdown.options).findIndex((o) => o.value === newLocale);
+        if (newIndex >= 0) dropdown.selectedIndex = newIndex;
+      }
+      if (pluginId !== "i18n-plus") {
+        new import_obsidian5.Notice(`Restarting ${pluginId} to apply new locale...`);
+        const pm = this.app.plugins;
+        if (pm && typeof pm.disablePlugin === "function") {
+          pm.disablePlugin(pluginId).then(() => {
+            pm.enablePlugin(pluginId);
+          }).catch((err) => {
+            console.warn("[i18n-plus] Failed to restart plugin", pluginId, err);
+            new import_obsidian5.Notice(`Could not restart ${pluginId}. Reload Obsidian to see changes.`);
+          });
+        }
       }
     };
     const currentGlobalLocale = manager.getGlobalLocale() || "en";
@@ -1796,8 +2101,8 @@ var DictionaryManagerView = class {
     if (currentGlobalLocale === "zh-CN") targetLocales.push("zh");
     const isLocallyAvailable = builtinLocales.some((l) => targetLocales.includes(l)) || pluginDicts.some((d) => targetLocales.includes(d.locale));
     if (!isLocallyAvailable) {
-      const cloudDicts = this.plugin.cloudManager.getCloudDictsForPlugin(pluginId);
-      const cloudMatch = cloudDicts.find((d) => targetLocales.includes(d.locale));
+      const cloudDicts2 = this.plugin.cloudManager.getCloudDictsForPlugin(pluginId);
+      const cloudMatch = cloudDicts2.find((d) => targetLocales.includes(d.locale));
       if (cloudMatch) {
         const downloadBtn = controls.createEl("button", { cls: "mod-cta" });
         downloadBtn.textContent = t("action.download_locale", { locale: currentGlobalLocale }) || `Download ${currentGlobalLocale}`;
@@ -1817,6 +2122,27 @@ var DictionaryManagerView = class {
     addBtn.setAttribute("aria-label", t("action.add_translation"));
     (0, import_obsidian5.setIcon)(addBtn, "plus");
     addBtn.onclick = () => this.createNewDictionary(pluginId);
+    const cloudDicts = this.plugin.cloudManager.getCloudDictsForPlugin(pluginId);
+    if (cloudDicts.length > 0) {
+      const batchBtn = controls.createEl("button", { cls: "clickable-icon" });
+      batchBtn.setAttribute("aria-label", t("manager.download_all"));
+      (0, import_obsidian5.setIcon)(batchBtn, "cloud-download");
+      batchBtn.onclick = async (e) => {
+        e.stopPropagation();
+        batchBtn.addClass("is-loading");
+        let count = 0;
+        for (const remote of cloudDicts) {
+          try {
+            await this.handleCloudDownload(remote);
+            count++;
+          } catch (err) {
+            console.error(`Failed to download ${remote.locale} for ${pluginId}:`, err);
+          }
+        }
+        batchBtn.removeClass("is-loading");
+        new import_obsidian5.Notice(t("manager.download_all_result", { count, total: cloudDicts.length }));
+      };
+    }
     const cardBody = section.createDiv({ cls: "i18n-plus-card-body" });
     const dictGrid = cardBody.createDiv({ cls: "i18n-plus-dict-list" });
     cardHeader.onclick = () => {
@@ -1835,7 +2161,7 @@ var DictionaryManagerView = class {
     }
     if (allDictLocales.size === 0) {
       cardBody.createEl("div", {
-        text: "No dictionaries available for this plugin.",
+        text: t("manager.no_dictionaries"),
         cls: "i18n-plus-no-dict"
       });
     }
@@ -1887,7 +2213,11 @@ var DictionaryManagerView = class {
     viewBtn.onclick = (e) => {
       e.stopPropagation();
       const isBuiltinForEdit = type === "builtin";
-      this.plugin.showDictionaryEditor(pluginId, locale, void 0, isBuiltinForEdit);
+      if (this.navigationTarget) {
+        this.navigationTarget.navigateToEditor(pluginId, locale, isBuiltinForEdit);
+      } else {
+        this.plugin.showDictionaryEditor(pluginId, locale, void 0, isBuiltinForEdit);
+      }
     };
     const exportBtn = controls.createEl("button", { cls: "clickable-icon" });
     exportBtn.setAttribute("aria-label", type === "builtin" ? t("action.export_template") : t("action.export"));
@@ -1934,9 +2264,7 @@ var DictionaryManagerView = class {
       item.addButton(
         (btn) => btn.setIcon("trash-2").setWarning().onClick(() => {
           void this.store.deleteDictionary(dict.pluginId, dict.locale).then(() => {
-            var _a;
             new import_obsidian5.Notice(t("notice.deleted_orphan", { pluginId: dict.pluginId, locale: dict.locale }));
-            (_a = this.plugin.floatingWidget) == null ? void 0 : _a.refresh();
           });
         })
       );
@@ -1950,15 +2278,14 @@ var DictionaryManagerView = class {
     input.type = "file";
     input.accept = ".json";
     input.onchange = async () => {
-      var _a, _b, _c;
+      var _a, _b;
       const file = (_a = input.files) == null ? void 0 : _a[0];
       if (!file) return;
       const result = await this.store.importFromFile(file, pluginId);
       if (result.valid) {
         new import_obsidian5.Notice(t("notice.import_success", { pluginId }));
-        (_b = this.plugin.floatingWidget) == null ? void 0 : _b.refresh();
       } else {
-        const errorMsg = ((_c = result.errors) == null ? void 0 : _c.map((e) => e.message).join(", ")) || "Unknown validation error";
+        const errorMsg = ((_b = result.errors) == null ? void 0 : _b.map((e) => e.message).join(", ")) || "Unknown validation error";
         new import_obsidian5.Notice(t("notice.import_failed", { error: errorMsg }));
       }
     };
@@ -2008,7 +2335,7 @@ var DictionaryManagerView = class {
     }
     const pluginManifest = (_b = (_a = this.app.plugins) == null ? void 0 : _a.manifests) == null ? void 0 : _b[pluginId];
     if (!pluginManifest || !pluginManifest.version) {
-      new import_obsidian5.Notice(`Failed to export: Version not found for plugin ${pluginId}`);
+      new import_obsidian5.Notice(t("notice.export_failed_version", { pluginId }));
       return;
     }
     const pluginVersion = pluginManifest.version;
@@ -2044,12 +2371,10 @@ var DictionaryManagerView = class {
       t("action.delete"),
       () => {
         void (async () => {
-          var _a;
           const manager = getI18nPlusManager();
           manager.unloadDictionary(dict.pluginId, dict.locale);
           await this.store.deleteDictionary(dict.pluginId, dict.locale);
           new import_obsidian5.Notice(t("notice.removed_dict", { locale: dict.locale }));
-          (_a = this.plugin.floatingWidget) == null ? void 0 : _a.refresh();
         })();
       }
     );
@@ -2072,7 +2397,7 @@ var DictionaryManagerView = class {
     });
     this.showLocaleSelector(options, (selectedLocale) => {
       void (async () => {
-        var _a, _b, _c;
+        var _a, _b;
         if (selectedLocale.cloudInfo) {
           await this.handleCloudDownload(selectedLocale.cloudInfo);
           return;
@@ -2103,8 +2428,11 @@ var DictionaryManagerView = class {
           await this.store.createDictionary(pluginId, selectedLocale.code, newDict);
           manager.loadDictionary(pluginId, selectedLocale.code, newDict);
           new import_obsidian5.Notice(t("notice.created_dict", { locale: selectedLocale.code }));
-          this.plugin.showDictionaryEditor(pluginId, selectedLocale.code, void 0, false);
-          (_c = this.plugin.floatingWidget) == null ? void 0 : _c.refresh();
+          if (this.navigationTarget) {
+            this.navigationTarget.navigateToEditor(pluginId, selectedLocale.code, false);
+          } else {
+            this.plugin.showDictionaryEditor(pluginId, selectedLocale.code, void 0, false);
+          }
         } catch (error) {
           console.error("[i18n-plus] Failed to create dictionary:", error);
           new import_obsidian5.Notice(t("notice.create_failed", { error: String(error) }));
@@ -2139,12 +2467,10 @@ var DictionaryManagerView = class {
     const sortedLocales = Array.from(optionLocales).sort();
     for (const locale of sortedLocales) {
       const localeInfo = OBSIDIAN_LOCALES.find((l) => l.code === locale);
-      const label = localeInfo ? `${localeInfo.nativeName} (${locale})` : locale;
-      const isExternal = installedLocales.includes(locale);
+      const label = localeInfo ? localeInfo.nativeName : locale;
       const option = dropdown.createEl("option", {
         value: locale,
-        text: (isExternal ? "\u{1F4C4} " : "\u{1F310} ") + label
-        // Icon diff: File vs Web/Global
+        text: label
       });
       if (locale === currentGlobalLocale) option.selected = true;
     }
@@ -2203,7 +2529,13 @@ var DictionaryManagerView = class {
           const updated = await this.store.ensureThemeBaseDictionaryUpToDate(themeName);
           if (updated) {
             new import_obsidian5.Notice(hasEn ? t("notice.theme_updated", { theme: themeName }) || `Updated base dictionary for ${themeName}` : t("notice.theme_generated", { theme: themeName }) || `Generated base dictionary for ${themeName}`);
-            this.plugin.showDictionaryManager();
+            const leaves = this.app.workspace.getLeavesOfType("i18n-plus-main");
+            for (const leaf of leaves) {
+              const view = leaf.view;
+              if (view && "renderRoute" in view) {
+                view.renderRoute();
+              }
+            }
           }
         } catch (err) {
           console.error(`[i18n-plus] Auto-update check failed for ${themeName}`, err);
@@ -2236,8 +2568,13 @@ var DictionaryManagerView = class {
     viewBtn.setAttribute("aria-label", t("action.view_content"));
     (0, import_obsidian5.setIcon)(viewBtn, "eye");
     viewBtn.onclick = (e) => {
+      var _a;
       e.stopPropagation();
-      this.plugin.showDictionaryEditor(null, dict.locale, dict.themeName, isBuiltin);
+      if ((_a = this.navigationTarget) == null ? void 0 : _a.navigateToThemeEditor) {
+        this.navigationTarget.navigateToThemeEditor(dict.themeName, dict.locale, isBuiltin);
+      } else {
+        this.plugin.showDictionaryEditor(null, dict.locale, dict.themeName, isBuiltin);
+      }
     };
     const exportBtn = controls.createEl("button", { cls: "clickable-icon" });
     exportBtn.setAttribute("aria-label", t("action.export"));
@@ -2262,7 +2599,6 @@ var DictionaryManagerView = class {
     });
     this.showLocaleSelector(options, (selectedLocale) => {
       void (async () => {
-        var _a;
         if (selectedLocale.cloudInfo) {
           await this.handleCloudDownload(selectedLocale.cloudInfo, true);
           return;
@@ -2286,7 +2622,6 @@ var DictionaryManagerView = class {
           await this.store.saveThemeDictionary(themeName, selectedLocale.code, newDict);
           manager.loadThemeDictionary(themeName, selectedLocale.code, newDict);
           new import_obsidian5.Notice(t("notice.created_dict", { locale: selectedLocale.code }));
-          (_a = this.plugin.floatingWidget) == null ? void 0 : _a.refresh();
         } catch (error) {
           console.error("[i18n-plus] Failed to create theme dictionary:", error);
           new import_obsidian5.Notice(t("notice.create_failed", { error: String(error) }));
@@ -2303,7 +2638,7 @@ var DictionaryManagerView = class {
     input.accept = ".json";
     input.onchange = () => {
       void (async () => {
-        var _a, _b, _c;
+        var _a, _b;
         const file = (_a = input.files) == null ? void 0 : _a[0];
         if (!file) return;
         try {
@@ -2317,7 +2652,6 @@ var DictionaryManagerView = class {
           await this.store.saveThemeDictionary(themeName, locale, dict);
           getI18nPlusManager().loadThemeDictionary(themeName, locale, dict);
           new import_obsidian5.Notice(t("notice.import_success", { pluginId: themeName }));
-          (_c = this.plugin.floatingWidget) == null ? void 0 : _c.refresh();
         } catch (err) {
           new import_obsidian5.Notice("Import failed: " + String(err));
         }
@@ -2367,12 +2701,10 @@ var DictionaryManagerView = class {
       t("action.delete"),
       () => {
         void (async () => {
-          var _a;
           const manager = getI18nPlusManager();
           manager.unloadThemeDictionary(dict.themeName, dict.locale);
           await this.store.deleteThemeDictionary(dict.themeName, dict.locale);
           new import_obsidian5.Notice(t("notice.removed_dict", { locale: dict.locale }));
-          (_a = this.plugin.floatingWidget) == null ? void 0 : _a.refresh();
         })();
       }
     );
@@ -2477,7 +2809,6 @@ var MetadataEditorView = class {
   }
   /**
    * Render the metadata editor into a container
-   * Compatible with I18nFloatingWidget.showView()
    */
   render(container) {
     this.container = container;
@@ -2873,14 +3204,12 @@ Do not translate these placeholders.`);
     if (!this.state.isReadOnly) {
       setting.addButton(
         (btn) => btn.setButtonText(t("editor.metadata")).setTooltip(t("editor.metadata")).onClick(() => {
-          var _a;
           if (this.state.originalDict && this.state.originalDict.$meta) {
             const metaView = new MetadataEditorView(
               this.app,
               this.plugin,
               this.state.originalDict.$meta,
               (newMeta) => {
-                var _a2;
                 if (this.state.originalDict && this.state.originalDict.$meta) {
                   this.state.originalDict.$meta = {
                     ...this.state.originalDict.$meta,
@@ -2889,27 +3218,21 @@ Do not translate these placeholders.`);
                   this.state.hasUnsavedChanges = true;
                   this.updateSaveButtonState();
                 }
-                (_a2 = this.plugin.floatingWidget) == null ? void 0 : _a2.showView(
-                  (container2) => {
-                    void this.render(container2);
-                  },
-                  t("editor.title")
-                );
               },
               () => {
-                var _a2;
-                (_a2 = this.plugin.floatingWidget) == null ? void 0 : _a2.showView(
-                  (container2) => {
-                    void this.render(container2);
-                  },
-                  t("editor.title")
-                );
               }
             );
-            (_a = this.plugin.floatingWidget) == null ? void 0 : _a.showView(
-              (container2) => metaView.render(container2),
-              t("metadata.title")
+            const metaModal = new MetadataModal(
+              this.app,
+              this.plugin,
+              metaView,
+              () => {
+                if (this.container && this.container.isConnected) {
+                  void this.render(this.container);
+                }
+              }
             );
+            metaModal.open();
           } else {
             if (this.state.originalDict) {
               this.state.originalDict.$meta = {
@@ -3073,195 +3396,152 @@ var ConfirmModal = class extends import_obsidian7.Modal {
     this.contentEl.empty();
   }
 };
+var MetadataModal = class extends import_obsidian7.Modal {
+  constructor(app, plugin, metaView, onClose) {
+    super(app);
+    this.plugin = plugin;
+    this.metaView = metaView;
+    this.onCloseCallback = onClose;
+  }
+  onOpen() {
+    const { contentEl } = this;
+    contentEl.empty();
+    this.metaView.render(contentEl);
+  }
+  onClose() {
+    this.contentEl.empty();
+    this.onCloseCallback();
+  }
+};
 
-// src/ui/floating-widget.ts
-var import_obsidian8 = require("obsidian");
-var I18nFloatingWidget = class {
-  constructor(app, plugin) {
-    this.containerEl = null;
-    this.isExpanded = false;
-    // Drag state
-    this.isDragging = false;
-    this.dragStartX = 0;
-    this.dragStartY = 0;
-    this.initialLeft = 0;
-    this.initialTop = 0;
-    this.hasMoved = false;
-    // Current View Renderer
-    this.currentRenderer = null;
-    this.onDragMove = (e) => {
-      if (!this.isDragging) return;
-      const dx = e.clientX - this.dragStartX;
-      const dy = e.clientY - this.dragStartY;
-      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
-        this.hasMoved = true;
-      }
-      let newLeft = this.initialLeft + dx;
-      let newTop = this.initialTop + dy;
-      const rect = this.containerEl.getBoundingClientRect();
-      const maxLeft = window.innerWidth - rect.width;
-      const maxTop = window.innerHeight - rect.height;
-      newLeft = Math.max(0, Math.min(newLeft, maxLeft));
-      newTop = Math.max(0, Math.min(newTop, maxTop));
-      this.containerEl.style.left = `${newLeft}px`;
-      this.containerEl.style.top = `${newTop}px`;
-    };
-    this.onDragEnd = () => {
-      this.isDragging = false;
-      activeDocument.removeEventListener("mousemove", this.onDragMove);
-      activeDocument.removeEventListener("mouseup", this.onDragEnd);
-    };
-    this.app = app;
+// src/ui/i18n-editor-view.ts
+var VIEW_TYPE_I18N_PLUS = "i18n-plus-main";
+var I18nPlusMainView = class extends import_obsidian8.ItemView {
+  constructor(leaf, plugin) {
+    super(leaf);
+    this.route = { mode: "manager" };
+    /** Prevents duplicate render calls (async race conditions). */
+    this._rendering = false;
+    // ─── Rendering ─────────────────────────────────────────────────────
+    this._renderPromise = null;
     this.plugin = plugin;
   }
-  onload() {
-    this.createWidget();
+  getViewType() {
+    return VIEW_TYPE_I18N_PLUS;
   }
-  onunload() {
-    if (this.containerEl) {
-      this.containerEl.remove();
-      this.containerEl = null;
+  getDisplayText() {
+    if (this.route.mode === "editor") {
+      return `i18n+ \u2014 ${this.route.pluginId} / ${this.route.locale}`;
+    }
+    if (this.route.mode === "editor-theme") {
+      return `i18n+ \u2014 ${this.route.themeName} / ${this.route.locale}`;
+    }
+    return "i18n+ Dictionary Manager";
+  }
+  getIcon() {
+    return "languages";
+  }
+  async onOpen() {
+    const saved = this.leaf.getViewState().state;
+    if (saved == null ? void 0 : saved.mode) {
+      this.route = saved;
     }
   }
-  createWidget() {
-    this.containerEl = activeDocument.body.createDiv({ cls: "i18n-plus-floating-widget" });
-    this.containerEl.addClass("i18n-plus-hidden");
-    const defaultWidth = 800;
-    const defaultHeight = 600;
-    const initLeft = Math.max(0, (window.innerWidth - defaultWidth) / 2);
-    const initTop = Math.max(0, (window.innerHeight - defaultHeight) / 2);
-    this.containerEl.style.left = `${initLeft}px`;
-    this.containerEl.style.top = `${initTop}px`;
-    this.bubbleEl = this.containerEl.createDiv({ cls: "i18n-plus-fw-bubble" });
-    (0, import_obsidian8.setIcon)(this.bubbleEl, "globe");
-    (0, import_obsidian8.setTooltip)(this.bubbleEl, "i18n+");
-    this.enableDrag(this.bubbleEl);
-    this.bubbleEl.addEventListener("click", (e) => {
-      if (!this.hasMoved) {
-        this.expand();
-      }
+  onClose() {
+    return Promise.resolve();
+  }
+  getState() {
+    return { ...this.route };
+  }
+  async setState(state, result) {
+    const s = state;
+    if (s.mode === "editor" || s.mode === "editor-theme" || s.mode === "manager") {
+      this.route = s;
+      await this.renderRoute();
+    }
+    await super.setState(state, result);
+  }
+  // ─── Navigation ────────────────────────────────────────────────────
+  /** Navigate to the dictionary manager (plugin list). */
+  navigateToManager() {
+    this.route = { mode: "manager" };
+    void this.renderRoute();
+  }
+  /** Navigate to the dictionary editor for a plugin's locale. */
+  navigateToEditor(pluginId, locale, isBuiltin) {
+    this.route = { mode: "editor", pluginId, locale, isBuiltin };
+    void this.renderRoute();
+  }
+  /** Navigate to the dictionary editor for a theme's locale. */
+  navigateToThemeEditor(themeName, locale, isBuiltin) {
+    this.route = { mode: "editor-theme", themeName, locale, isBuiltin };
+    void this.renderRoute();
+  }
+  async renderRoute() {
+    while (this._renderPromise) {
+      await this._renderPromise;
+    }
+    const promise = this._doRender();
+    this._renderPromise = promise;
+    try {
+      await promise;
+    } finally {
+      this._renderPromise = null;
+    }
+  }
+  async _doRender() {
+    this.contentEl.empty();
+    this.contentEl.addClass("i18n-plus-main-view");
+    switch (this.route.mode) {
+      case "manager":
+        await this.renderManager();
+        break;
+      case "editor":
+      case "editor-theme":
+        await this.renderEditor();
+        break;
+    }
+  }
+  async renderManager() {
+    const view = new DictionaryManagerView(this.plugin.app, this.plugin);
+    view.setNavigationTarget(this);
+    await view.render(this.contentEl);
+  }
+  async renderEditor() {
+    const route = this.route;
+    const backBtn = this.contentEl.createEl("button", {
+      cls: "clickable-icon i18n-plus-editor-back-btn",
+      attr: { "aria-label": "Back to dictionary manager" }
     });
-    this.panelEl = this.containerEl.createDiv({ cls: "i18n-plus-fw-panel" });
-    this.panelEl.addClass("i18n-plus-hidden");
-    const header = this.panelEl.createDiv({ cls: "i18n-plus-fw-header" });
-    const brandName = "i18n+";
-    this.headerTitle = header.createEl("span", { text: brandName, cls: "i18n-plus-fw-title" });
-    this.enableDrag(header);
-    const controls = header.createDiv({ cls: "i18n-plus-fw-controls" });
-    const minBtn = controls.createEl("div", { cls: "clickable-icon i18n-plus-fw-btn" });
-    (0, import_obsidian8.setIcon)(minBtn, "minimize-2");
-    (0, import_obsidian8.setTooltip)(minBtn, t("action.cancel"));
-    minBtn.onclick = (e) => {
-      e.stopPropagation();
-      this.collapse();
-    };
-    const closeBtn = controls.createEl("div", { cls: "clickable-icon i18n-plus-fw-btn" });
-    (0, import_obsidian8.setIcon)(closeBtn, "x");
-    (0, import_obsidian8.setTooltip)(closeBtn, t("editor.close"));
-    closeBtn.onclick = (e) => {
-      e.stopPropagation();
-      this.hide();
-    };
-    this.contentContainer = this.panelEl.createDiv({ cls: "i18n-plus-fw-content" });
-  }
-  /**
-   * Set the content renderer and automatically expand the widget
-   * @param renderFn Function that populates the container
-   * @param title Optional title to show in header
-   */
-  showView(renderFn, title) {
-    this.currentRenderer = renderFn;
-    if (title) this.headerTitle.innerText = title;
-    this.renderContent();
-    this.show();
-    if (!this.isExpanded) {
-      this.expand();
+    backBtn.appendChild(document.createTextNode("\u2039 Back"));
+    backBtn.onclick = () => this.navigateToManager();
+    let pluginId;
+    let locale;
+    let isBuiltin;
+    let themeName;
+    if (route.mode === "editor") {
+      pluginId = route.pluginId;
+      locale = route.locale;
+      isBuiltin = route.isBuiltin;
+      themeName = void 0;
+    } else if (route.mode === "editor-theme") {
+      pluginId = "";
+      locale = route.locale;
+      isBuiltin = route.isBuiltin;
+      themeName = route.themeName;
+    } else {
+      return;
     }
-  }
-  /**
-   * Refresh the current view
-   */
-  refresh() {
-    if (this.currentRenderer) {
-      this.renderContent();
-    }
-  }
-  /** Ensure widget is visible in DOM */
-  show() {
-    if (this.containerEl) {
-      this.containerEl.removeClass("i18n-plus-hidden");
-      this.containerEl.addClass("i18n-plus-flex-display");
-    }
-  }
-  /** Hide widget completely */
-  hide() {
-    if (this.containerEl) {
-      this.containerEl.removeClass("i18n-plus-flex-display");
-      this.containerEl.addClass("i18n-plus-hidden");
-    }
-    this.isExpanded = false;
-    if (this.panelEl) {
-      this.panelEl.removeClass("i18n-plus-flex-display");
-      this.panelEl.addClass("i18n-plus-hidden");
-    }
-    if (this.bubbleEl) {
-      this.bubbleEl.removeClass("i18n-plus-hidden");
-      this.bubbleEl.addClass("i18n-plus-flex-display");
-    }
-  }
-  renderContent() {
-    this.contentContainer.empty();
-    if (this.currentRenderer) {
-      this.currentRenderer(this.contentContainer);
-    }
-  }
-  expand() {
-    this.isExpanded = true;
-    this.bubbleEl.removeClass("i18n-plus-flex-display");
-    this.bubbleEl.addClass("i18n-plus-hidden");
-    this.panelEl.removeClass("i18n-plus-hidden");
-    this.panelEl.addClass("i18n-plus-flex-display");
-    this.ensureOnScreen();
-  }
-  collapse() {
-    this.isExpanded = false;
-    this.panelEl.removeClass("i18n-plus-flex-display");
-    this.panelEl.addClass("i18n-plus-hidden");
-    this.bubbleEl.removeClass("i18n-plus-hidden");
-    this.bubbleEl.addClass("i18n-plus-flex-display");
-  }
-  ensureOnScreen() {
-    if (!this.containerEl) return;
-    const rect = this.containerEl.getBoundingClientRect();
-    const winW = window.innerWidth;
-    const winH = window.innerHeight;
-    let newLeft = rect.left;
-    let newTop = rect.top;
-    if (newLeft + rect.width > winW) newLeft = Math.max(0, winW - rect.width);
-    if (newTop + rect.height > winH) newTop = Math.max(0, winH - rect.height);
-    this.containerEl.style.left = `${newLeft}px`;
-    this.containerEl.style.top = `${newTop}px`;
-  }
-  // ========================================================================
-  // Drag & Drop Logic
-  // ========================================================================
-  enableDrag(element) {
-    element.addEventListener("mousedown", this.onDragStart.bind(this));
-  }
-  onDragStart(e) {
-    if (e.button !== 0) return;
-    if (e.target.closest(".clickable-icon")) return;
-    this.isDragging = true;
-    this.hasMoved = false;
-    this.dragStartX = e.clientX;
-    this.dragStartY = e.clientY;
-    const rect = this.containerEl.getBoundingClientRect();
-    this.initialLeft = rect.left;
-    this.initialTop = rect.top;
-    activeDocument.addEventListener("mousemove", this.onDragMove);
-    activeDocument.addEventListener("mouseup", this.onDragEnd);
-    e.preventDefault();
-    e.stopPropagation();
+    const editorView = new DictionaryEditorView(
+      this.plugin.app,
+      this.plugin,
+      pluginId,
+      locale,
+      isBuiltin,
+      themeName
+    );
+    const editorContainer = this.contentEl.createDiv({ cls: "i18n-plus-editor" });
+    await editorView.render(editorContainer);
   }
 };
 
@@ -3269,7 +3549,8 @@ var I18nFloatingWidget = class {
 var I18nPlusPlugin = class extends import_obsidian9.Plugin {
   constructor() {
     super(...arguments);
-    this.floatingWidget = null;
+    /** Shared manager reference (holds translator instances for all plugins). */
+    this.i18nManager = getI18nPlusManager();
   }
   async onload() {
     var _a, _b;
@@ -3277,8 +3558,14 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
     await this.loadSettings();
     this.dictionaryStore = new DictionaryStore(this.app, this);
     this.cloudManager = new CloudManager();
-    this.floatingWidget = new I18nFloatingWidget(this.app, this);
-    this.floatingWidget.onload();
+    const effectiveCdnUrl = this.settings.cdnPreset === "custom" ? this.settings.cdnCustomUrl || this.settings.cdnUrl : this.settings.cdnUrl || "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@latest";
+    if (effectiveCdnUrl) {
+      this.cloudManager.setCdnUrl(effectiveCdnUrl);
+    }
+    this.registerView(
+      VIEW_TYPE_I18N_PLUS,
+      (leaf) => new I18nPlusMainView(leaf, this)
+    );
     const manager = getI18nPlusManager();
     manager.on("plugin-registered", (pluginId) => {
       if (typeof pluginId === "string") {
@@ -3286,16 +3573,18 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
           console.debug(`[i18n-plus] plugin-registered event for: ${pluginId}`);
         }
         void this.dictionaryStore.loadDictionariesForPlugin(pluginId).then((count) => {
+          var _a2;
           if (this.settings.debugMode && count > 0) {
             console.debug(`[i18n-plus] Loaded ${count} dictionaries for plugin: ${pluginId}`);
           }
-          if (this.settings.currentLocale) {
+          const preferredLocale = ((_a2 = this.settings.pluginLocales) == null ? void 0 : _a2[pluginId]) || this.settings.currentLocale;
+          if (preferredLocale) {
             const translator2 = manager.getTranslator(pluginId);
-            if (translator2 && translator2.getLocale() !== this.settings.currentLocale) {
+            if (translator2 && translator2.getLocale() !== preferredLocale) {
               try {
-                translator2.setLocale(this.settings.currentLocale);
+                translator2.setLocale(preferredLocale);
                 if (this.settings.debugMode) {
-                  console.debug(`[i18n-plus] Applied locale preference to ${pluginId}: ${this.settings.currentLocale}`);
+                  console.debug(`[i18n-plus] Applied locale to ${pluginId}: ${preferredLocale}`);
                 }
               } catch (e) {
                 console.warn(`[i18n-plus] Failed to apply locale to ${pluginId}`, e);
@@ -3315,19 +3604,35 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
         });
       }
     });
+    manager.on("plugin-locale-changed", (pluginId, locale) => {
+      if (typeof pluginId === "string" && typeof locale === "string") {
+        if (this.settings.debugMode) {
+          console.debug(`[i18n-plus] Plugin locale changed: ${pluginId} -> ${locale}`);
+        }
+        if (pluginId === "i18n-plus") {
+          const leaves = this.app.workspace.getLeavesOfType(VIEW_TYPE_I18N_PLUS);
+          for (const leaf of leaves) {
+            const view = leaf.view;
+            if (view && "renderRoute" in view) {
+              view.renderRoute();
+            }
+          }
+        }
+      }
+    });
     initGlobalAPI();
     initSelfI18n(this);
     this.addSettingTab(new I18nPlusSettingTab(this.app, this));
     this.addCommand({
       id: "open-dictionary-manager",
-      name: "Open dictionary manager",
+      name: t("command.open_manager"),
       callback: () => {
-        this.showDictionaryManager();
+        void this.showMainPopout({ mode: "manager" });
       }
     });
     this.addCommand({
       id: "show-registered-plugins",
-      name: "Show registered plugins",
+      name: t("command.show_plugins"),
       callback: () => {
         const manager2 = getI18nPlusManager();
         const plugins = manager2.getRegisteredPlugins();
@@ -3340,7 +3645,7 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
     });
     this.addCommand({
       id: "reload-dictionaries",
-      name: "Reload all dictionaries",
+      name: t("command.reload_dicts"),
       callback: () => {
         void this.dictionaryStore.autoLoadDictionaries().then((count) => {
           new import_obsidian9.Notice(t("notice.loaded_dicts", { count }));
@@ -3348,15 +3653,20 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
       }
     });
     this.addRibbonIcon("languages", t("manager.title"), () => {
-      this.showDictionaryManager();
+      void this.showMainPopout();
     });
     if (this.settings.currentLocale) {
-      manager.setGlobalLocale(this.settings.currentLocale);
+      const resolved = resolveLocale(this.settings.currentLocale);
+      if (resolved !== this.settings.currentLocale) {
+        this.settings.currentLocale = resolved;
+        void this.saveSettings();
+      }
+      manager.setGlobalLocale(resolved);
       if (this.settings.debugMode) {
-        console.debug(`[i18n-plus] Restored locale: ${this.settings.currentLocale}`);
+        console.debug(`[i18n-plus] Restored locale: ${resolved}`);
       }
     } else {
-      const currentLang = ((_b = window.moment) == null ? void 0 : _b.locale()) || "en";
+      const currentLang = resolveLocale(((_b = window.moment) == null ? void 0 : _b.locale()) || "en");
       manager.setGlobalLocale(currentLang);
       if (this.settings.debugMode) {
         console.debug(`[i18n-plus] Auto-detected global locale: ${currentLang}`);
@@ -3378,25 +3688,38 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
     if (this.settings.debugMode) console.debug("[i18n-plus] Plugin loaded successfully");
   }
   onunload() {
-    if (this.floatingWidget) {
-      this.floatingWidget.onunload();
-      this.floatingWidget = null;
-    }
     destroyGlobalAPI();
     if (this.settings.debugMode) console.debug("[i18n-plus] Plugin unloaded");
   }
   showDictionaryManager() {
-    if (!this.floatingWidget) return;
-    const view = new DictionaryManagerView(this.app, this);
-    this.floatingWidget.showView(
-      (container) => {
-        void view.render(container);
-      },
-      t("manager.title")
-    );
+    void this.showMainPopout({ mode: "manager" });
+  }
+  /**
+   * Open the main i18n+ popout window.
+   * Shows the dictionary manager by default.
+   * Falls back to an in-app leaf on platforms where popouts are unavailable.
+   */
+  async showMainPopout(route) {
+    const state = route || { mode: "manager" };
+    try {
+      const leaf = this.app.workspace.openPopoutLeaf({
+        size: { width: 960, height: 720 }
+      });
+      await leaf.setViewState({
+        type: VIEW_TYPE_I18N_PLUS,
+        active: true,
+        state
+      });
+    } catch (e) {
+      const leaf = this.app.workspace.getLeaf(false);
+      await leaf.setViewState({
+        type: VIEW_TYPE_I18N_PLUS,
+        active: true,
+        state
+      });
+    }
   }
   showDictionaryEditor(pluginId, locale, themeName, isBuiltinOverride) {
-    if (!this.floatingWidget) return;
     const manager = getI18nPlusManager();
     let isBuiltin = isBuiltinOverride;
     if (isBuiltin === void 0) {
@@ -3407,16 +3730,26 @@ var I18nPlusPlugin = class extends import_obsidian9.Plugin {
         isBuiltin = false;
       }
     }
-    const view = new DictionaryEditorView(this.app, this, pluginId || "", locale, isBuiltin, themeName);
-    this.floatingWidget.showView(
-      (container) => {
-        void view.render(container);
-      },
-      themeName ? `${themeName} / ${locale}` : `${pluginId} / ${locale}`
-    );
+    const route = pluginId ? { mode: "editor", pluginId, locale, isBuiltin } : { mode: "editor-theme", themeName: themeName || "", locale, isBuiltin };
+    void this.showMainPopout(route);
   }
   async loadSettings() {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    const savedData = await this.loadData();
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, savedData);
+    if (savedData.cdnPreset === void 0 && savedData.cdnUrl) {
+      const knownUrls = {
+        "default": "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@latest",
+        "jsdelivr-main": "https://cdn.jsdelivr.net/gh/open-obsidian-i18n/dictionaries@main",
+        "unpkg": "https://unpkg.com/@open-obsidian-i18n/dictionaries@latest"
+      };
+      const matched = Object.entries(knownUrls).find(([, url]) => url === savedData.cdnUrl);
+      if (matched) {
+        this.settings.cdnPreset = matched[0];
+      } else {
+        this.settings.cdnPreset = "custom";
+        this.settings.cdnCustomUrl = savedData.cdnUrl;
+      }
+    }
   }
   async saveSettings() {
     await this.saveData(this.settings);

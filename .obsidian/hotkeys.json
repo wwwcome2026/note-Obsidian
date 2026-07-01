@@ -7,5 +7,19 @@
       ],
       "key": "`"
     }
+  ],
+  "obsidian-outliner:fold": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "ArrowUp"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "V"
+    }
   ]
 }

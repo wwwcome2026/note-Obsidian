@@ -54,3 +54,5 @@ Rest风格路径传参---→http:127.0.0.1:8080/user/{id}/{name} ---------（@Pa
 @Controller  @RestController  @RequestMapping  @RequestParam
 
 @PathVariable @RequestBody
+
+

@@ -31,7 +31,7 @@ LinkedList  是增删快，查询慢
 HashMap与HashTable都是key-value 结构 ，put()添加
 HashMap 可以为null  ,HashTable 不能为 null， 
 
-HashSet  是 不能 有重复元素,add()添加
+HashSet  是不能有重复元素,add()添加
 
 ## 6.HashMap, ConcurrentHashMap 和HashTable 的区别？（线程安全性考虑）
 
