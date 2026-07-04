@@ -1,7 +1,7 @@
 # Obsidian 语法速查
 
 ## 基础 Markdown
-
+![357](assets/obsidian-cheatsheet/file-20260704181217377.png)
 ### 标题
 
 ```markdown
