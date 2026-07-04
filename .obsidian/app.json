@@ -1,8 +1,11 @@
 {
-  "useMarkdownLinks": true,
+  "useMarkdownLinks": false,
   "newLinkFormat": "relative",
   "promptDelete": false,
   "showLineNumber": true,
   "defaultViewMode": "source",
-  "useTab": false
+  "useTab": false,
+  "autoConvertHtml": true,
+  "attachmentFolderPath": "/",
+  "alwaysUpdateLinks": true
 }
