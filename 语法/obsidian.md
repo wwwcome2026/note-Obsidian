@@ -1,7 +1,7 @@
 # Obsidian 语法速查
 
 ## 基础 Markdown
-![357](assets/obsidian-cheatsheet/file-20260704181217377.png)
+![357](assets/obsidian/file-20260711192839296.png)
 ### 标题
 
 ```markdown
@@ -239,16 +239,16 @@ flowchart LR
 
 ### 编辑
 
-| 快捷键 | 功能 |
-|--------|------|
-| `Ctrl+B` | 粗体 |
-| `Ctrl+I` | 斜体 |
-| `Ctrl+K` | 插入链接 |
-| `Ctrl+Enter` | 切换待办状态 |
-| `Ctrl+]` | 增加缩进 |
-| `Ctrl+[` | 减少缩进 |
-| `Ctrl+Shift+K` | 删除段落 |
-| `Ctrl+D` | 删除当前行 |
+| 快捷键            | 功能     |
+| -------------- | ------ |
+| `Ctrl+B`       | 粗体     |
+| `Ctrl+I`       | 斜体     |
+| `Ctrl+K`       | 插入链接   |
+| `Ctrl+Enter`   | 切换待办状态 |
+| `Ctrl+]`       | 增加缩进   |
+| `Ctrl+[`       | 减少缩进   |
+| `Ctrl+Shift+K` | 删除段落   |
+| `Ctrl+D`       | 删除当前行  |
 
 ### 导航
 

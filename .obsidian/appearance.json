@@ -2,7 +2,7 @@
   "theme": "moonstone",
   "cssTheme": "Zen",
   "baseFontSizeAction": true,
-  "accentColor": "#e6507b",
+  "accentColor": "#ff4f55",
   "baseFontSize": 20,
   "enabledCssSnippets": []
 }
