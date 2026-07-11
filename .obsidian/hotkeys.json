@@ -1,5 +1,4 @@
 {
-  "markdown:toggle-preview": [],
   "editor:toggle-source": [
     {
       "modifiers": [
@@ -20,6 +19,14 @@
         "Mod"
       ],
       "key": "V"
+    }
+  ],
+  "markdown:toggle-preview": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Enter"
     }
   ]
 }

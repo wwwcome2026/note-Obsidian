@@ -1,11 +1,10 @@
 [
   "obsidian-custom-attachment-location",
   "obsidian-enhancing-export",
-  "lang-plus",
-  "emoji-shortcodes",
   "obsidian-custom-frames",
   "dynamic-outline",
   "pathlinker",
   "obsidian-git",
-  "obsidian-outliner"
+  "obsidian-outliner",
+  "auto-numbered-headings"
 ]
