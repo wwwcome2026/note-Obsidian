@@ -28,5 +28,13 @@
       ],
       "key": "Enter"
     }
+  ],
+  "number-headings-obsidian:number-headings": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "ContextMenu"
+    }
   ]
 }
