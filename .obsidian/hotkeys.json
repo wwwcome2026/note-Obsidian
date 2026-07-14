@@ -36,5 +36,13 @@
       ],
       "key": "ContextMenu"
     }
+  ],
+  "number-headings-obsidian:remove-number-headings": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Delete"
+    }
   ]
 }
