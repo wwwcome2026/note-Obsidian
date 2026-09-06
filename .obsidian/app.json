@@ -6,6 +6,8 @@
   "defaultViewMode": "source",
   "useTab": false,
   "autoConvertHtml": true,
-  "attachmentFolderPath": "/",
-  "alwaysUpdateLinks": true
+  "attachmentFolderPath": "附件",
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "root",
+  "newFileFolderPath": "附件"
 }

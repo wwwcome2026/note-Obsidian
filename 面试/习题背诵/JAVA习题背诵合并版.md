@@ -17,7 +17,7 @@ Substring(0,5)—截取字符串
 
 ## 3.请说出java 的集合分类？
 
-答：![](每天习题背诵_assets/image_01.png)
+答：![](assets/每天习题背诵_assets/image_01.png)
 
 ## 4.ArrayList 和 LinkedList 的区别？
 
@@ -58,7 +58,7 @@ Hash 冲突 时会放入链表中，链表的长度是 8.  Jdk 1.8 之前是链�
 
 ## 9.Map 能不能循坏？
 
-![](每天习题背诵_assets/image_02.png)
+![](assets/每天习题背诵_assets/image_02.png)
 
 ## 12.什么是双亲委派机制？
 
@@ -166,7 +166,7 @@ public class Singleton1 {
 }
 ```
 
-- 懒汉式：
+- 懒汉式(双重检查锁DCL，高并发推荐)：
 
 ```java
 
@@ -177,21 +177,15 @@ public class Singleton {
     private Singleton() {}
 
     private static Singleton single=null;
-
     //静态工厂方法
-
     public static Singleton getInstance() {
 
          if (single == null) {
 
              single = new Singleton();
-
          }
-
         return single;
-
     }
-
 }
 ```
 
@@ -206,6 +200,35 @@ public class Singleton {
 
 （找到自己熟悉的设计模式集合业务使用场景叙述）
 
+源码了。
+
+---
+
+### 第一类：创建型模式（教你如何“优雅地 new 对象”）
+
+|模式名称|一句话核心|实战中的经典场景|
+|---|---|---|
+|**单例模式 (Singleton)**|全局只有一个实例。|**你刚学的**。Spring中的Bean（默认单例）、数据库连接池、日志管理器。|
+|**工厂模式 (Factory)**|把 `new` 的过程封装起来，调用者不用关心具体实现类。|Spring的 `BeanFactory`、`ApplicationContext`。比如你要生成不同的支付渠道（微信/支付宝），传个类型就返回对应的实现类。|
+|**建造者模式 (Builder)**|解决**多参数**对象创建，尤其是可选参数很多时，支持链式调用。|你之前看到的静态内部类例子。Lombok的 `@Builder` 注解、`OkHttpClient` 的构建、`StringBuilder`。|
+
+
+### 第二类：结构型模式（教你如何“组合类和对象”）
+
+| 模式名称                  | 一句话核心                            | 实战中的经典场景                                                                                             |
+| --------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| **代理模式 (Proxy)**      | 不直接操作目标对象，而是通过一个“中间人”来间接控制或增强功能。 | **Spring AOP（面向切面编程）** 的底层核心！比如你在方法前后加日志、加事务、做权限校验，都是通过动态代理帮你插进去的。                                   |
+| **适配器模式 (Adapter)**   | 让两个原本不兼容的接口能一起工作，像个“转换插头”。       | Spring MVC中的 `HandlerAdapter`（把五花八门的Controller统一适配成标准执行流程）、`java.io.InputStreamReader`（字节流转字符流）。     |
+| **装饰器模式 (Decorator)** | 动态地给一个对象添加额外的职责，比继承更灵活。          | Java I/O流，如 `new BufferedReader(new FileReader(...))`。`BufferedReader` 就是在装饰 `FileReader`，给它加上了缓存功能。 |
+
+### 第三类：行为型模式（教你“对象之间如何高效通信”）
+
+|模式名称|一句话核心|实战中的经典场景|
+|---|---|---|
+|**策略模式 (Strategy)**|定义一系列算法，把每个算法封装起来，让它们可以互相替换。|支付方式的选择（微信/支付宝/银行卡）、活动的优惠计算（满减/打折/秒杀）。若有一大堆 `if...else`，就是重构为策略模式的最佳时机。|
+|**观察者模式 (Observer)**|对象间一对多的依赖，当一个对象状态改变，所有依赖它的对象都会自动收到通知。|**Spring 事件监听（ApplicationEvent）**、消息队列的发布-订阅模型、WebSocket 推送。你写个 `@EventListener` 注解，底层就是这玩意儿。|
+|**模板方法模式 (Template Method)**|父类定义好执行流程的骨架，具体步骤交给子类实现。|Spring中的 `JdbcTemplate`、`RedisTemplate`。它把“获取连接-执行SQL-释放连接”的流程固定死，你只需传入具体的SQL逻辑即可。|
+
 ## 21.CAS 和 AQS ?
 
 CAS（Compare-And-Swap）是Java中的一种原子操作，用于实现**无锁并发控制。它通过比较并交换的方式确保线程安全**，常用于多线程环境下的变量更新。
@@ -219,7 +242,7 @@ Java 中的 CAS
 
 在Java中，CAS主要通过**java.util.concurrent.atomic包中的类（如AtomicInteger、AtomicLong等）实现。这些类提供了compareAndSet方法**，用于执行CAS操作。
 
-![](每天习题背诵_assets/image_03.png)
+![](assets/每天习题背诵_assets/image_03.png)
 
 CAS 的优缺点
 
@@ -230,7 +253,6 @@ CAS 的优缺点
 轻量：相比锁机制，开销较小。
 
 缺点：
-
 ABA问题：值从A变为B再变回A，CAS会误认为未变化。可通过版本号或AtomicStampedReference解决。
 
 自旋开销：在高竞争下，CAS可能多次重试，增加CPU负担。
@@ -327,9 +349,9 @@ AQS 是 Java 并发包中许多同步工具的基础，例如：
 
 读锁使用共享模式，写锁使用独占模式。
 
-![](每天习题背诵_assets/image_04.png)
+![](assets/每天习题背诵_assets/image_04.png)
 
-![](每天习题背诵_assets/image_05.png)
+![](assets/每天习题背诵_assets/image_05.png)
 
 **AQS 的优点**
 
@@ -345,7 +367,7 @@ AQS 是 Java 并发编程的核心框架之一，它为构建锁和其他同步�
 
 ## 22.JVM 的结构？JVM 如何调优？
 
-![JVM内存模型结构图](每天习题背诵_assets/image_06.png)
+![JVM内存模型结构图](assets/每天习题背诵_assets/image_06.png)
 
 栈 Stack  ; 堆 Heap ; 方法区(永久代----元空间)；本地方法栈；程序计数器
 
@@ -353,7 +375,7 @@ GC垃圾回收算法：标记-清理 ； 标记-整理 ； 标记-复制
 
 Jvm 优化调优参数
 
-![在这里插入图片描述](每天习题背诵_assets/image_07.png)
+![在这里插入图片描述](assets/每天习题背诵_assets/image_07.png)
 
 Jvm 命令工具：
 
@@ -442,7 +464,7 @@ ClassLoader loader, class<?> interfaces,new InvocationHandler)
 
 Aop 用来在不改变原代码的基础上对代码功能进行增强。我项目中有使用到，主要用在了后台管理系统，获取用户操作后台页面的前后记录插入到数据库操作。
 
-![](每天习题背诵_assets/image_08.png)
+![](assets/每天习题背诵_assets/image_08.png)
 
 ## spring依赖注入实现方式有几种？
 
@@ -495,16 +517,16 @@ Aop 用来在不改变原代码的基础上对代码功能进行增强。我项�
 
 2. 同一个类中，一个方法调用了另一个带有事务注解的方法，事务不会生效。因为Spring的事务管理是通过代理模式实现的，内部方法调用不会经过代理对象。
 
-![393](每天习题背诵_assets/image_09.png)
+![393](assets/每天习题背诵_assets/image_09.png)
 
 1. Spring事务默认情况下只会回滚RuntimeException和Error，如果抛出的是受检异常（Checked Exception），事务不会回滚。
    但可以通过@Transactional注解的rollbackFor属性指定需要回滚的异常类型。
 
-![401](每天习题背诵_assets/image_10.png)
+![401](assets/每天习题背诵_assets/image_10.png)
 
 4. Spring事务的传播行为（Propagation Behavior）决定了事务在不同方法调用间如何传播。如果传播行为设置不当，可能导致事务失效
 
-![410](每天习题背诵_assets/image_11.png)s
+![410](assets/每天习题背诵_assets/image_11.png)s
 
 ## Spring事务的隔离级别有哪些？
 
@@ -524,7 +546,7 @@ Aop 用来在不改变原代码的基础上对代码功能进行增强。我项�
 
 脏读和幻读的区别？
 
-![619](每天习题背诵_assets/image_12.png)
+![619](assets/每天习题背诵_assets/image_12.png)
 
 ## 说说什么是Spring事务传播行为？Spring事务的传播行为有哪些？
 
@@ -543,9 +565,9 @@ Spring提供了多种传播行为，用于控制事务的边界和行为
 | **never**         | 从不         | 排斥。**从不**在事务里跑，有事务就报错。       |
 | **nested**        | 嵌套的        | 内嵌。在现有事务里**嵌套**一个子事务。        |
 
-![713](每天习题背诵_assets/image_13.png)
+![713](assets/每天习题背诵_assets/image_13.png)
 
-![735](每天习题背诵_assets/image_14.png)
+![735](assets/每天习题背诵_assets/image_14.png)
 
 ## 15..简单说说Spring事务的底层实现原理？
 
@@ -586,7 +608,7 @@ public class UserService {
 
 首先spring会调用代理对象，对于事务，代理对象会通过执行事务的aop切面逻辑。在这个切面逻辑，Spring会去判断是否含有@Transactional事务注解，如果有才会去开启事务。spring的事务管理器DataSourceTransactionManager会新建一个数据库连接conn，紧接着会把conn.autocommit 设置为 false ，autocommit(自动提交)，每次执行完SQL后就会立马提交，因此这里需要设置为false。(因为spring默认是开启了自动提交，当SQL执行结束之后就会提交，当遇到异常的时候，由于前面的事务都已经提升，因此就没法回滚了，所以需要把自动提交给关闭了) 最后在通过第一次创建的对象去执行test方法。接着会去执行SQL语句，在此SQL执行完之后是不会进行提交的，在执行SQL语句之前，jdbcTemplate会去拿到事务管理器创建的这个数据库连接conn。当执行完test方法后，Spring事务会去判断是否有异常，没有异常就会提交事务（conn.commit()），否者就会事务回滚（conn.rollback()）;
 
-![](每天习题背诵_assets/image_15.png)
+![](assets/每天习题背诵_assets/image_15.png)
 
 ## 16. Spring 框架中都用到了哪些设计模式，简单说说？
 
@@ -605,6 +627,8 @@ public class UserService {
 模板方法模式
 
 应用场景：Spring中的JdbcTemplate、RestTemplate等模板类使用了模板方法模式，简化了数据库操作和REST API调用
+
+
 
 ## 19.知道Spring是如何解决Bean的循环依赖的吗 ？
 
@@ -689,7 +713,7 @@ Spring 对象产生需要这几步：creatBeanInstance 实例化，populateBean 
 
 循环依赖主要发生在实例化和属性赋值中间。Spring 采用了三级缓存
 
-![](每天习题背诵_assets/image_16.png)
+![](assets/每天习题背诵_assets/image_16.png)
 
 步骤:
 
@@ -723,7 +747,7 @@ Bean 的创建和管理：BeanFactory 负责创建、配置和管理 Bean 实例
 复杂对象的创建：FactoryBean 常用于创建复杂的对象，例如代理对象、数据库连接池等。
 延迟初始化：FactoryBean 可以控制 Bean 的初始化时机，例如在第一次请求时才创建 Bean 实例。
 
-![](每天习题背诵_assets/image_17.png)
+![](assets/每天习题背诵_assets/image_17.png)
 
 
 ## 21.说说spring和springboot的关系？
@@ -1014,7 +1038,7 @@ MyBatis 的执行流程大致可以分为以下几个步骤：
 
 在一次 SqlSession 中（数据库会话），程序执行多次查询，且查询条件完全相同，多次查询之间程序没有其他增删改操作，则第二次及后面的查询可以从缓存中获取数据，避免走数据库。
 
-![](每天习题背诵_assets/image_18.png)
+![](assets/每天习题背诵_assets/image_18.png)
 
 每个SqlSession中持有了Executor，每个Executor中有一个LocalCache。当用户发起查询时，MyBatis根据当前执行的语句生成MappedStatement，在Local Cache进行查询，如果缓存命中的话，直接返回结果给用户，如果缓存没有命中的话，查询数据库，结果写入Local Cache，最后返回结果给用户。
 
@@ -1030,7 +1054,7 @@ Statement Id \+ Offset \+ Limmit \+ Sql \+ Params
 
 值是 SQL 查询的结果：
 
-![](每天习题背诵_assets/image_19.png)
+![](assets/每天习题背诵_assets/image_19.png)
 
 一级缓存配置
 
@@ -1074,7 +1098,7 @@ MyBatis 一级缓存失效的场景：
 
 二级缓存开启后，同一个 namespace下的所有操作语句，都影响着同一个Cache
 
-![](每天习题背诵_assets/image_20.png)
+![](assets/每天习题背诵_assets/image_20.png)
 
 每个 Mapper 文件只能配置一个 namespace，用来做 Mapper 文件级别的缓存共享。
 
@@ -1084,7 +1108,7 @@ MyBatis 一级缓存失效的场景：
 
 通常我们会为每个单表创建单独的映射文件，由于MyBatis的二级缓存是基于namespace的，多表查询语句所在的namspace无法感应到其他namespace中的语句对多表查询中涉及的表进行的修改，引发脏数据问题
 
-![](每天习题背诵_assets/image_21.png)
+![](assets/每天习题背诵_assets/image_21.png)
 
 先查询二级缓存，因为二级缓存中可能会有其他程序已经查出来的数据，可以拿来直接使用
 
@@ -1178,7 +1202,7 @@ SQL调优通常涉及以下方面：
     联合索引满足最左匹配原则
 
 3.  使用explain 慢sql计划 分析
-![882](每天习题背诵_assets/image_22.png)
+![882](assets/每天习题背诵_assets/image_22.png)
 
 possible_key 当前sql可能会使用到的索引
 
@@ -1217,7 +1241,7 @@ key_len 本次查询实际使用了索引中多少个字节的长度
 
 读未提交；读已提交；可重复读；串行化
 
-![](每天习题背诵_assets/image_23.png)
+![](assets/每天习题背诵_assets/image_23.png)
 
 ## 9.数据库的引擎？
 
@@ -1262,13 +1286,14 @@ Merge
 
 现在我有一张表 这张表 有 6000万 数据量，我怎么在这张中查询或者分页 我想要的数据 1 s ?  id --→嵌套sql
 
-![](每天习题背诵_assets/image_24.png)
+![](assets/每天习题背诵_assets/image_24.png)
 
 ---
 
+
 # Redis 缓存相关：
 
-1. 什么是redis 的缓存雪崩，击穿，穿透？怎么解决？
+## 1. 什么是redis 的缓存雪崩，击穿，穿透？怎么解决？
 缓存雪崩：大量的高并发请求在同一时刻访问redis 里大量的缓存key,但是这些key              在同一时刻过期或失效，导致访问mysql ,引起服务宕机
 
 解决：**使用锁进行控制，对同一类型信息的key设置不同的过期时间，、缓存定时预热**
@@ -1281,7 +1306,7 @@ Merge
 
 解决：缓存空值或特殊值，布隆过滤器
 
-2.redis 持久化方式有几种？区别是什么？
+## 2.redis 持久化方式有几种？区别是什么？
   RDB:将内存数据全量打包成rdb文件
   Aof:将输入的数据指令存入到aof文件中
 
@@ -1309,11 +1334,11 @@ Merge
 
 8）allkeys-lfu：移除最近最少使用的key。
 
-3.主从搭建的步骤？
+## 3.主从搭建的步骤？
 起动两台redis 服务器。让其中一台redis
 服务作为slave 从机 slaveof 指令去连主机即可
 
-4.哨兵的作用？
+## 4.哨兵的作用？
 监控，故障转移，通知。
 哨兵的搭建步骤？
   1. 先准备一个一主加两次的主从结构redis
@@ -1330,14 +1355,14 @@ Merge
   \# 第2个redis-sentinel s2/sentinel.conf
   \# 第3个redis-sentinel s3/sentinel.conf
 
-5.为什么要搭建分片集群？
+## 5.为什么要搭建分片集群？
 主从和哨兵可以解决高可用、高并发读的问题。但是依然有两个问题没有解决：
 - 海量数据存储问题
 - 高并发写的问题
 搭建分片集群的步骤?
 搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，
 
-![](每天习题背诵_assets/image_35.jpg)
+![](assets/每天习题背诵_assets/image_35.jpg)
 
 准备一个新的redis.conf文件
 port 6379
@@ -1366,7 +1391,7 @@ logfile /tmp/6379/run.log
 ./redis-trib.rb create --replicas 1
 192.168.150.101:7001 192.168.150.101:7002 192.168.150.101:7003
 192.168.150.101:8001 192.168.150.101:8002 192.168.150.101:8003
-6.分片集群的分槽了不了解？
+## 6.分片集群的分槽了不了解？
 槽一共有16384个区间。会根据key 进行hashcode 进行计算，然后对槽数量进行取摩操作这样会将数据放到哪个区间
 
 ---
@@ -1514,25 +1539,26 @@ gateway:
 
 流量控制：直接限流；关联模式，链路模式
 
-![](每天习题背诵_assets/image_25.png)         ![](每天习题背诵_assets/image_26.png)
+![](assets/每天习题背诵_assets/image_25.png)         ![](assets/每天习题背诵_assets/image_26.png)
 
 流控效果：直接失败；warmup; 排队等待
 
-![](每天习题背诵_assets/image_27.png)     ![](每天习题背诵_assets/image_28.png)
+![](assets/每天习题背诵_assets/image_27.png)     ![](assets/每天习题背诵_assets/image_28.png)
 
 熔断降级：
 
 熔断：断路器默认是close关闭,设置触发的熔断规则（自己设置：慢调用，异常比例，异常数）时则open 打开，到达熔断时长时则会half-open放开一个链接去进行访问，如果成功则断路器close,如果失败则断路器open.持续上面的过程
 
-![](每天习题背诵_assets/image_29.png)
+![](assets/每天习题背诵_assets/image_29.png)
 
 降级：业务失败后，不能直接报错，而应该返回用户一个友好提示或者默认结果，这个就是失败降级逻辑。给FeignClient编写失败后的降级逻辑
-![](每天习题背诵_assets/image_30.png)      ![](每天习题背诵_assets/image_31.png)
-![](每天习题背诵_assets/image_32.png)      ![](每天习题背诵_assets/image_33.png)
+![](assets/每天习题背诵_assets/image_30.png)      ![](assets/每天习题背诵_assets/image_31.png)
+![](assets/每天习题背诵_assets/image_32.png)      ![](assets/每天习题背诵_assets/image_33.png)
 
 ---
 
-# 微服务组件相关知识：
+# 微服务组件相关知识MQ：
+
 
 RabbitMQ 相关:
 
@@ -1586,7 +1612,7 @@ Public-return: 交换机成功但到队列失败
 
 # 微服务如何进行分布式事务处理？
 
-Cap 理论 和Base 理论？
+## Cap 理论 和Base 理论？
 
 C 是 一致性，A是可用性。P是分区容错。当P存在时，C和A不能同时满足
 
@@ -1596,7 +1622,7 @@ BASE理论是对CAP中的一致性和可用性进行一个权衡的结果，无�
 
 - CP模式：各个子事务执行后互相等待，同时提交，同时回滚，达成强一致。
 
-Seata 组成三种角色？
+## Seata 组成三种角色？
 
 TC ----- 事务协调者
 
@@ -1604,7 +1630,7 @@ TM------全局事务
 
 RM------分支事务
 
-Seata 的四种模式？
+## Seata 的四种模式？
 
 XA 模式的两阶段提交：
 
@@ -1648,7 +1674,7 @@ seata:
 
 Seata 和服务如何进行整合？
 
-![](每天习题背诵_assets/image_34.png)
+![](assets/每天习题背诵_assets/image_34.png)
 
 几张表？
 
