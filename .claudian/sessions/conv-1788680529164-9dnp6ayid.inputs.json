@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "conversationId": "conv-1788680529164-9dnp6ayid",
+  "records": [
+    {
+      "schemaVersion": 1,
+      "id": "msg-1788680529250-vq2yzy4",
+      "userTurnOrdinal": 1,
+      "state": "accepted",
+      "localMessageId": "msg-1788680529153-by7l0ht",
+      "timestamp": 1788680529153,
+      "rawDisplayText": "补充一个java设计模式背诵的任务。",
+      "canonicalText": "补充一个java设计模式背诵的任务。",
+      "context": {
+        "linkedContent": {
+          "path": "任务.md"
+        }
+      },
+      "images": [],
+      "contentDigest": "099fc806359ee226445b0d63ab869f2750abeca8d06c677868c48783a20abb4b",
+      "providerUserMessageId": "01a075aa-e849-7792-a47e-223b657e3b47",
+      "providerAssistantMessageId": "msg_0b80108c6f943a62016a9d19e11d3087d08eb075f5b81102ac"
+    }
+  ]
+}
