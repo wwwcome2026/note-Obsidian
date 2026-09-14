@@ -97,7 +97,7 @@
         {
           "model": "gpt-5.6-sol",
           "displayName": "GPT-5.6-Sol",
-          "description": "Latest frontier agentic coding model.",
+          "description": "Reliable agentic workhorse for everyday tasks.",
           "supportedReasoningEfforts": [
             {
               "value": "low",
@@ -130,11 +130,6 @@
               "id": "priority",
               "name": "Fast",
               "description": "1.5x speed, increased usage"
-            },
-            {
-              "id": "ultrafast",
-              "name": "Ultrafast",
-              "description": "The fastest available responses for latency-sensitive work."
             }
           ],
           "defaultServiceTier": null,
@@ -233,7 +228,7 @@
         {
           "model": "gpt-5.5",
           "displayName": "GPT-5.5",
-          "description": "Frontier model for complex coding, research, and real-world work.",
+          "description": "Proven previous-generation model for coding and general work.",
           "supportedReasoningEfforts": [
             {
               "value": "low",
@@ -266,37 +261,6 @@
             "image"
           ],
           "isDefault": false
-        },
-        {
-          "model": "gpt-5.2",
-          "displayName": "GPT-5.2",
-          "description": "Optimized for professional work and long-running agents.",
-          "supportedReasoningEfforts": [
-            {
-              "value": "low",
-              "description": "Balances speed with some reasoning; useful for straightforward queries and short explanations"
-            },
-            {
-              "value": "medium",
-              "description": "Provides a solid balance of reasoning depth and latency for general-purpose tasks"
-            },
-            {
-              "value": "high",
-              "description": "Maximizes reasoning depth for complex or ambiguous problems"
-            },
-            {
-              "value": "xhigh",
-              "description": "Extra high reasoning for complex problems"
-            }
-          ],
-          "defaultReasoningEffort": "medium",
-          "serviceTiers": [],
-          "defaultServiceTier": null,
-          "inputModalities": [
-            "text",
-            "image"
-          ],
-          "isDefault": false
         }
       ],
       "modelAliases": {},
@@ -309,7 +273,7 @@
       "reasoningSummary": "detailed",
       "environmentVariables": "",
       "environmentHash": "runtime-input:v1:77991c63ec2501a67c4e4774bb8d205a534e60f8fcca760b2ecc97af6dfae42c",
-      "catalogTimestamp": 1789032585743,
+      "catalogTimestamp": 1789354091689,
       "catalogFingerprint": "2:a6c3899b5808992c0dda7469f68a3db00c14718946a9840a275393c2f78bb06e",
       "installationMethodsByHost": {},
       "wslDistroOverridesByHost": {}
