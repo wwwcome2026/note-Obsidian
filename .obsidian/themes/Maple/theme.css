@@ -1,4 +1,4 @@
-/* Maple Theme v1.4.15 For Obsidian */
+/* Maple Theme v1.5.14 For Obsidian */
 /* @settings
 id: maple-basic
 name: Maple Basic
@@ -339,6 +339,10 @@ settings:
       type: class-toggle
       title: Bold Folder Titles
       title.zh: 加粗文件夹标题
+    - id: explorer-center-action-button
+      type: class-toggle
+      title: Centered Action Buttons
+      title.zh: 操作按钮居中
     - id: setting-color-dirs
       type: variable-themed-color
       title: Directory Color
@@ -452,7 +456,7 @@ settings:
       type: variable-text
       title: Setting Panel Header Title
       title.zh: 设置面板标题
-      default: Maple 1.4.15
+      default: Maple 1.5.14
       quotes: true
     - id: modal-setting-header-title-center
       type: class-toggle
@@ -851,6 +855,10 @@ settings:
       type: heading
       level: 2
       collapsed: true
+    - id: text-highlight-enable
+      type: class-toggle
+      title: Enable Custom Highlight Color
+      title.zh: 启用自定义高亮颜色
     - id: setting-text-highlight-bg
       type: variable-text
       title: Highlight Text Background Color
@@ -866,24 +874,6 @@ settings:
       opacity: true
       default-light: "#"
       default-dark: "#"
-    - id: setting-text-highlight-radius
-      type: variable-number-slider
-      title: Highlight Background Radius
-      title.zh: 高亮背景圆角大小
-      description: Value in pixels (px)
-      description.zh: 单位：像素（px）
-      default: 4
-      min: 0
-      max: 8
-      step: 1
-      format: px
-    - id: text-highlight-all-round
-      type: class-toggle
-      title: Maintain Radius When Wrapping
-      title.zh: 换行时保持圆角
-      description: Except during editing
-      description.zh: 编辑时除外
-      default: true
     - id: title-bold
       title: Bold
       title.zh: 粗体
@@ -954,6 +944,24 @@ settings:
       type: heading
       level: 1
       collapsed: true
+    - id: font-override-editor-font-size
+      type: class-toggle
+      title: Override Editor Font Size
+      title.zh: 覆盖编辑器字体大小
+      description: Override the font size set in Appearance settings; may cause
+          unexpected layout issues if the value is too large
+      description.zh: 覆盖外观设置中编辑器的字体大小；如果数值过大可能会导致意想不到的布局问题
+    - id: setting-editor-font-size
+      type: variable-number-slider
+      title: Editor Font Size
+      title.zh: 编辑器字体大小
+      description: Font size for the editor
+      description.zh: 编辑器的字体大小
+      default: 16
+      min: 10
+      max: 24
+      step: 1
+      format: px
     - id: font-maple-interface
       type: class-toggle
       title: Use "Maple Mono" as Interface Font
@@ -1726,7 +1734,6 @@ settings:
       title.zh: 鼠标按下时放大图片
       description: Reference from https://github.com/aaaaalexis/obsidian-cupertino
       description.zh: 参考自 https://github.com/aaaaalexis/obsidian-cupertino
-      default: true
     - id: image-dark-hover
       type: class-toggle
       title: Decrease Brightness in Dark Mode
@@ -2092,13 +2099,15 @@ settings:
 
           > - MySnippets
 
-          > - Quite Outline
+          > - Quiet Outline
 
           > - Recent Files
 
           > - Settings Search
 
           > - Shiki Highlighter
+
+          > - AnyBlock
       description.zh: >-
           如果您发现某个插件显示不正常，请前往 [GitHub
           仓库](https://github.com/subframe7536/obsidian-theme-maple) 提交 issue。
@@ -2113,13 +2122,15 @@ settings:
 
           > - MySnippets
 
-          > - Quite Outline
+          > - Quiet Outline
 
           > - Recent Files
 
           > - Settings Search
 
           > - Shiki Highlighter
+
+          > - AnyBlock
       markdown: true
     - id: title-calendar
       title: Calendar
@@ -2150,6 +2161,10 @@ settings:
             value: calendar-end-6-7
           - label: Column 7 and 1
             value: calendar-end-7-1
+          - label: Column 7 and 8 (show week number)
+            value: calendar-end-7-8
+          - label: Column 8 and 2 (show week number)
+            value: calendar-end-8-2
     - id: calendar-swap-year-month
       type: class-toggle
       title: Swap Year and Month Display
@@ -2250,26 +2265,6 @@ body {
   --font-ui-smaller: 13px;
   --font-ui-small: 14px;
   --font-ui-medium: 16px;
-  --input-radius: var(--size-2-3);
-  --input-shadow:
-    0 0.125px 0 0.5px var(--color-base-10), inset 0 -0.125px 1px 0px var(--color-base-30),
-    0 0.75px 2px 0.5px var(--color-base-50);
-  --input-shadow-hover:
-    0 0.125px 0 0.5px var(--color-base-20), inset 0 -0.125px 1px 0px var(--color-base-40),
-    0 0.75px 2px 0.5px var(--color-base-50);
-  --animation-dur: var(--setting-animation-time, 250ms);
-  --animation-fast: calc(var(--animation-dur) / 2) var(--anim-motion-smooth);
-  --animation: var(--animation-dur) var(--anim-motion-smooth);
-  --animation-slow: calc(var(--animation-dur) * 2) var(--anim-motion-smooth);
-  --animation-delay: calc(4 * var(--animation-dur));
-  --divider-color: var(--setting-divider-color, var(--color-base-30));
-  --divider-width-hover: var(--size-4-1);
-  --nav-item-background-active: var(--accent-active-bg);
-  --nav-item-background-selected: var(--background-modifier-hover);
-  --line-height-normal: var(--setting-line-height, 1.8);
-  --line-height-tight: var(--setting-item-line-height, 1.5);
-  --menu-padding: 4px;
-  --color-opacity: 1;
 }
 body:not(.color-highlight-only) {
   --background-modifier-border: hsla(
@@ -2294,6 +2289,28 @@ body:not(.color-highlight-only) {
   --tab-container-background: var(--frame-bg);
   --titlebar-background: var(--frame-bg);
   --titlebar-background-focused: var(--frame-bg);
+}
+body {
+  --input-radius: var(--size-2-3);
+  --input-shadow:
+    0 0.125px 0 0.5px var(--color-base-10), inset 0 -0.125px 1px 0px var(--color-base-30),
+    0 0.75px 2px 0.5px var(--color-base-50);
+  --input-shadow-hover:
+    0 0.125px 0 0.5px var(--color-base-20), inset 0 -0.125px 1px 0px var(--color-base-40),
+    0 0.75px 2px 0.5px var(--color-base-50);
+  --animation-dur: var(--setting-animation-time, 250ms);
+  --animation-fast: calc(var(--animation-dur) / 2) var(--anim-motion-smooth);
+  --animation: var(--animation-dur) var(--anim-motion-smooth);
+  --animation-slow: calc(var(--animation-dur) * 2) var(--anim-motion-smooth);
+  --animation-delay: calc(4 * var(--animation-dur));
+  --divider-color: var(--setting-divider-color, var(--color-base-30));
+  --divider-width-hover: var(--size-4-1);
+  --nav-item-background-active: var(--accent-active-bg);
+  --nav-item-background-selected: var(--background-modifier-hover);
+  --line-height-normal: var(--setting-line-height, 1.8);
+  --line-height-tight: var(--setting-item-line-height, 1.5);
+  --menu-padding: 4px;
+  --color-opacity: 1;
 }
 
 .theme-light {
@@ -2348,13 +2365,6 @@ body:not(.color-highlight-only) {
     calc(85% + var(--theme-accent-active-l) * 0.1)
   );
 }
-.theme-light.color-use-minimal {
-  --base-accent-h: var(--setting-color-active-custom-light-h, 210);
-  --theme-accent-active-s: var(--setting-color-active-custom-light-s, 6%);
-  --theme-accent-active-l: var(--setting-color-active-custom-light-l, 36%);
-  --theme-accent-inactive-s: var(--setting-color-inactive-custom-light-s, 8%);
-  --theme-accent-inactive-l: var(--setting-color-inactive-custom-light-l, 70%);
-}
 .theme-light.color-use-minimal:not(.color-highlight-only) {
   --background-primary-hsl: var(--base-accent-h), 6%, 97%;
   --background-primary-alt-hsl: var(--base-accent-h), 10%, 95.5%;
@@ -2364,6 +2374,13 @@ body:not(.color-highlight-only) {
     calc(var(--theme-accent-active-s) * 0.2),
     calc(85% + var(--theme-accent-active-l) * 0.1)
   );
+}
+.theme-light.color-use-minimal {
+  --base-accent-h: var(--setting-color-active-custom-light-h, 210);
+  --theme-accent-active-s: var(--setting-color-active-custom-light-s, 6%);
+  --theme-accent-active-l: var(--setting-color-active-custom-light-l, 36%);
+  --theme-accent-inactive-s: var(--setting-color-inactive-custom-light-s, 8%);
+  --theme-accent-inactive-l: var(--setting-color-inactive-custom-light-l, 70%);
 }
 .theme-light.color-use-custom {
   --base-accent-h: var(--setting-accent-h-light, 35);
@@ -2383,7 +2400,7 @@ body:not(.color-highlight-only) {
   --theme-accent-inactive-s: var(--setting-color-inactive-custom-light-s);
   --theme-accent-inactive-l: var(--setting-color-inactive-custom-light-l);
 }
-.theme-light.color-use-custom.color-modify-bg-light, .theme-light.color-use-custom:not(.color-highlight-only) {
+.theme-light.color-use-custom:is(.color-modify-bg-light, .color-highlight-only) {
   --default-mod-bg-hsl: 0, 0%, 97%;
   --background-primary-hsl: var(--setting-bg-primary-light-hsl, var(--default-mod-bg-hsl));
   --background-primary-alt-hsl: var(
@@ -2409,6 +2426,11 @@ body:not(.color-highlight-only) {
   --color-blue: rgba(var(--color-blue-rgb), var(--color-opacity));
   --color-purple-rgb: 186.2265, 179.265, 238.935;
   --color-purple: rgba(var(--color-purple-rgb), var(--color-opacity));
+}
+.theme-dark:not(.color-dark-dim-disable) {
+  --color-opacity: 0.85;
+}
+.theme-dark {
   --theme-accent-active-h: var(--theme-accent-h);
   --theme-accent-active-s: calc(20% + var(--accent-s) / 10);
   --theme-accent-active-l: calc(40% + var(--accent-l) / 10);
@@ -2432,9 +2454,6 @@ body:not(.color-highlight-only) {
   --text-normal: hsla(var(--base-accent-h), 50%, 94%, 75%);
   --text-on-accent: #eaeaea !important;
 }
-.theme-dark:not(.color-dark-dim-disable) {
-  --color-opacity: 0.85;
-}
 .theme-dark:not(.color-highlight-only) {
   --background-primary-hsl: var(--base-accent-h), 6%, 11%;
   --background-primary-alt-hsl: var(--base-accent-h), 10%, 13%;
@@ -2454,10 +2473,6 @@ body:not(.color-highlight-only) {
 .theme-dark.color-use-minimal {
   --text-on-accent: #1e1e1f !important;
   --base-accent-h: var(--setting-color-active-custom-dark-h, 210);
-  --theme-accent-active-s: var(--setting-color-active-custom-dark-s, 4%);
-  --theme-accent-active-l: var(--setting-color-active-custom-dark-l, 72%);
-  --theme-accent-inactive-s: var(--setting-color-inactive-custom-dark-s, 12%);
-  --theme-accent-inactive-l: var(--setting-color-inactive-custom-dark-l, 42%);
 }
 .theme-dark.color-use-minimal:not(.color-highlight-only) {
   --background-primary-hsl: var(--base-accent-h), 4%, 10%;
@@ -2469,12 +2484,11 @@ body:not(.color-highlight-only) {
     calc(8% + var(--theme-accent-active-l) * 0.1 * var(--color-opacity))
   );
 }
-.theme-dark.color-use-custom {
-  --base-accent-h: var(--setting-accent-h-dark, 207);
-  --theme-accent-active-s: 24%;
-  --theme-accent-active-l: 52%;
-  --theme-accent-inactive-s: 12%;
-  --theme-accent-inactive-l: 32%;
+.theme-dark.color-use-minimal {
+  --theme-accent-active-s: var(--setting-color-active-custom-dark-s, 4%);
+  --theme-accent-active-l: var(--setting-color-active-custom-dark-l, 72%);
+  --theme-accent-inactive-s: var(--setting-color-inactive-custom-dark-s, 12%);
+  --theme-accent-inactive-l: var(--setting-color-inactive-custom-dark-l, 42%);
 }
 .theme-dark.color-use-custom:not(.color-highlight-only) {
   --bg-delta-dark: var(--setting-bg-delta-dark, 0%);
@@ -2485,6 +2499,13 @@ body:not(.color-highlight-only) {
   --background-secondary-hsl:
     calc(var(--base-accent-h) - 18), calc(6% + var(--bg-delta-dark) / 2),
     calc(12% + var(--bg-delta-dark));
+}
+.theme-dark.color-use-custom {
+  --base-accent-h: var(--setting-accent-h-dark, 207);
+  --theme-accent-active-s: 24%;
+  --theme-accent-active-l: 52%;
+  --theme-accent-inactive-s: 12%;
+  --theme-accent-inactive-l: 32%;
 }
 .theme-dark.color-use-custom.color-active-alt-dark {
   --theme-accent-h: calc(var(--base-accent-h) + 60);
@@ -2497,7 +2518,7 @@ body:not(.color-highlight-only) {
   --theme-accent-inactive-s: var(--setting-color-inactive-custom-dark-s);
   --theme-accent-inactive-l: var(--setting-color-inactive-custom-dark-l);
 }
-.theme-dark.color-use-custom.color-modify-bg-dark, .theme-dark.color-use-custom:not(.color-highlight-only) {
+.theme-dark.color-use-custom:is(.color-modify-bg-dark, .color-highlight-only) {
   --default-mod-bg-hsl: 0, 0%, 8%;
   --background-primary-hsl: var(--setting-bg-primary-dark-hsl, var(--default-mod-bg-hsl));
   --background-primary-alt-hsl: var(
@@ -2547,7 +2568,7 @@ body:not(.color-highlight-only) {
 /* #endregion */
 /* #region Default Color Input Indicator */
 html[lang=zh] {
-  --system-accent-override-text-cotent: "由 Style Settings 插件控制";
+  --system-accent-override-text-cotent: '由 Style Settings 插件控制';
 }
 
 .setting-item-info:has(+ .setting-item-control > .style-settings-import) .setting-item-name {
@@ -2557,7 +2578,7 @@ html[lang=zh] {
 body.css-settings-manager:not(.color-use-default) .mod-settings .vertical-tab-content-container > .vertical-tab-content > .setting-item:nth-child(2) > .setting-item-control:has(> input[type=color]), body.css-settings-manager:not(.color-use-default) .mod-settings .vertical-tab-content-container > .vertical-tab-content > .setting-group > .setting-items > .setting-item.mod-toggle > .setting-item-control:has(> input[type=color]) {
   position: relative;
 }
-body.css-settings-manager:not(.color-use-default) .mod-settings .vertical-tab-content-container > .vertical-tab-content > .setting-item:nth-child(2) > .setting-item-control:has(> input[type=color]) :is(div, input), body.css-settings-manager:not(.color-use-default) .mod-settings .vertical-tab-content-container > .vertical-tab-content > .setting-group > .setting-items > .setting-item.mod-toggle > .setting-item-control:has(> input[type=color]) :is(div, input) {
+body.css-settings-manager:not(.color-use-default) .mod-settings .vertical-tab-content-container > .vertical-tab-content > .setting-item:nth-child(2) > .setting-item-control:has(> input[type=color]) :is(.extra-setting-button, input), body.css-settings-manager:not(.color-use-default) .mod-settings .vertical-tab-content-container > .vertical-tab-content > .setting-group > .setting-items > .setting-item.mod-toggle > .setting-item-control:has(> input[type=color]) :is(.extra-setting-button, input) {
   visibility: hidden;
   pointer-events: none;
 }
@@ -2710,6 +2731,7 @@ body:not(.editor-bg-plain) .setting-item[data-id=setting-editor-bg],
 body.editor-bg-plain .setting-item[data-id=setting-editor-bg-grid-spacing],
 body:not(.editor-bg-grid-dots) .setting-item[data-id=setting-editor-bg-grid-dots],
 body:not(.editor-bg-grid-line) .setting-item[data-id=setting-editor-bg-grid-line],
+body:not(.font-override-editor-font-size) .setting-item[data-id=setting-editor-font-size],
 body:not(.scrollbar-enable) .setting-item:is([data-id=scrollbar-hover], [data-id=scrollbar-movein-animation-enable]),
 body.bg-default .setting-item[data-id=setting-bg-color],
 body.scrollbar-hide .setting-item:is([data-id*=scrollbar-hover],
@@ -2725,6 +2747,7 @@ body:not(.outline-enable) .setting-item:is([data-id=setting-outline-width],
 [data-id=setting-outline-dot-color]),
 body.color-use-default .setting-item:is([data-id=title-light-mode], [data-id=title-dark-mode]),
 body.color-use-minimal .setting-item:is([data-id=title-light-mode], [data-id=title-dark-mode]),
+body:not(.text-highlight-enable) .setting-item:is([data-id=setting-text-highlight-bg], [data-id=setting-text-highlight-color]),
 body:not(.color-active-custom-light) .setting-item:is([data-id=setting-color-active-custom-light],
 [data-id=setting-color-inactive-custom-light]),
 body:not(.color-modify-bg-light) .setting-item:is([data-id=setting-bg-primary-light-hsl],
@@ -2789,6 +2812,7 @@ body:not(.editor-bg-plain) .setting-item[data-id=setting-editor-bg] + .style-set
 body.editor-bg-plain .setting-item[data-id=setting-editor-bg-grid-spacing] + .style-settings-container,
 body:not(.editor-bg-grid-dots) .setting-item[data-id=setting-editor-bg-grid-dots] + .style-settings-container,
 body:not(.editor-bg-grid-line) .setting-item[data-id=setting-editor-bg-grid-line] + .style-settings-container,
+body:not(.font-override-editor-font-size) .setting-item[data-id=setting-editor-font-size] + .style-settings-container,
 body:not(.scrollbar-enable) .setting-item:is([data-id=scrollbar-hover], [data-id=scrollbar-movein-animation-enable]) + .style-settings-container,
 body.bg-default .setting-item[data-id=setting-bg-color] + .style-settings-container,
 body.scrollbar-hide .setting-item:is([data-id*=scrollbar-hover],
@@ -2804,6 +2828,7 @@ body:not(.outline-enable) .setting-item:is([data-id=setting-outline-width],
 [data-id=setting-outline-dot-color]) + .style-settings-container,
 body.color-use-default .setting-item:is([data-id=title-light-mode], [data-id=title-dark-mode]) + .style-settings-container,
 body.color-use-minimal .setting-item:is([data-id=title-light-mode], [data-id=title-dark-mode]) + .style-settings-container,
+body:not(.text-highlight-enable) .setting-item:is([data-id=setting-text-highlight-bg], [data-id=setting-text-highlight-color]) + .style-settings-container,
 body:not(.color-active-custom-light) .setting-item:is([data-id=setting-color-active-custom-light],
 [data-id=setting-color-inactive-custom-light]) + .style-settings-container,
 body:not(.color-modify-bg-light) .setting-item:is([data-id=setting-bg-primary-light-hsl],
@@ -3096,6 +3121,10 @@ body.app-layout-card:not(.is-mobile):not(.color-highlight-only) .modal-container
 }
 body.app-layout-card:not(.is-mobile):not(.color-highlight-only) .modal-container .mod-settings .modal-content .vertical-tab-header {
   background-color: transparent;
+  margin-top: 0;
+}
+body.app-layout-card:not(.is-mobile):not(.color-highlight-only) .modal-container .mod-settings .modal-content .setting-group-filters {
+  padding-top: var(--size-4-3);
 }
 body.app-layout-card:not(.is-mobile):not(.color-highlight-only) .modal-container .mod-settings .modal-content .vertical-tab-content-container > .vertical-tab-content {
   background-color: transparent;
@@ -3125,7 +3154,6 @@ body.app-layout-card:not(.is-mobile):not(.color-highlight-only).modal-setting-he
   padding: 0 !important;
 }
 body.app-layout-card:not(.is-mobile):not(.color-highlight-only).modal-setting-header.modal-setting-header-search .setting-group-search + .setting-items {
-  padding-top: var(--size-4-5);
   border-start-start-radius: var(--setting-items-radius);
   border-start-end-radius: var(--setting-items-radius);
 }
@@ -3134,6 +3162,9 @@ body.app-layout-card:not(.is-mobile):not(.color-highlight-only) .modal-sidebar {
 }
 body.app-layout-card:not(.is-mobile):not(.color-highlight-only) .modal-setting-nav-bar {
   border-color: transparent;
+}
+body.app-layout-card:not(.is-mobile):not(.color-highlight-only).tab-float .mod-root .workspace-tab-header-container {
+  padding-left: var(--size-2-3);
 }
 
 /* #endregion layout */
@@ -3221,15 +3252,15 @@ mjx-stretchy-h > mjx-ext > mjx-c::before {
 /* #endregion fix latex */
 /* #region monospace */
 body:is(:not(.css-settings-manager), .font-maple) {
-  --font-monospace-theme: "maplemono";
+  --font-monospace-theme: 'maplemono';
 }
 
 .font-maple-text {
-  --font-text-theme: "maplemono";
+  --font-text-theme: 'maplemono';
 }
 
 .font-maple-interface {
-  --font-interface-theme: "maplemono";
+  --font-interface-theme: 'maplemono';
 }
 
 code,
@@ -3243,6 +3274,9 @@ code *,
 /* #region text */
 body {
   --text-selection: hsla(var(--color-accent-hsl), 0.25);
+}
+body.font-override-editor-font-size .workspace-leaf-content[data-type=markdown] {
+  --font-text-size: var(--setting-editor-font-size, inherit);
 }
 
 .markdown-source-view,
@@ -3393,6 +3427,7 @@ video:active {
   border-color: var(--background-modifier-border-focus);
 }
 
+/* #endregion media */
 /* #region highlight */
 mark {
   color: var(--text-normal);
@@ -3406,37 +3441,9 @@ mark {
   --text-faint: #aaa;
 }
 
-body {
-  --text-highlight-bg: var(--setting-text-highlight-bg, rgba(var(--color-yellow-rgb), 0.3));
-}
-
-.text-highlight-all-round :is(.markdown-source-view .cm-highlight, .markdown-rendered mark) {
-  -webkit-box-decoration-break: clone;
-}
-
-.markdown-source-view span.cm-highlight,
-.markdown-rendered mark {
-  border-radius: var(--setting-text-highlight-radius, 4);
-  color: var(--setting-text-highlight-color);
-  background: var(--text-highlight-bg);
-}
-
-.markdown-source-view :is(:not(.cm-highlight) + .cm-formatting-highlight, .cm-formatting-highlight:first-child) {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-right: 0;
-  padding-right: 0;
-}
-.markdown-source-view .cm-formatting-highlight + .cm-highlight {
-  border-radius: 0;
-  padding-inline: 0;
-  margin: 0;
-}
-.markdown-source-view .cm-highlight + .cm-formatting-highlight {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  margin-left: 0;
-  padding-left: 0;
+.text-highlight-enable :is(.markdown-source-view span.cm-highlight, .markdown-rendered mark) {
+  color: var(--setting-text-highlight-color, inherit);
+  background: var(--setting-text-highlight-bg, rgba(255, 208, 0, 0.4));
 }
 
 /* #endregion highlight */
@@ -3611,7 +3618,6 @@ code {
 }
 
 .cm-s-obsidian .cm-line.HyperMD-codeblock {
-  line-height: calc(var(--line-height-normal) - 0.2);
   color: var(--code-normal) !important;
   border-inline: var(--code-border-width) solid var(--code-border-color);
   border-radius: 0 !important;
@@ -3626,13 +3632,11 @@ code {
   border-top: var(--code-border-width) solid var(--code-border-color);
   border-start-start-radius: var(--code-radius) !important;
   border-start-end-radius: var(--code-radius) !important;
-  margin-top: var(--size-2-1) !important;
 }
 .cm-s-obsidian .cm-line.HyperMD-codeblock.HyperMD-codeblock-end-bg {
   border-bottom: var(--code-border-width) solid var(--code-border-color);
   border-end-start-radius: var(--code-radius) !important;
   border-end-end-radius: var(--code-radius) !important;
-  margin-bottom: var(--size-2-1) !important;
 }
 
 .cm-hmd-codeblock .cm-indent::before {
@@ -3712,439 +3716,439 @@ body .markdown-rendered pre .copy-code-button {
 
 /* https://prismjs.com/#supported-languages */
 body:is(:not(.css-settings-manager), .code-language) pre.language-markup {
-  --code-lang: "Markup";
+  --code-lang: 'Markup';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-html {
-  --code-lang: "HTML";
+  --code-lang: 'HTML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-xml {
-  --code-lang: "XML";
+  --code-lang: 'XML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-svg {
-  --code-lang: "SVG";
+  --code-lang: 'SVG';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-mathml {
-  --code-lang: "MathML";
+  --code-lang: 'MathML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-ssml {
-  --code-lang: "SSML";
+  --code-lang: 'SSML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-atom {
-  --code-lang: "Atom";
+  --code-lang: 'Atom';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-rss {
-  --code-lang: "RSS";
+  --code-lang: 'RSS';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-css {
-  --code-lang: "CSS";
+  --code-lang: 'CSS';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-javascript, .language-js) {
-  --code-lang: "JavaScript";
+  --code-lang: 'JavaScript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-typescript, .language-ts) {
-  --code-lang: "Typescript";
+  --code-lang: 'Typescript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-jsx {
-  --code-lang: "JSX";
+  --code-lang: 'JSX';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-typescript-jsx, .language-tsx) {
-  --code-lang: "TypeScript-JSX";
+  --code-lang: 'TypeScript-JSX';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-ada {
-  --code-lang: "Ada";
+  --code-lang: 'Ada';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-apex {
-  --code-lang: "Apex";
+  --code-lang: 'Apex';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-applescript {
-  --code-lang: "AppleScript";
+  --code-lang: 'AppleScript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-aql {
-  --code-lang: "AQL";
+  --code-lang: 'AQL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-arduino, .language-ino) {
-  --code-lang: "Arduino";
+  --code-lang: 'Arduino';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-armasm, .language-arm-asm) {
-  --code-lang: "ArmAsm";
+  --code-lang: 'ArmAsm';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-asciidoc, .language-adoc) {
-  --code-lang: "AsciiDoc";
+  --code-lang: 'AsciiDoc';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-aspnet {
-  --code-lang: "AspNet";
+  --code-lang: 'AspNet';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-asm6502 {
-  --code-lang: "Asm6502";
+  --code-lang: 'Asm6502';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-autohotkey {
-  --code-lang: "AutoHotKey";
+  --code-lang: 'AutoHotKey';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-awk, .language-gawk) {
-  --code-lang: "AWK";
+  --code-lang: 'AWK';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-bash, .language-sh, .language-shell) {
-  --code-lang: "bash";
+  --code-lang: 'bash';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-basic {
-  --code-lang: "basic";
+  --code-lang: 'basic';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-batch {
-  --code-lang: "batch";
+  --code-lang: 'batch';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-bibtex {
-  --code-lang: "bibtex";
+  --code-lang: 'bibtex';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-bison {
-  --code-lang: "Bison";
+  --code-lang: 'Bison';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-c {
-  --code-lang: "C";
+  --code-lang: 'C';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-c\#, .language-csharp, .language-cs, .language-dotnet) {
-  --code-lang: "C#";
+  --code-lang: 'C#';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-c\+\+, .language-cpp) {
-  --code-lang: "C++";
+  --code-lang: 'C++';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-clojure {
-  --code-lang: "Clojure";
+  --code-lang: 'Clojure';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-cmake {
-  --code-lang: "CMake";
+  --code-lang: 'CMake';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-cobol {
-  --code-lang: "COBOL";
+  --code-lang: 'COBOL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-coffeescript, .language-coffee) {
-  --code-lang: "CoffeeScript";
+  --code-lang: 'CoffeeScript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-csp {
-  --code-lang: "CSP";
+  --code-lang: 'CSP';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-crystal {
-  --code-lang: "Crystal";
+  --code-lang: 'Crystal';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-csv {
-  --code-lang: "CSV";
+  --code-lang: 'CSV';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-cue {
-  --code-lang: "CUE";
+  --code-lang: 'CUE';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-d {
-  --code-lang: "D";
+  --code-lang: 'D';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-dart {
-  --code-lang: "Dart";
+  --code-lang: 'Dart';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-diff {
-  --code-lang: "Diff";
+  --code-lang: 'Diff';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-django {
-  --code-lang: "Django";
+  --code-lang: 'Django';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-jinja2 {
-  --code-lang: "Jinja2";
+  --code-lang: 'Jinja2';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-docker {
-  --code-lang: "Docker";
+  --code-lang: 'Docker';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-dockerfile {
-  --code-lang: "Dockerfile";
+  --code-lang: 'Dockerfile';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-ebnf {
-  --code-lang: "EBNF";
+  --code-lang: 'EBNF';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-editorconfig {
-  --code-lang: "EditorConfig";
+  --code-lang: 'EditorConfig';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-ejs {
-  --code-lang: "EJS";
+  --code-lang: 'EJS';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-elixir {
-  --code-lang: "Elixir";
+  --code-lang: 'Elixir';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-elm {
-  --code-lang: "Elm";
+  --code-lang: 'Elm';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-erb {
-  --code-lang: "ERB";
+  --code-lang: 'ERB';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-excel-formula, .language-xlsx, .language-xls) {
-  --code-lang: "Excel-Formula";
+  --code-lang: 'Excel-Formula';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-f\#, .language-fsharp) {
-  --code-lang: "F#";
+  --code-lang: 'F#';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-flow {
-  --code-lang: "Flow";
+  --code-lang: 'Flow';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-fortran {
-  --code-lang: "Fortran";
+  --code-lang: 'Fortran';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-gdscript {
-  --code-lang: "GDScript";
+  --code-lang: 'GDScript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-git {
-  --code-lang: "Git";
+  --code-lang: 'Git';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-glsl {
-  --code-lang: "GLSL";
+  --code-lang: 'GLSL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-go {
-  --code-lang: "Go";
+  --code-lang: 'Go';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-go-module, .language-go-mod) {
-  --code-lang: "Go-Module";
+  --code-lang: 'Go-Module';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-gradle {
-  --code-lang: "Gradle";
+  --code-lang: 'Gradle';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-graphql {
-  --code-lang: "GraphQL";
+  --code-lang: 'GraphQL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-groovy {
-  --code-lang: "Groovy";
+  --code-lang: 'Groovy';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-haml {
-  --code-lang: "HAML";
+  --code-lang: 'HAML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-handlebars, .language-hbs, .language-mustache) {
-  --code-lang: "Handlebars";
+  --code-lang: 'Handlebars';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-haskell, .language-hs) {
-  --code-lang: "Haskell";
+  --code-lang: 'Haskell';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-hcl {
-  --code-lang: "HCL";
+  --code-lang: 'HCL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-hlsl {
-  --code-lang: "HLSL";
+  --code-lang: 'HLSL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-http {
-  --code-lang: "HTTP";
+  --code-lang: 'HTTP';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-icon {
-  --code-lang: "Icon";
+  --code-lang: 'Icon';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-icu-message-format {
-  --code-lang: "ICU-Message-Format";
+  --code-lang: 'ICU-Message-Format';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-gitignore {
-  --code-lang: "gitignore";
+  --code-lang: 'gitignore';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-ini {
-  --code-lang: "Ini";
+  --code-lang: 'Ini';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-java {
-  --code-lang: "Java";
+  --code-lang: 'Java';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-javadoc {
-  --code-lang: "JavaDoc";
+  --code-lang: 'JavaDoc';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-jq {
-  --code-lang: "JQ";
+  --code-lang: 'JQ';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-jsdoc {
-  --code-lang: "JSDoc";
+  --code-lang: 'JSDoc';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-json {
-  --code-lang: "JSON";
+  --code-lang: 'JSON';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-json5 {
-  --code-lang: "JSON5";
+  --code-lang: 'JSON5';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-jsonp {
-  --code-lang: "JSONP";
+  --code-lang: 'JSONP';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-julia {
-  --code-lang: "Julia";
+  --code-lang: 'Julia';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-kotlin, .language-kt, .language-kts) {
-  --code-lang: "Kotlin";
+  --code-lang: 'Kotlin';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-latex, .language-tex) {
-  --code-lang: "Latex";
+  --code-lang: 'Latex';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-less {
-  --code-lang: "Less";
+  --code-lang: 'Less';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-liquid {
-  --code-lang: "Liquid";
+  --code-lang: 'Liquid';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-lisp, .language-emacs, .language-elisp, .language-emacs-lisp) {
-  --code-lang: "Lisp";
+  --code-lang: 'Lisp';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-llvm {
-  --code-lang: "LLVM";
+  --code-lang: 'LLVM';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-log {
-  --code-lang: "Log";
+  --code-lang: 'Log';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-lua {
-  --code-lang: "Lua";
+  --code-lang: 'Lua';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-makefile {
-  --code-lang: "Makefile";
+  --code-lang: 'Makefile';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-markdown, .language-md) {
-  --code-lang: "Markdown";
+  --code-lang: 'Markdown';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-matlab {
-  --code-lang: "MATLAB";
+  --code-lang: 'MATLAB';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-mermaid {
-  --code-lang: "Mermaid";
+  --code-lang: 'Mermaid';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-mongodb {
-  --code-lang: "MongoDB";
+  --code-lang: 'MongoDB';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-monkey {
-  --code-lang: "Monkey";
+  --code-lang: 'Monkey';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-neon {
-  --code-lang: "Neon";
+  --code-lang: 'Neon';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-nginx {
-  --code-lang: "Nginx";
+  --code-lang: 'Nginx';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-nim {
-  --code-lang: "Nim";
+  --code-lang: 'Nim';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-nix {
-  --code-lang: "Nix";
+  --code-lang: 'Nix';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-nsis {
-  --code-lang: "NSIS";
+  --code-lang: 'NSIS';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-objectc, .language-objc) {
-  --code-lang: "ObjectC";
+  --code-lang: 'ObjectC';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-ocaml {
-  --code-lang: "OCaml";
+  --code-lang: 'OCaml';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-odin {
-  --code-lang: "odin";
+  --code-lang: 'odin';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-opencl {
-  --code-lang: "OpenCL";
+  --code-lang: 'OpenCL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-pascal {
-  --code-lang: "Pascal";
+  --code-lang: 'Pascal';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-perl {
-  --code-lang: "Perl";
+  --code-lang: 'Perl';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-php {
-  --code-lang: "PHP";
+  --code-lang: 'PHP';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-phpdoc {
-  --code-lang: "PHPDoc";
+  --code-lang: 'PHPDoc';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-powershell {
-  --code-lang: "PowerShell";
+  --code-lang: 'PowerShell';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-properties {
-  --code-lang: "Properties";
+  --code-lang: 'Properties';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-protobuf {
-  --code-lang: "ProtoBuf";
+  --code-lang: 'ProtoBuf';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-pug {
-  --code-lang: "Pug";
+  --code-lang: 'Pug';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-python, .language-py) {
-  --code-lang: "Python";
+  --code-lang: 'Python';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-qml {
-  --code-lang: "QML";
+  --code-lang: 'QML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-r {
-  --code-lang: "R";
+  --code-lang: 'R';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-regex {
-  --code-lang: "Regex";
+  --code-lang: 'Regex';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-rescript, .language-res) {
-  --code-lang: "ReScript";
+  --code-lang: 'ReScript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-rip {
-  --code-lang: "Rip";
+  --code-lang: 'Rip';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-ruby, .language-rb) {
-  --code-lang: "Ruby";
+  --code-lang: 'Ruby';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-rust, .language-rs) {
-  --code-lang: "Rust";
+  --code-lang: 'Rust';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-sass {
-  --code-lang: "Sass";
+  --code-lang: 'Sass';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-scss {
-  --code-lang: "Scss";
+  --code-lang: 'Scss';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-scala {
-  --code-lang: "Scala";
+  --code-lang: 'Scala';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-solidity {
-  --code-lang: "Solidity";
+  --code-lang: 'Solidity';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-sql {
-  --code-lang: "SQL";
+  --code-lang: 'SQL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-stylus {
-  --code-lang: "stylus";
+  --code-lang: 'stylus';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-swift {
-  --code-lang: "Swift";
+  --code-lang: 'Swift';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-tcl {
-  --code-lang: "TCL";
+  --code-lang: 'TCL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-toml {
-  --code-lang: "TOML";
+  --code-lang: 'TOML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-uri, .language-url) {
-  --code-lang: "URI";
+  --code-lang: 'URI';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-unrealscript, .language-uscript, .language-uc) {
-  --code-lang: "UnrealScript";
+  --code-lang: 'UnrealScript';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-v {
-  --code-lang: "V";
+  --code-lang: 'V';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-vbnet {
-  --code-lang: "VBNet";
+  --code-lang: 'VBNet';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-velocity {
-  --code-lang: "Velocity";
+  --code-lang: 'Velocity';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-vhdl {
-  --code-lang: "VHDL";
+  --code-lang: 'VHDL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-vim {
-  --code-lang: "Vim";
+  --code-lang: 'Vim';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-visual-basic, .language-vb, .language-vba) {
-  --code-lang: "Visual-Basic";
+  --code-lang: 'Visual-Basic';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-wasm {
-  --code-lang: "WASM";
+  --code-lang: 'WASM';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-wgsl {
-  --code-lang: "WGSL";
+  --code-lang: 'WGSL';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-wiki {
-  --code-lang: "WIKI";
+  --code-lang: 'WIKI';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-wren {
-  --code-lang: "Wren";
+  --code-lang: 'Wren';
 }
 body:is(:not(.css-settings-manager), .code-language) pre:is(.language-yaml, .language-yml) {
-  --code-lang: "YAML";
+  --code-lang: 'YAML';
 }
 body:is(:not(.css-settings-manager), .code-language) pre.language-zig {
-  --code-lang: "Zig";
+  --code-lang: 'Zig';
 }
 body:is(:not(.css-settings-manager), .code-language) .markdown-rendered {
   --code-block-padding: calc(var(--line-height-tight) * var(--code-size))
@@ -4339,7 +4343,6 @@ body {
   --bases-embed-border-radius: var(--embed-radius);
 }
 body .markdown-source-view.mod-cm6 .cm-embed-block {
-  margin-block: var(--size-4-1) !important;
   border-radius: var(--embed-radius) !important;
   transition: box-shadow var(--animation);
 }
@@ -4349,27 +4352,26 @@ body .markdown-source-view.mod-cm6 .cm-embed-block .edit-block-button {
   transition-property: background-color, opacity;
   height: fit-content;
 }
-body .internal-embed.is-loaded:not(.image-embed) {
+body .internal-embed.is-loaded {
   transition: var(--animation);
   transition-property: border-color, background-color;
   border-radius: var(--embed-radius);
-  margin-block: var(--size-4-1) !important;
 }
-body .internal-embed.is-loaded:not(.image-embed):hover {
+body .internal-embed.is-loaded:hover {
   border-color: var(--accent-active);
 }
-body .internal-embed.is-loaded:not(.image-embed):is(.mod-empty, .mod-empty-attachment) {
+body .internal-embed.is-loaded:is(.mod-empty, .mod-empty-attachment) {
   border: var(--size-2-1) dotted var(--text-faint);
 }
-body .internal-embed.is-loaded:not(.image-embed) :is(.markdown-embed-link, .file-embed-link) {
+body .internal-embed.is-loaded :is(.markdown-embed-link, .file-embed-link) {
   border-radius: var(--radius-s);
   transition: var(--animation);
   transition-property: color, background-color;
 }
-body .internal-embed.is-loaded:not(.image-embed) :is(.markdown-embed-link, .file-embed-link):hover {
+body .internal-embed.is-loaded :is(.markdown-embed-link, .file-embed-link):hover {
   background-color: var(--nav-item-background-hover);
 }
-body .internal-embed.is-loaded:not(.image-embed) .markdown-embed-title {
+body .internal-embed.is-loaded .markdown-embed-title {
   display: none;
 }
 body .cm-lang-query .internal-query-header {
@@ -4463,13 +4465,13 @@ body.embed-title-right-top .internal-embed.is-loaded:not([alt="#"]) :is(.markdow
 /* #endregion hr */
 /* #region link */
 .external-link {
-  background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23222222' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 7h10v10M7 17L17 7'/></svg>");
+  background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23222' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 7h10v10M7 17L17 7'/></svg>");
   background-size: var(--font-text-size);
   padding-inline-end: var(--size-4-4);
 }
 
 .theme-dark .external-link {
-  background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23DDDDDD' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 7h10v10M7 17L17 7'/></svg>");
+  background-image: linear-gradient(transparent, transparent), url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23ddd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M7 7h10v10M7 17L17 7'/></svg>");
 }
 
 body {
@@ -4608,7 +4610,7 @@ body.link-hover-expand :is(.cm-hmd-internal-link, .cm-link) {
   display: inline-block;
   transform: translateY(var(--size-2-1));
   margin-inline: var(--size-2-1);
-  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4M10 9H8m8 4H8m8 4H8'/></g></svg>") no-repeat;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8'/></g></svg>") no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
   color: inherit;
@@ -4660,7 +4662,6 @@ body:is(:not(.css-settings-manager), .list-enable) {
   --checkbox-marker-color: var(--text-on-accent);
   --checkbox-border-color: var(--setting-list-checkbox-color, var(--accent-inactive));
   --checkbox-border-color-hover: var(--setting-list-checkbox-color-hover, var(--accent-active));
-  --list-bullet-size: calc(var(--font-text-size) / 3 + var(--size-2-1));
 }
 body:is(:not(.css-settings-manager), .list-enable) .cm-formatting-list {
   padding-inline-start: var(--size-4-1);
@@ -4722,6 +4723,9 @@ body:is(:not(.css-settings-manager), .list-enable) .markdown-rendered ol li > ol
 }
 body:is(:not(.css-settings-manager), .list-enable) :is(.markdown-rendered, div) > ul {
   --list-indent: 0;
+}
+body:is(:not(.css-settings-manager), .list-enable) {
+  --list-bullet-size: calc(var(--font-text-size) / 3 + var(--size-2-1));
 }
 body:is(:not(.css-settings-manager), .list-enable) .HyperMD-list-line-2 .list-bullet {
   --list-marker-color: transparent;
@@ -5577,9 +5581,6 @@ body:is(:not(.css-settings-manager), .table-round:not(.table-style-minimal)) .ta
   justify-content: center;
   align-items: center;
 }
-.markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper:has(.is-live-preview .image-embed) [class=cm-line] {
-  display: none;
-}
 .markdown-source-view.mod-cm6 .cm-table-widget :is(.table-row-btn, .table-col-btn, .table-row-drag-handle, .table-col-drag-handle) {
   transition: opacity var(--animation-fast);
 }
@@ -5804,7 +5805,7 @@ body .cm-contentContainer :first-child .cm-formatting.cm-formatting-header {
 }
 
 :is(.HyperMD-header-1, .markdown-rendered h1) {
-  --h-indicator-content: "H1";
+  --h-indicator-content: 'H1';
 }
 
 .link-heading :is(.HyperMD-header-1, .markdown-rendered h1) {
@@ -5816,7 +5817,7 @@ body .cm-contentContainer :first-child .cm-formatting.cm-formatting-header {
 }
 
 :is(.HyperMD-header-2, .markdown-rendered h2) {
-  --h-indicator-content: "H2";
+  --h-indicator-content: 'H2';
 }
 
 .link-heading :is(.HyperMD-header-2, .markdown-rendered h2) {
@@ -5828,7 +5829,7 @@ body .cm-contentContainer :first-child .cm-formatting.cm-formatting-header {
 }
 
 :is(.HyperMD-header-3, .markdown-rendered h3) {
-  --h-indicator-content: "H3";
+  --h-indicator-content: 'H3';
 }
 
 .link-heading :is(.HyperMD-header-3, .markdown-rendered h3) {
@@ -5840,7 +5841,7 @@ body .cm-contentContainer :first-child .cm-formatting.cm-formatting-header {
 }
 
 :is(.HyperMD-header-4, .markdown-rendered h4) {
-  --h-indicator-content: "H4";
+  --h-indicator-content: 'H4';
 }
 
 .link-heading :is(.HyperMD-header-4, .markdown-rendered h4) {
@@ -5852,7 +5853,7 @@ body .cm-contentContainer :first-child .cm-formatting.cm-formatting-header {
 }
 
 :is(.HyperMD-header-5, .markdown-rendered h5) {
-  --h-indicator-content: "H5";
+  --h-indicator-content: 'H5';
 }
 
 .link-heading :is(.HyperMD-header-5, .markdown-rendered h5) {
@@ -5864,7 +5865,7 @@ body .cm-contentContainer :first-child .cm-formatting.cm-formatting-header {
 }
 
 :is(.HyperMD-header-6, .markdown-rendered h6) {
-  --h-indicator-content: "H6";
+  --h-indicator-content: 'H6';
 }
 
 .link-heading :is(.HyperMD-header-6, .markdown-rendered h6) {
@@ -6354,10 +6355,6 @@ img {
 .image-alt .image-embed[alt] {
   padding: var(--size-4-1) 0;
 }
-.image-alt .image-embed[alt]::after {
-  display: block;
-  text-align: center;
-}
 .image-alt .image-embed[alt]:not([alt$=".png"],
 [alt$=".jpg"],
 [alt$=".jpeg"],
@@ -6366,12 +6363,33 @@ img {
 [alt$=".gif"],
 [alt$=".tiff"],
 [alt$=".bmp"],
-[alt$=".tiff"])::after {
-  content: attr(alt);
+[alt$=".tiff"]) {
+  --content: attr(alt);
+}
+.image-alt .image-embed[alt]:not(:has(.image-wrapper))::after {
+  content: var(--content);
+  display: block;
+  text-align: center;
   font-size: var(--font-smaller);
   color: var(--text-faint);
 }
-.image-alt .view-content img:not(.emoji) {
+.image-alt .image-embed[alt] .image-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.image-alt .image-embed[alt] .image-wrapper::before {
+  height: var(--size-4-5);
+  line-height: var(--size-4-5);
+  display: block;
+  text-align: center;
+  content: var(--content);
+  font-size: var(--font-smaller);
+  color: var(--text-faint);
+}
+.image-alt .image-embed[alt] .image-wrapper .image-resize-corner {
+  transform: translateY(calc(-1 * var(--size-4-5)));
+}
+.image-alt .view-content img:not(.emoji):not(.highlight-swatch) {
   display: block;
   margin-right: auto;
   margin-left: auto;
@@ -6533,6 +6551,9 @@ body.canvas-center .canvas-node-content.markdown-embed > .markdown-embed-content
   body.list-enable {
     --list-marker-color-alt-render: var(--list-marker-color-alt);
   }
+  body.quote-shadow .markdown-rendered blockquote {
+    box-shadow: none;
+  }
 }
 /* #endregion pdf */
 /* #region property */
@@ -6618,7 +6639,7 @@ body.canvas-center .canvas-node-content.markdown-embed > .markdown-embed-content
   display: none;
 }
 .metadata-container :is([data-property-key=published], [data-property-key*=date]) .lucide-text {
-  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M8 2v4m8-4v4'/><rect width='18' height='18' x='3' y='4' rx='2'/><path d='M3 10h18'/></g></svg>") no-repeat;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M8 2v3m8-3v3'/><rect width='18' height='18' x='3' y='3' rx='2'/><path d='M3 9h18'/></g></svg>") no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
 }
@@ -6686,7 +6707,7 @@ input.metadata-property-key-input,
 /* #endregion excalidraw */
 /* #region better-command-palette */
 .better-command-palette {
-  --prompt-text: "Better Command Palette";
+  --prompt-text: 'Better Command Palette';
 }
 .better-command-palette .prompt-instruction {
   display: none;
@@ -6711,13 +6732,13 @@ input.metadata-property-key-input,
   font-family: -apple-system, BlinkMacSystemFont, var(--font-monospace);
 }
 .better-command-palette[palette-mode=commands] {
-  --action: var(--action-text-command, "Command");
+  --action: var(--action-text-command, 'Command');
 }
 .better-command-palette[palette-mode=commands] .prompt-instructions :first-child {
   display: inline-block;
 }
 .better-command-palette[palette-mode=files] {
-  --action: var(--action-text-file, "File");
+  --action: var(--action-text-file, 'File');
 }
 .better-command-palette[palette-mode=files] .prompt-instructions :first-child,
 .better-command-palette[palette-mode=files] .prompt-instructions :nth-child(2),
@@ -6725,7 +6746,7 @@ input.metadata-property-key-input,
   display: inline-block;
 }
 .better-command-palette[palette-mode=tags] {
-  --action: var(--action-text-tag, "Tag");
+  --action: var(--action-text-tag, 'Tag');
 }
 .better-command-palette[palette-mode=tags] .prompt-instructions :first-child {
   display: inline-block;
@@ -6757,9 +6778,9 @@ input.metadata-property-key-input,
 }
 
 html[lang=zh] {
-  --action-text-command: "命令";
-  --action-text-file: "文件";
-  --action-text-tag: "标签";
+  --action-text-command: '命令';
+  --action-text-file: '文件';
+  --action-text-tag: '标签';
 }
 
 .is-mobile .better-command-palette-title::before {
@@ -6878,6 +6899,14 @@ body.calendar-swap-year-month #calendar-container .nav .title .month {
   background-color: hsla(var(--color-accent-hsl), 0.1);
 }
 
+.calendar-end-7-8 #calendar-container tbody tr td:is(:nth-child(7), :nth-child(8)) {
+  background-color: hsla(var(--color-accent-hsl), 0.1);
+}
+
+.calendar-end-8-2 #calendar-container tbody tr td:is(:nth-child(8), :nth-child(2)) {
+  background-color: hsla(var(--color-accent-hsl), 0.1);
+}
+
 .workspace-leaf-content[data-type=calendar] .view-content {
   padding-inline: var(--size-4-1);
   padding-block: 0;
@@ -6940,7 +6969,7 @@ body.calendar-swap-year-month #calendar-container .nav .title .month {
   display: none;
 }
 .MySnippets-statusbar-menu .ms-add {
-  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4M9 15h6m-3 3v-6'/></g></svg>") no-repeat;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5M9 15h6m-3 3v-6'/></g></svg>") no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
 }
@@ -6998,13 +7027,19 @@ body:not(.is-mobile).modal-setting-header.modal-setting-header-search .settings-
   background-color: var(--nav-item-background-hover);
 }
 .quiet-outline .n-tree.n-tree--block-line .n-tree-node.located p {
-  color: var(--accent-active);
+  color: var(--text-on-accent);
 }
 .quiet-outline .n-input {
   --input-border-width-focus: 0;
 }
 
 /* #endregion quiet-outline */
+/* #region anyblock */
+.code-nowrap .el-pre .ab-note .markdown-rendered {
+  position: relative;
+}
+
+/* #endregion anyblock */
 /* #endregion [plugins] */
 /* #region [workspace] */
 /* #region document-search */
@@ -7109,14 +7144,15 @@ body:not(.is-phone) :is(.horizontal-tab-nav-item, .vertical-tab-nav-item).is-act
 }
 
 body:is(:not(.css-settings-manager), .modal-control-gradient) button.mod-cta {
+  --interactive-accent: transparent;
   transition: box-shadow var(--animation);
   background: linear-gradient(to bottom, transparent -240%, var(--color-accent) 100%);
 }
 body:is(:not(.css-settings-manager), .modal-control-gradient) button.mod-cta:hover {
   background: linear-gradient(to bottom, transparent -240%, var(--color-accent-1) 100%);
 }
-body:is(:not(.css-settings-manager), .modal-control-gradient) button.mod-cta:not(.mod-loading) {
-  color: var(--text-on-accent);
+body:is(:not(.css-settings-manager), .modal-control-gradient) button.mod-cta.mod-loading {
+  color: transparent !important;
 }
 body:is(:not(.css-settings-manager), .modal-control-gradient) button.mod-warning {
   transition: box-shadow var(--animation);
@@ -7183,13 +7219,15 @@ body:not(.is-mobile).modal-slider input[type=range]::-webkit-slider-thumb:is(:ho
 }
 body:not(.is-mobile):is(.modal-toggle-floating, .modal-toggle-thin) .checkbox-container {
   --toggle-target-width: var(--toggle-width);
+}
+body:not(.is-mobile):is(.modal-toggle-floating, .modal-toggle-thin) .checkbox-container.mod-small {
+  --toggle-target-width: var(--toggle-s-width);
+}
+body:not(.is-mobile):is(.modal-toggle-floating, .modal-toggle-thin) .checkbox-container {
   --toggle-radius: var(--radius-m);
   height: var(--size-4-4);
   transition: var(--animation);
   border: var(--toggle-border-width) solid var(--text-faint);
-}
-body:not(.is-mobile):is(.modal-toggle-floating, .modal-toggle-thin) .checkbox-container.mod-small {
-  --toggle-target-width: var(--toggle-s-width);
 }
 body:not(.is-mobile):is(.modal-toggle-floating, .modal-toggle-thin) .checkbox-container:focus-within {
   outline: none;
@@ -7252,70 +7290,70 @@ body:not(.is-mobile).modal-toggle-thin .checkbox-container.is-enabled:active::af
   left: calc(2 * var(--toggle-border-width));
 }
 
-body.modal-setting-header:not(.is-mobile) {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) {
   --modal-close-button-padding: var(--size-4-2);
   --modal-header-height: var(--size-4-10);
 }
-body.modal-setting-header:not(.is-mobile) .modal-close-button {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) :is(.modal-close-button, .modal-header-button) {
   transition: background-color var(--animation);
   z-index: calc(var(--layer-modal) + 1);
   top: var(--modal-close-button-padding);
   inset-inline-end: var(--modal-close-button-padding);
 }
-body.modal-setting-header:not(.is-mobile) .modal-container .mod-settings {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .modal-container .mod-settings {
   container-type: inline-size;
 }
-body.modal-setting-header:not(.is-mobile) .modal-container .mod-settings::before {
-  content: var(--setting-modal-header-title, "Maple 1.4.15");
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .modal-container .mod-settings::before {
+  content: var(--setting-modal-header-title, "Maple 1.5.14");
   position: absolute;
   left: var(--size-4-4);
-  top: calc(var(--modal-header-height) / 2);
+  top: calc(var(--modal-header-height) * 2 / 3);
   translate: 0 -50%;
   font-size: 18px;
   font-weight: 550;
   color: var(--setting-color-logo, var(--text-accent));
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-title-center .modal-container .mod-settings::before {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-title-center .modal-container .mod-settings::before {
   left: 50%;
   translate: -50% -50%;
 }
 @container (max-width:750px) {
-  body.modal-setting-header:not(.is-mobile).modal-setting-header-title-center .modal-container .mod-settings::before {
+  body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-title-center .modal-container .mod-settings::before {
     opacity: 0;
   }
 }
-body.modal-setting-header:not(.is-mobile) .mod-settings .modal-content {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .mod-settings .modal-content {
   background-color: var(--titlebar-background);
 }
-body.modal-setting-header:not(.is-mobile) .mod-settings .modal-content .vertical-tab-header {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .mod-settings .modal-content .vertical-tab-header {
   background-color: hsl(var(--background-secondary-hsl));
   border-top: 1px solid var(--divider-color);
   margin-top: var(--modal-header-height);
   padding-top: 0;
 }
-body.modal-setting-header:not(.is-mobile) .mod-settings .modal-content .vertical-tab-content-container {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .mod-settings .modal-content .vertical-tab-content-container {
   padding-top: var(--modal-header-height);
   position: relative;
 }
-body.modal-setting-header:not(.is-mobile) .mod-settings .modal-content .vertical-tab-content-container .vertical-tab-content {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .mod-settings .modal-content .vertical-tab-content-container .vertical-tab-content {
   position: unset !important;
   background-color: var(--background-primary);
   border-top: 1px solid var(--divider-color);
   padding-top: var(--size-4-6);
   padding-right: var(--size-4-8);
 }
-body.modal-setting-header:not(.is-mobile) .mod-settings .modal-content .vertical-tab-content-container .vertical-tab-content h2 {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal) .mod-settings .modal-content .vertical-tab-content-container .vertical-tab-content h2 {
   font-size: var(--h2-size);
   font-weight: var(--h2-weight);
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search {
   --modal-close-button-padding: var(--size-4-3);
   --modal-header-height: var(--size-4-12);
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings::before {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings::before {
   font-size: 20px;
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content :is(.plugin-list-plugins,
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content :is(.plugin-list-plugins,
 .vertical-tab-content:is(:has(> .installed-plugins-container),
 :has(> .hotkey-list-container))) > .setting-item:has(input) {
   position: absolute;
@@ -7324,42 +7362,43 @@ body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-setti
   right: var(--modal-header-height);
   border: none;
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content :is(.plugin-list-plugins,
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content :is(.plugin-list-plugins,
 .vertical-tab-content:is(:has(> .installed-plugins-container),
 :has(> .hotkey-list-container))) > .setting-item:has(input) .setting-item-info {
   visibility: hidden;
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content .plugin-list-plugins .setting-item-heading {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content .plugin-list-plugins .setting-item-heading {
   margin: 0;
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content .setting-filter-container {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content .setting-filter-container {
   margin-bottom: var(--size-4-1);
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content .setting-filter-container .hotkey-filter {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content .setting-filter-container .hotkey-filter {
   margin-bottom: var(--size-4-3);
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content :is(.setting-group-search .search-input-container,
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content :is(.setting-group-search .search-input-container,
 .setting-item-control:has(.search-input-container.mod-hotkey)) {
   position: absolute;
   padding: 0;
+  margin: 0;
   top: calc(var(--size-4-2) + var(--size-2-1));
   right: var(--modal-header-height);
   border: none;
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content :is(.setting-group-search .search-input-container,
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content :is(.setting-group-search .search-input-container,
 .setting-item-control:has(.search-input-container.mod-hotkey)) .setting-item-info {
   visibility: hidden;
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content .setting-group-search {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content .setting-group-search {
   padding-block: calc(var(--size-4-2) + var(--size-2-1));
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content .setting-item:has(~ .hotkey-list-container) .setting-item-info {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content .setting-item:has(~ .hotkey-list-container) .setting-item-info {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   gap: var(--size-4-2);
 }
-body.modal-setting-header:not(.is-mobile).modal-setting-header-search .mod-settings .modal-content .setting-item:has(~ .hotkey-list-container) .setting-item-info .setting-item-name {
+body.modal-setting-header:not(.is-mobile):not(.is-popout-modal).modal-setting-header-search .mod-settings .modal-content .setting-item:has(~ .hotkey-list-container) .setting-item-info .setting-item-name {
   font-size: var(--h4-size);
   font-weight: bold;
 }
@@ -7383,12 +7422,12 @@ button[disabled=true] {
 }
 
 .theme-light {
-  --select-bg-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23222222' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9l6 6l6-6'/></svg>");
+  --select-bg-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23222' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9l6 6l6-6'/></svg>");
 }
 
 .theme-dark {
   /* current color seems to be invalid for SVG in background-image */
-  --select-bg-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23DDDDDD' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9l6 6l6-6'/></svg>");
+  --select-bg-img: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='%23ddd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 9l6 6l6-6'/></svg>");
 }
 
 :is(select, .dropdown) {
@@ -7405,50 +7444,23 @@ button[disabled=true] {
   --flair-color: var(--text-accent);
 }
 
-body:not(.is-phone) .modal-container .is-loading {
-  position: initial;
-}
-body:not(.is-phone) .modal-container :is(.mod-community-plugin, .mod-community-theme) .modal-sidebar .setting-item:first-child {
-  max-width: var(--modal-community-sidebar-width);
-  margin-bottom: var(--size-4-2);
-}
-body:not(.is-phone) .modal-container :is(.mod-community-plugin, .mod-community-theme) .modal-header {
-  display: inline-block;
-  position: absolute;
-  top: var(--size-4-3);
-  inset-inline-start: var(--size-4-4);
-}
-body:not(.is-phone) .modal-container .community-item {
-  --interactive-accent: var(--accent-active-bg);
-  transition: border-color var(--animation);
-}
-body:not(.is-phone) .modal-container .modal-sidebar:not(:has(+ .community-modal-details)) .community-modal-controls {
+body:not(.is-phone) .mod-community-modal .community-modal-controls {
   display: flex;
-  flex-direction: row-reverse;
+  flex-wrap: wrap;
+  justify-items: center;
   align-items: center;
-  justify-content: flex-start;
-  height: calc(var(--font-ui-small) + var(--size-4-3) * 2);
-  padding-inline-end: var(--size-4-9);
+  gap: var(--size-4-1);
 }
-body:not(.is-phone) .modal-container .community-modal-search-summary {
-  display: none;
+body:not(.is-phone) .mod-community-modal .community-modal-search {
+  max-width: var(--modal-community-sidebar-width);
+  margin: 0;
 }
-body:not(.is-phone) .modal-container .community-modal-controls button.clickable-icon {
-  padding: var(--size-2-1) var(--size-2-2);
-  position: absolute;
-  margin-inline-end: var(--size-4-1);
+body:not(.is-phone) .mod-community-modal .setting-item.mod-toggle {
+  align-items: center;
 }
-body:not(.is-phone) .modal-container .community-modal-controls .search-input-container .search-input-clear-button {
-  right: calc(var(--size-4-6) + var(--size-2-1));
-}
-body:not(.is-phone) .modal-container .community-modal-controls .search-input-container input {
-  padding-inline-end: var(--size-4-8);
-  transition: var(--animation);
-  transition-property: border-color, background-color, box-shadow;
-}
-body:not(.is-phone) .modal-container .mod-settings .modal-content .setting-item-heading .setting-item-name {
-  font-weight: 550;
-  font-size: var(--font-ui-medium);
+body:not(.is-phone) .mod-community-modal .community-modal-search-summary {
+  padding-block: 0;
+  width: 100%;
 }
 
 body.enable-group-title .modal-container .mod-settings .modal-content .vertical-tab-header-group {
@@ -7541,7 +7553,7 @@ body:not(.is-phone).enable-blur .modal-bg {
 /* !Chrome >= 121 no longer support `-webkit-scrollbar-*`, no effect currently */
 /* usage of `@property`: https://stackoverflow.com/a/74050413/20058211 */
 /* usage of `-webkit-text-fill-color`: https://stackoverflow.com/a/46304690/20058211 */
-body.scrollbar-enable:not(.is-mobile) .mod-settings :is(.vertical-tab-content, .vertical-tab-header) {
+body.scrollbar-enable:not(.is-mobile):not(.is-popup-window).mod-settings :is(.vertical-tab-content, .vertical-tab-header) {
   scrollbar-gutter: stable;
 }
 body.scrollbar-enable:not(.is-mobile).scrollbar-hover-accent {
@@ -7622,7 +7634,7 @@ body:is(:not(.css-settings-manager), .explorer-icon) .workspace-tab-header-inner
   display: none;
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .workspace-tab-header-inner-icon .lucide-file-text {
-  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 7v14m-9-3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4a4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3a3 3 0 0 0-3-3z'/></svg>") no-repeat;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v16m8.001-2A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2a5 5 0 0 1 4-2z'/></svg>") no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
 }
@@ -7668,7 +7680,7 @@ body:is(:not(.css-settings-manager), .tab-float) .mod-root .workspace-tab-header
   box-shadow: var(--tab-active-shadow);
 }
 body:is(:not(.css-settings-manager), .tab-float) .mod-root .workspace-tab-header-container {
-  translate: calc(-1 * var(--size-4-1));
+  padding-left: var(--size-4-1);
 }
 body:is(:not(.css-settings-manager), .tab-float) .mod-root .workspace-tab-header-container-inner {
   margin-top: var(--size-4-1);
@@ -7855,14 +7867,16 @@ body.message-modify .notice.is-loading::before {
 
 .labeled-nav {
   --labeled-nav-top-margin: var(--header-height);
-  /* refactor this using a new variable for border above labeled nav
-  in different conditions e.g. OSes and colorful frame */
 }
 .labeled-nav.is-translucent .mod-left-split .mod-top .workspace-tab-header-container .workspace-tab-header-container-inner {
   background-color: transparent;
 }
 .labeled-nav.is-hidden-frameless:not(.is-fullscreen) .mod-left-split .workspace-tabs.mod-top-left-space .workspace-tab-header-container {
   padding-left: 0;
+}
+.labeled-nav {
+  /* refactor this using a new variable for border above labeled nav
+  in different conditions e.g. OSes and colorful frame */
 }
 .labeled-nav.mod-macos .mod-left-split .mod-top .workspace-tab-header-container:before, .labeled-nav.mod-macos.is-hidden-frameless:not(.is-fullscreen) .mod-left-split .mod-top .workspace-tab-header-container:before {
   -webkit-app-region: drag;
@@ -8195,7 +8209,7 @@ body.theme-dark.explorer-icon .is-active .nav-file-tag {
 }
 
 body:is(:not(.css-settings-manager), .explorer-icon) .menu.mod-tab-list .lucide-file {
-  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4M10 9H8m8 4H8m8 4H8'/></g></svg>") no-repeat;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8'/></g></svg>") no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
 }
@@ -8203,7 +8217,7 @@ body:is(:not(.css-settings-manager), .explorer-icon) .menu.mod-tab-list .lucide-
   display: none;
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .menu.mod-tab-list .lucide-file-text {
-  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 7v14m-9-3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4a4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3a3 3 0 0 0-3-3z'/></svg>") no-repeat;
+  -webkit-mask: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v16m8.001-2A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2a5 5 0 0 1 4-2z'/></svg>") no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
 }
@@ -8265,9 +8279,6 @@ body:is(:not(.css-settings-manager), .explorer-icon) .nav-folder .collapse-icon.
   background-color: currentColor;
   color: var(--folder-color);
 }
-body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title {
-  padding-inline-end: 0;
-}
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title::before {
   content: "";
   position: absolute;
@@ -8275,7 +8286,7 @@ body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title::before {
   flex-shrink: 0;
   translate: calc(var(--size-2-1) - var(--size-4-5)) -50%;
   top: 50%;
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z'/><path d='M14 2v4a2 2 0 0 0 2 2h4M10 9H8m8 4H8m8 4H8'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z'/><path d='M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8'/></g></svg>");
   -webkit-mask: var(--file-icon) no-repeat;
   -webkit-mask-size: 100% 100%;
   background-color: currentColor;
@@ -8284,52 +8295,55 @@ body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title::before {
   height: var(--size-4-4);
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=pdf])::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 7v14m-9-3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4a4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3a3 3 0 0 0-3-3z'/></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 5v16m8.001-2A2 2 0 0 0 22 17V5a2 2 0 0 0-1.999-2L16 3.002A5 5 0 0 0 12 5a5 5 0 0 0-4-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 1.999 2H8a5 5 0 0 1 4 2a5 5 0 0 1 4-2z'/></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=png], [data-path$=".svg"], [data-path$=".jpeg"], [data-path$=".jpg"], [data-path$=".bmp"], [data-path$=".gif"], [data-path$=".webp"], [data-path$=".tiff"])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><rect width='18' height='18' x='3' y='3' rx='2' ry='2'/><circle cx='9' cy='9' r='2'/><path d='m21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=mp3], [data-path$=".flac"], [data-path$=".wav"], [data-path$=".ape"], [data-path$=".alac"], [data-path$=".aac"], [data-path$=".m4a"])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M9 18V5l12-2v13M9 9l12-2'/><circle cx='6' cy='18' r='3'/><circle cx='18' cy='16' r='3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=mkv], [data-path$=".mp4"], [data-path$=".flv"], [data-path$=".webm"], [data-path$=".avi"], [data-path$=".mov"])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><rect width='18' height='18' x='3' y='3' rx='2'/><path d='M7 3v18M3 7.5h4M3 12h18M3 16.5h4M17 3v18m0-13.5h4m-4 9h4'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=canvas])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 22a1 1 0 0 1 0-20a10 9 0 0 1 10 9a5 5 0 0 1-5 5h-2.25a1.75 1.75 0 0 0-1.4 2.8l.3.4a1.75 1.75 0 0 1-1.4 2.8z'/><circle cx='13.5' cy='6.5' r='.5' fill='currentColor'/><circle cx='17.5' cy='10.5' r='.5' fill='currentColor'/><circle cx='6.5' cy='12.5' r='.5' fill='currentColor'/><circle cx='8.5' cy='7.5' r='.5' fill='currentColor'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=base])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><ellipse cx='12' cy='5' rx='9' ry='3'/><path d='M3 5v14a9 3 0 0 0 18 0V5'/><path d='M3 12a9 3 0 0 0 18 0'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$="excalidraw.md"], [data-path$=".excalidraw"])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><path fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497zM15 5l4 4'/></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title:is([data-path$=".smm.md"])::before {
   --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1026 1024'><path fill='currentColor' d='M981.333 473.173h-417.28a42.667 42.667 0 0 0 0 85.334h417.28a42.667 42.667 0 0 0 0-85.334m0 365.014h-417.28a42.667 42.667 0 0 0 0 85.333h417.28a42.667 42.667 0 0 0 0-85.333m-417.28-644.694h417.28a42.667 42.667 0 0 0 0-85.333h-417.28a42.667 42.667 0 0 0 0 85.333M398.293 515.84a42.667 42.667 0 0 0-42.666-42.667h-89.174a527 527 0 0 0 27.52-117.12c13.654-88.96 26.24-149.333 75.094-164.906a42.667 42.667 0 1 0-27.094-80.854c-101.76 33.92-118.826 144.214-132.48 232.747-15.146 99.2-25.813 130.133-62.506 130.133H42.667a42.667 42.667 0 0 0 0 85.334h104.32c36.693 0 47.36 30.933 62.506 130.133 13.654 88.533 30.72 198.613 132.48 232.747a42.7 42.7 0 0 0 13.654 2.133 42.667 42.667 0 0 0 13.44-83.2c-48.854-16.213-61.44-75.733-75.094-164.693a527 527 0 0 0-27.52-117.12h89.174a42.667 42.667 0 0 0 42.666-42.667'/></svg> ");
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title.is-unsupported::before {
-  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M12 17h.01M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+  --file-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'><g fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'><path d='M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2zm6-5h.01'/><path d='M9.1 9a3 3 0 0 1 5.82 1c0 2-3 3-3 3'/></g></svg>");
+}
+body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title {
+  padding-inline-end: 0;
 }
 body:is(:not(.css-settings-manager), .explorer-icon) .nav-file-title .nav-file-tag {
   margin-right: var(--size-2-3);
@@ -8358,6 +8372,10 @@ body.explorer-title-wrap :is(.nav-file-title-content, .nav-folder-title-content)
 
 body.explorer-folder-bold .nav-folder-title {
   font-weight: 600;
+}
+
+body.explorer-center-action-button .workspace-leaf-content[data-type=file-explorer] .nav-buttons-container {
+  justify-content: center;
 }
 
 /* #endregion file-explorer */
@@ -8422,8 +8440,8 @@ body.explorer-folder-bold .nav-folder-title {
   --scrollbar-thumb-bg: var(--interactive-hover);
   --scrollbar-active-thumb-bg: var(--interactive-accent);
   --toggle-s-width: 42px;
-  --font-interface-theme: var(--setting-mobile-font-interface, "");
-  --font-text-theme: var(--setting-mobile-font-text, "");
+  --font-interface-theme: var(--setting-mobile-font-interface, '');
+  --font-text-theme: var(--setting-mobile-font-text, '');
   --font-monospace-theme: var(--setting-mobile-font-monospace, maplemono);
 }
 .is-mobile .modal-close-button::before {

@@ -97,7 +97,7 @@
         {
           "model": "gpt-5.6-sol",
           "displayName": "GPT-5.6-Sol",
-          "description": "Reliable agentic workhorse for everyday tasks.",
+          "description": "Latest frontier agentic coding model.",
           "supportedReasoningEfforts": [
             {
               "value": "low",
@@ -130,6 +130,11 @@
               "id": "priority",
               "name": "Fast",
               "description": "1.5x speed, increased usage"
+            },
+            {
+              "id": "ultrafast",
+              "name": "Ultrafast",
+              "description": "The fastest available responses for latency-sensitive work."
             }
           ],
           "defaultServiceTier": null,
@@ -228,7 +233,7 @@
         {
           "model": "gpt-5.5",
           "displayName": "GPT-5.5",
-          "description": "Proven previous-generation model for coding and general work.",
+          "description": "Frontier model for complex coding, research, and real-world work.",
           "supportedReasoningEfforts": [
             {
               "value": "low",
@@ -273,7 +278,7 @@
       "reasoningSummary": "detailed",
       "environmentVariables": "",
       "environmentHash": "runtime-input:v1:77991c63ec2501a67c4e4774bb8d205a534e60f8fcca760b2ecc97af6dfae42c",
-      "catalogTimestamp": 1790081973393,
+      "catalogTimestamp": 1792943550548,
       "catalogFingerprint": "2:a6c3899b5808992c0dda7469f68a3db00c14718946a9840a275393c2f78bb06e",
       "installationMethodsByHost": {},
       "wslDistroOverridesByHost": {}

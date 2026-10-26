@@ -1,8 +1,8 @@
 {
-  "theme": "moonstone",
+  "theme": "obsidian",
   "cssTheme": "Zen",
   "baseFontSizeAction": true,
-  "accentColor": "#ff4f55",
+  "accentColor": "#8b8fe8",
   "baseFontSize": 19,
   "enabledCssSnippets": []
 }

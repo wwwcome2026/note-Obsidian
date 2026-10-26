@@ -105,7 +105,7 @@ A2A 用于与独立 Agent 交互，描述能力并交换任务与结果；工具
 ## 架构图
 
 > [!info]- 展开查看 Spring AI RAG 版架构图
-> ![[网课平台Agent中台架构图（Spring AI RAG版）.png]]
+> ![[../../附件/网课平台Agent中台架构图（Spring AI RAG版）.png]]
 
 ## 关联笔记
 
