@@ -1,6 +1,6 @@
 {
   "userName": "",
-  "permissionMode": "yolo",
+  "permissionMode": "normal",
   "model": "openai-codex/gpt-5.6-luna",
   "effortLevel": "medium",
   "serviceTier": "default",
@@ -285,7 +285,7 @@
   },
   "savedProviderPermissionMode": {
     "claude": "yolo",
-    "codex": "yolo"
+    "codex": "normal"
   },
   "pendingProviderSessionInvalidations": {},
   "enableAutoScroll": true,
