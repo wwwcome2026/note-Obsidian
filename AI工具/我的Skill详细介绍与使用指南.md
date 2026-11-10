@@ -19,28 +19,28 @@ aliases:
 
 ## 快速选择
 
-| 现在想做什么 | 优先查看 |
-| --- | --- |
-| 需求还模糊，先想清楚怎么做 | [[#brainstorming｜需求澄清与方案设计]] |
-| 需求明确，想拆成具体开发步骤 | [[#writing-plans｜编写实施计划]] |
-| 长任务需要记录进展、避免重复调查 | [[#planning-with-files｜用文件记录长任务进度]] |
-| 排查报错、异常或性能问题 | [[#systematic-debugging｜系统化排查问题]] |
-| 为业务功能建立有意义的测试 | [[#test-driven-development｜测试驱动开发]] |
-| 审查改动或处理他人的评论 | [[#requesting-code-review｜发起代码审查]]、[[#receiving-code-review｜核实并处理审查意见]] |
-| 处理 Word、PDF、Excel 文件 | [[#documents｜Word 文档创建与编辑]]、[[#pdf｜PDF 阅读、生成与检查]]、[[#spreadsheets｜表格文件与数据分析]] |
-| 修改正在打开的 Excel | [[#excel-live-control｜操作正在打开的 Excel]] |
-| 美化中文简历或润色表达 | [[#resume-beautify｜中文 Word 简历美化]]、[[#humanizer-zh｜中文表达润色]] |
-| 生成图片或给文章配图 | [[#imagegen｜图片生成与编辑]]、[[#article-illustration-generator｜为文章配图并生成图文页面]] |
-| 做浏览器演示或正式 PPTX | [[#guizang-ppt-skill｜横向翻页的网页演示]]、[[#presentations｜PowerPoint 与 Slides 演示文稿]] |
-| 制作可程序化的视频 | [[#remotion｜用 React 编写视频]] |
-| 做前端界面、知识网页或完整站点 | [[#frontend-design｜前端界面设计与实现]]、[[#knowledge-2-web｜把知识文章做成互动网页]]、[[#sites-building｜通过 Sites 建设完整网站]] |
-| 操作真实浏览器中的页面 | [[#kimi-webbridge｜操作真实浏览器]] |
-| 找 Skill、安装 Skill、做自己的 Skill | [[#find-skills｜寻找适合的 Skill]]、[[#skill-installer｜安装已选定的 Skill]]、[[#skill-creator｜创建或修改 Skill]] |
-| 保存一份成品的样式以供重复使用 | [[#template-creator｜制作可反复使用的个人模板]] |
-| 打包插件或管理外部连接 | [[#plugin-creator｜创建个人插件]]、[[#plugin-management｜发现与管理外部连接]] |
-| 查 Codex 或 OpenAI 产品的官方规则 | [[#openai-docs｜核对 OpenAI 官方说明]] |
-| 切换 Codex 主题 | [[#codex-theme-switcher｜切换和恢复 Codex 主题]] |
-| 了解一个陌生代码仓库 | [[#project-onboarding｜项目新人导览]] |
+| 现在想做什么                      | 优先查看                                                                                                |
+| --------------------------- | --------------------------------------------------------------------------------------------------- |
+| 需求还模糊，先想清楚怎么做               | [[#brainstorming｜需求澄清与方案设计]]                                                                        |
+| 需求明确，想拆成具体开发步骤              | [[#writing-plans｜编写实施计划]]                                                                           |
+| 长任务需要记录进展、避免重复调查            | [[#planning-with-files｜用文件记录长任务进度]]                                                                 |
+| 排查报错、异常或性能问题                | [[#systematic-debugging｜系统化排查问题]]                                                                   |
+| 为业务功能建立有意义的测试               | [[#test-driven-development｜测试驱动开发]]                                                                 |
+| 审查改动或处理他人的评论                | [[#requesting-code-review｜发起代码审查]]、[[#receiving-code-review｜核实并处理审查意见]]                             |
+| 处理 Word、PDF、Excel 文件        | [[#documents｜Word 文档创建与编辑]]、[[#pdf｜PDF 阅读、生成与检查]]、[[#spreadsheets｜表格文件与数据分析]]                       |
+| 修改正在打开的 Excel               | [[#excel-live-control｜操作正在打开的 Excel]]                                                               |
+| 美化中文简历或润色表达                 | [[#resume-beautify｜中文 Word 简历美化]]、[[#humanizer-zh｜中文表达润色]]                                          |
+| 生成图片或给文章配图                  | [[#imagegen｜图片生成与编辑]]、[[#article-illustration-generator｜为文章配图并生成图文页面]]                              |
+| 做浏览器演示或正式 PPTX              | [[#guizang-ppt-skill｜横向翻页的网页演示]]、[[#presentations｜PowerPoint 与 Slides 演示文稿]]                        |
+| 制作可程序化的视频                   | [[#remotion｜用 React 编写视频]]                                                                          |
+| 做前端界面、知识网页或完整站点             | [[#frontend-design｜前端界面设计与实现]]、[[#knowledge-2-web｜把知识文章做成互动网页]]、[[#sites-building｜通过 Sites 建设完整网站]] |
+| 操作真实浏览器中的页面                 | [[#kimi-webbridge｜操作真实浏览器]]                                                                         |
+| 找 Skill、安装 Skill、做自己的 Skill | [[#find-skills｜寻找适合的 Skill]]、[[#skill-installer｜安装已选定的 Skill]]、[[#skill-creator｜创建或修改 Skill]]       |
+| 保存一份成品的样式以供重复使用             | [[#template-creator｜制作可反复使用的个人模板]]                                                                  |
+| 打包插件或管理外部连接                 | [[#plugin-creator｜创建个人插件]]、[[#plugin-management｜发现与管理外部连接]]                                         |
+| 查 Codex 或 OpenAI 产品的官方规则    | [[#openai-docs｜核对 OpenAI 官方说明]]                                                                     |
+| 切换 Codex 主题                 | [[#codex-theme-switcher｜切换和恢复 Codex 主题]]                                                            |
+| 了解一个陌生代码仓库                  | [[#project-onboarding｜项目新人导览]]                                                                      |
 
 ## 清单范围与状态
 
